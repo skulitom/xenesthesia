@@ -22,4 +22,4 @@ if ($Scene -ne 'menu') {
 # Start at the menu by default so opening the preview cannot immediately grab
 # the mouse for gameplay. Keep the title bar and normal window controls.
 Start-Process -FilePath $steam -ArgumentList ('-applaunch 220 -windowed -w 1280 -h 720 -novid -condebug +hl2_expansion hl2 +exec xen_preview {0}' -f $start)
-Write-Output 'Xenesthesia preview requested in a bordered window. F4 toggles the effect; F6 opens the pause menu.'
+Write-Output 'Xenesthesia preview requested in a bordered window. F4 toggles colour only; F6 opens the pause menu. Texture motion stays active until the addon is disabled and the game restarted.'
