@@ -67,7 +67,16 @@ class SurfaceMotionTests(unittest.TestCase):
         self.assertEqual(values.count('$detailscale'),1)
         self.assertIn('"$detailframe" "0"',out)
         self.assertNotIn('plaster_detail_01',out)
-        self.assertIn('"0.500"',out)
+        self.assertIn('"-1337.000"',out)
+
+    def test_world_colour_shares_coordinates_and_clock_across_materials(self):
+        for name in ('brick/a', 'concrete/b', 'wood/c'):
+            out = animate(f'materials/{name}.vmt', 'LightmappedGeneric { $basetexture test }')
+            self.assertIn('"$detailscale" "-1337.000"', out)
+            self.assertIn('"animatedTextureFrameRate" "8.000"', out)
+        model = animate('materials/models/props_lab/crate.vmt', 'VertexLitGeneric { $basetexture test }')
+        self.assertIn('"$detailscale" "1.000"', model)
+        self.assertNotIn('-1337', model)
 
     def test_static_props_do_not_use_entity_only_proxy(self):
         out = animate('materials/models/props_c17/crate.vmt', 'VertexLitGeneric { $basetexture crate }')

@@ -1,0 +1,46 @@
+{
+  "runtime_sha256": "275ae692f996b78ef988d90d9eab211d44a34130cee98278ec5ff56f0dbe7a8b",
+  "files": 2420,
+  "bytes": 9602875,
+  "materials": 2392,
+  "human_materials": 115,
+  "world_colour_materials": 1271,
+  "tests_passed": 23,
+  "shaders_verified_against_retail": 20,
+  "notes": {
+    "38-42": "Actual npc_kleiner, close-up pulse over time; detached neck fragment absent.",
+    "43": "Regular lighting; flashlight not confirmed here.",
+    "44": "Phong and bump mapping disabled; face remains intact.",
+    "46": "Actual Kleiner after successful suit/weapons grant and flashlight toggle; broader eye invariance test remains.",
+    "47-51": "Forward motion, cl_forwardspeed 25; initial camera x0 y100; ending getpos x~0 y148.036 z64.031. Colour flow continues; deliberately mismatched north-wall UVs.",
+    "alyx-campaign": "Native d1_trainstation_05, Alyx temporarily repositioned near camera for origin/face check; no save created.",
+    "limitations": "Sampled stills, diagnostic scenes, not Workshop gallery or performance benchmark. Walking freeze not reproduced; subjective campaign retest requested."
+  },
+  "walking_centre_rgb": {
+    "47": [
+      71.28,
+      47.22,
+      23.72
+    ],
+    "48": [
+      72.22,
+      52.44,
+      23.53
+    ],
+    "49": [
+      74.67,
+      52.64,
+      25.69
+    ],
+    "50": [
+      74.36,
+      54.86,
+      26.44
+    ],
+    "51": [
+      64.03,
+      59.44,
+      29.75
+    ]
+  }
+}

@@ -73,5 +73,19 @@ class PackageTests(unittest.TestCase):
             self.assertNotIn('TextureTransform',source)
         self.assertIn(b'SOURCE 1 SDK LICENSE',read('xenesthesia/licenses/valve-sdk-license.txt'))
 
+    def test_world_and_generic_shader_combo_contracts(self):
+        _, read = read_vpk(ROOT/'content.vpk')
+        layouts = {
+            'lightmappedgeneric_vs20': (2048, 8, 65),
+            'lightmappedgeneric_flashlight_vs20': (32, 2, 17),
+            'vertexlit_and_unlit_generic_vs20': (98304, 192, 145),
+            'vertexlit_and_unlit_generic_vs30': (65536, 128, 145),
+            'vertexlit_and_unlit_generic_bump_vs20': (192, 24, 5),
+            'vertexlit_and_unlit_generic_bump_vs30': (128, 16, 5),
+        }
+        for name, (total, dynamic, static) in layouts.items():
+            self.assertEqual(struct.unpack_from('<6I', read(f'shaders/fxc/{name}.vcs')),
+                             (6, total, dynamic, 0, 0, static), name)
+
 if __name__ == '__main__':
     unittest.main()

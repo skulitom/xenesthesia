@@ -1,0 +1,37 @@
+{
+  "commit": "7309a5f13f63fdcc7b1e090f6c176113a9d95061",
+  "files": {
+    "vertexlit_and_unlit_generic_vs20.fxc": {
+      "path": "sp/src/materialsystem/stdshaders/vertexlit_and_unlit_generic_vs20.fxc",
+      "sha256": "3fae80ec1454719a0f4b5a3d5a9a82481e4eba6923be066c8eb7251034252bc8"
+    },
+    "vertexlit_and_unlit_generic_bump_vs20.fxc": {
+      "path": "sp/src/materialsystem/stdshaders/vertexlit_and_unlit_generic_bump_vs20.fxc",
+      "sha256": "f964e7ac8485fdcb6605dc1de18a733f95a57d3a10d52a5154a62168ec20a2c1"
+    },
+    "lightmappedgeneric_vs20.fxc": {
+      "path": "sp/src/materialsystem/stdshaders/lightmappedgeneric_vs20.fxc",
+      "sha256": "f0b30f560dab6719047ada820557755a7f05fb3750b62c65b1b8ed0c27736f25"
+    },
+    "lightmappedgeneric_flashlight_vs20.fxc": {
+      "path": "sp/src/materialsystem/stdshaders/lightmappedgeneric_flashlight_vs20.fxc",
+      "sha256": "976f9d9ff38358a85da3343452b0868c2477450e6746f4cacd3d36e2a51e67d5"
+    },
+    "common_vs_fxc.h": {
+      "path": "sp/src/materialsystem/stdshaders/common_vs_fxc.h",
+      "sha256": "7386392b2747f6fa67abca143f48e62ec32b0c891c6052add988ddf5b84b478e"
+    },
+    "common_fxc.h": {
+      "path": "sp/src/materialsystem/stdshaders/common_fxc.h",
+      "sha256": "91c2beb8b06e007169ea0abf4f16687dfff122005658bc5eb7a3dc55296b5a11"
+    },
+    "common_pragmas.h": {
+      "path": "sp/src/materialsystem/stdshaders/common_pragmas.h",
+      "sha256": "a4a844949c9b352627e6f3e00d18c32a132451a0d011b62bd0a4d8e269186235"
+    },
+    "common_hlsl_cpp_consts.h": {
+      "path": "sp/src/materialsystem/stdshaders/common_hlsl_cpp_consts.h",
+      "sha256": "147d39bfdf6d0266be3fd6b60dcdbbaf839e2be7853349bac0813d5605de68c5"
+    }
+  }
+}

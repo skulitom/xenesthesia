@@ -1,8 +1,29 @@
-# Current revision: independent colour flow and human pulses
+# Current revision: intact faces and continuous world colour
+
+Local preview only. Runtime SHA-256: `275ae692f996b78ef988d90d9eab211d44a34130cee98278ec5ff56f0dbe7a8b`. 2,420 files, 9,602,875 bytes. 2,392 generated materials: 2,360 colour, 1,944 subtle UV motion, 115 human pulse definitions; 1,271 world colour materials now share a continuous position field and 8 fps clock. Categories overlap. No Workshop item created or uploaded.
+
+The first candidate preserved Kleiner's native glasses shaders and added his transparent lenses to the pulse, but an actual npc_kleiner close-up still exposed a detached neck/facial fragment. Moving deformation after native flex/skinning into an entity-relative world field removed that fragment. Skin, generic, eyes and teeth now use the same final position field. Marked base transforms carry entity origin and pulse; original UVs are restored. Eye projection uses the unwarped position. The flashlight path uses EyeUp to carry origin/pulse; regular eye lighting reconstructs its up-axis from iris projection V. Upright NPC masking is still approximate for unusual poses.
+
+World detail colour now uses a continuous oblique projection, independent of material UV scale/origin. Both regular and flashlight world shaders implement it. The original base texture, bump/lightmap coordinates and approved subtle UV-motion bounds remain unchanged. Movable models keep UV-local colour and individual material clocks. Physical material/lighting borders and unsupported materials can still differ.
+
+Validation:
+
+- All 23 unit/package checks pass, including byte-for-byte VPK verification. All 20 compiled vertex shader combo layouts match retail. Verified source pins include the older single-player generic shaders; their legacy sampler syntax is normalized for PC FXC without changing combo declarations.
+- Reproduced all 115 generated human materials exactly from the installed game and current generator. Native proxy component reads use CFloatInput-compatible LinearRamp with zero rate; Equals does not parse source components.
+- Actual Kleiner close-up over several pulse phases: neck remains joined, no detached fragment; native glasses retained. Phong/bump-disabled fallback also retains the face. Flashlight-tested at a usable distance after granting the suit separately; more full eye-pass/cinematic regression is still needed.
+- Deliberately mismatched wall UV origin/scale: colour field is continuous at the join. Different material and corner joins visually checked. Colour changes while moving forward (camera moved from y100 to y148.036); five native samples are retained. The previous reported walking freeze was not reproduced, so subjective campaign feedback is still needed.
+- Native d1_trainstation_05 loads. Alyx checked near camera at a nonzero world origin/elevation; face and eyes remain intact. She was temporarily repositioned for this diagnostic; no save created.
+- No new shader or proxy errors observed. All diagnostic movement/rendering settings restored. Owned Anode game closed and desktop released. Main-session bordered preview launched successfully and is responding; feedback requested.
+
+Evidence: `surface-continuity/summary.json` and native screenshots. These are sampled diagnostic stills, not a Workshop gallery or a performance benchmark. The rejected candidate's detached-fragment captures remain private. Full campaign/cinematic/episode coverage, clean performance measurement, final gallery and publication approval remain release work.
+
+---
+
+# Previous revision: independent colour flow and human pulses
 
 Local review build, not uploaded. Runtime SHA-256: `b384d171f1242b6ea560183cd5f443d381b9bdc1ae669aafffc53a8243c7b42d`. 2,413 files, 7,581,726 bytes. 2,391 material definitions; 114 carry the human pulse. Surface colour shapes now deform in UV space; material clocks range from 7 to 10.996 frames/sec instead of one shared rate. Approved base texture-motion bounds are unchanged.
 
-Human pulse uses marked native skin vertex transforms and the eyes/teeth INTRO paths. Original skin pixel shading and textures remain in use. Head/upper-body expansion runs on a 5.3-second, entity-phased cycle. Named humans and citizen materials are targeted; unsupported special shaders remain excluded. The eye flashlight pass now carries its marker in EyeUp.w while leaving EyeUp.xyz intact. Actual NPC Alyx was visually checked with eyes open and flashlight lighting; six more native frames are saved. Disabling Phong/bump mapping also needs a supported fallback before release.
+Human pulse uses marked native skin vertex transforms and the eyes/teeth INTRO paths. Original skin pixel shading and textures remain in use. Head/upper-body expansion runs on a 5.3-second, entity-phased cycle. Named humans and citizen materials are targeted; unsupported special shaders remain excluded. Correction recorded in the next revision: the intended eye-flashlight patch was accidentally placed in the material generator, so the compiler erased its INTRO-only fallback. Those visual checks did not prove that the flashlight deformation ran. The misplaced branch has now been corrected and regression-tested. Disabling Phong/bump mapping also needs a supported fallback before release.
 
 Validated so far: 19 unit/package tests; all 14 native vertex shader layouts match retail; fixed-camera lab colour motion; eight sampled frames with Alyx skeletal playback stopped show changing head width. Native trainstation_05 loads. These lab captures are diagnostic evidence, not Workshop gallery media. F6 pause/menu and readable HUD were also checked. Phong and bump mapping were both confirmed enabled. No new shader/proxy errors appeared. Full cinematic regression, low-detail fallback, clean performance measurement and user feedback remain pending.
 

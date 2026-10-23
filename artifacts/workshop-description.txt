@@ -2,7 +2,7 @@ Xenesthesia — Half-Life 2 material effects
 
 DRAFT — NOT UPLOADED. Requires the owner's explicit go before any Workshop item is created or updated.
 
-City 17's surfaces quietly come alive. Brick, concrete, props and supported weapons breathe with restrained, irregular texture movement. Prismatic colour shapes bend and flow independently across materials and stay mapped to the textures as you move through the world.
+City 17's surfaces quietly come alive. Brick, concrete, props and supported weapons breathe with restrained, irregular texture movement. Prismatic colour shapes bend and flow over time. A continuous pattern crosses connected world surfaces; props and characters keep colours attached to their own textures as they move.
 
 • Gentle surface movement rather than camera blur or screen wobble.
 • Material-local colour on compatible walls, props, screens, hands, weapons and NPC materials.
@@ -17,6 +17,6 @@ Disable conflicting material addons, including City 17 ASCII, before use. Subscr
 
 To remove all effects, disable the addon and restart. There is currently no instant in-game toggle for native material animation. No keys are bound automatically.
 
-Original code and procedural colour data are MIT licensed. Valve-derived material definitions, compiled NPC shaders and game imagery are excluded; see the included notices. Not affiliated with or endorsed by Valve.
+Original code and procedural colour data are MIT licensed. Valve-derived material definitions, compiled shaders and game imagery are excluded; see the included notices. Not affiliated with or endorsed by Valve.
 
 Media: replace the old postprocess screenshots with verified material-colour captures before publication. Illustrated cover is labelled as artwork.

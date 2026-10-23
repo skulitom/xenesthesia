@@ -1,10 +1,8 @@
-"""Opt-in human pulse without replacing the native skin pixel/lighting shader.
+"""Opt-in human pulse after native animation, anchored to the entity origin.
 
-Skin receives the pulse through an explicitly marked base-UV transform. Its
-translation is removed before sampling, so the actual face texture never slides.
-Eyes/teeth use their native INTRO parameter. Stock unmarked paths stay intact.
+Marked base transforms transport pulse + origin to skin/generic vertex paths;
+their UVs are restored before sampling. Eyes/teeth keep native shader families.
 """
-from pathlib import Path
 
 FOLDERS = {'alyx', 'barney', 'kleiner', 'eli', 'mossman', 'breen', 'humans'}
 SHADERS = ('skin_vs20.fxc', 'Eyes_vs20.fxc', 'teeth_vs20.fxc', 'teeth_bump_vs20.fxc',
@@ -20,30 +18,35 @@ def material(name, source, tokens):
     ts = tokens(source)
     vals = [t[0].strip('"').lower() for t in ts]
     shader = vals[0]
-    if shader not in {'vertexlitgeneric', 'eyes', 'teeth'}:
+    lens = name == 'materials/models/kleiner/glass2.vmt' and shader == 'unlitgeneric'
+    if shader not in {'vertexlitgeneric', 'eyes', 'teeth'} and not lens:
         return None
-    if any(key in vals for key in ('$basetexturetransform', '$warpparam', '$intro', '$additive')):
+    if any(key in vals for key in ('$basetexturetransform', '$warpparam', '$intro')):
+        return None
+    if '$additive' in vals and not lens:
         return None
     declarations = ['// Xenesthesia human pulse; all parts share the entity phase.',
-                    '"$xen_hphase" "0"', '"$xen_hpulse" "0"']
-    proxies = ['"EntityRandom" { "scale" "7" "resultVar" "$xen_hphase" }']
-    if shader == 'vertexlitgeneric':
-        # The skin path supports an engine-provided flat normal when there is
-        # no bump map. Avoid introducing shiny highlights to matte materials.
-        if '$phong' not in vals:
-            declarations += ['"$phong" "1"', '"$basemapalphaphongmask" "1"', '"$phongboost" "0"']
-        elif vals[vals.index('$phong')+1] != '1':
-            return None
-        declarations += ['"$xen_hshift" "[1000 0]"',
+                    '"$xen_hphase" "0"', '"$entityorigin" "[0 0 0]"']
+    proxies = ['"EntityRandom" { "scale" "7" "resultVar" "$xen_hphase" }',
+               '"EntityOrigin" { }']
+    if shader in {'vertexlitgeneric', 'unlitgeneric'}:
+        # Preserve native alpha/lighting semantics. Both skin and generic
+        # vertex paths understand the marker, including the glasses lenses.
+        declarations += ['"$xen_hshift" "[1000 0]"', '"$xen_hcenter" "[0 0]"',
                          '"$basetexturetransform" "center 0 0 scale 1 1 rotate 0 translate 1000 0"']
         proxies += ['"Sine" { "sinePeriod" "5.3" "sineMin" "1000.01" "sineMax" "1000.16" "timeOffset" "$xen_hphase" "resultVar" "$xen_hshift[0]" }',
-                    '"TextureTransform" { "translateVar" "$xen_hshift" "resultVar" "$basetexturetransform" }']
+                    '"LinearRamp" { "rate" "0" "initialValue" "$entityorigin[2]" "resultVar" "$xen_hshift[1]" }',
+                    '"TextureTransform" { "centerVar" "$xen_hcenter" "scaleVar" "$entityorigin" "translateVar" "$xen_hshift" "resultVar" "$basetexturetransform" }']
     else:
-        declarations += ['"$intro" "1"', '"$warpparam" "2.01"', '"$entityorigin" "[0 0 0]"']
+        declarations += ['"$intro" "1"', '"$warpparam" "2.01"']
         proxies += ['"Sine" { "sinePeriod" "5.3" "sineMin" "2.01" "sineMax" "2.16" "timeOffset" "$xen_hphase" "resultVar" "$warpparam" }']
         if shader == 'eyes':
-            # EyeUp xyz belongs to the engine. Its otherwise unused fourth
-            # component reaches both regular and flashlight vertex shaders.
+            # EyeUp is the one shared constant available to the flashlight
+            # path. For marked eyes it carries entity origin + pulse. The
+            # regular shader reconstructs its lighting up-axis from iris V.
+            # CFloatInput parses source vector components; Equals does not.
+            # Copy components individually, avoiding Equals' 3-float buffer.
+            proxies += [f'"LinearRamp" {{ "rate" "0" "initialValue" "$entityorigin[{i}]" "resultVar" "$eyeup[{i}]" }}' for i in range(3)]
             proxies += ['"Equals" { "srcVar1" "$warpparam" "resultVar" "$eyeup[3]" }']
     insertions = [(ts[-1].start(), '\n'+'\n'.join(declarations)+'\n')]
     if 'proxies' in vals:
@@ -54,19 +57,6 @@ def material(name, source, tokens):
             if level == 0:
                 insertions.append((ts[i].start(),'\n'+'\n'.join(proxies)+'\n'))
                 break
-    elif name == 'eyes_flashlight_vs20.fxc':
-        source = source.replace('const float4 cLightPosition',
-                                'const float4 xenEyeUp : register( SHADER_SPECIFIC_CONST_7 );\nconst float4 cLightPosition',1)
-        source = source.replace('\t// Perform skinning', '''
-    float3 xenProjectionPos;
-    SkinPosition(g_bSkinning, vPosition, v.vBoneWeights, v.vBoneIndices, xenProjectionPos);
-    if (xenEyeUp.w >= 2.0 && xenEyeUp.w < 3.0)
-        XenHumanPulse(vPosition.xyz, xenEyeUp.w - 2.0);
-\t// Perform skinning''',1)
-        source = source.replace('dot( cIrisProjectionU,  float4(worldPos, 1) )',
-                                'dot( cIrisProjectionU,  float4(xenProjectionPos, 1) )')
-        source = source.replace('dot( cIrisProjectionV,  float4(worldPos, 1) )',
-                                'dot( cIrisProjectionV,  float4(xenProjectionPos, 1) )')
     else:
         insertions[0] = (insertions[0][0],insertions[0][1]+'"Proxies" {\n'+'\n'.join(proxies)+'\n}\n')
     for offset, addition in sorted(insertions,reverse=True):
@@ -74,47 +64,58 @@ def material(name, source, tokens):
     return source
 
 
+def once(source, anchor, replacement):
+    if source.count(anchor) != 1:
+        raise ValueError(f'Human shader anchor changed: {anchor}')
+    return source.replace(anchor, replacement, 1)
+
+
 def patch_shader(name, source):
-    if source.count('#include "') < 1:
-        raise ValueError('Missing SDK include')
-    source = source.replace('VS_OUTPUT main(', '#include "xen_human_pulse.h"\n\nVS_OUTPUT main(',1)
+    source = once(source, 'VS_OUTPUT main(', '#include "xen_human_pulse.h"\n\nVS_OUTPUT main(')
+    anchor = '\t// Transform into projection space'
     if name == 'skin_vs20.fxc':
-        anchor = '\t// Perform skinning'
-        source = source.replace(anchor, '''
+        extra = """
     float xenMarker = cBaseTexCoordTransform[0].w;
     bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1001.0;
-    if (xenHuman) XenHumanPulse(vPosition.xyz, xenMarker - 1000.0);
-''' + anchor,1)
-        anchor = '\to.baseTexCoord.x = dot( v.vTexCoord0, cBaseTexCoordTransform[0] );'
-        if source.count(anchor) != 1:
-            raise ValueError('Skin UV anchor changed')
-        source = source.replace(anchor,anchor+'\n\tif (xenHuman) o.baseTexCoord.x -= xenMarker;')
+    float3 xenOrigin = float3(cBaseTexCoordTransform[0].x,
+                             cBaseTexCoordTransform[1].y, cBaseTexCoordTransform[1].w);
+    if (xenHuman) XenHumanPulseWorld(worldPos, xenOrigin, xenMarker - 1000.0);
+"""
+        source = once(source, anchor, extra+anchor)
+        for field, uv, transform in [('x', 'x', 'cBaseTexCoordTransform[0]'),
+                                      ('y', 'y', 'cBaseTexCoordTransform[1]'),
+                                      ('z', 'x', 'cDetailTexCoordTransform[0]'),
+                                      ('w', 'y', 'cDetailTexCoordTransform[1]')]:
+            old = f'o.baseTexCoord.{field} = dot( v.vTexCoord0, {transform} );'
+            source = once(source, old, f'o.baseTexCoord.{field} = xenHuman ? v.vTexCoord0.{uv} : dot( v.vTexCoord0, {transform} );')
+    elif name == 'eyes_flashlight_vs20.fxc':
+        source = once(source, 'const float4 cLightPosition',
+                      'const float4 xenEyeUp : register( SHADER_SPECIFIC_CONST_7 );\nconst float4 cLightPosition')
+        source = once(source, anchor, """
+    float3 xenProjectionPos = worldPos;
+    if (xenEyeUp.w >= 2.0 && xenEyeUp.w < 3.0)
+        XenHumanPulseWorld(worldPos, xenEyeUp.xyz, xenEyeUp.w - 2.0);
+"""+anchor)
+        source = source.replace('float4(worldPos, 1)', 'float4(xenProjectionPos, 1)')
     else:
-        # Insert before the first skinning call, after morphing. Preserve stock
-        # intro behavior, but our marker uses the same local-space field as skin.
-        anchor = ('\t// Transform the position and dummy normal' if name == 'Eyes_vs20.fxc'
-                  else '\t// Normalize the flexed normal' if name == 'teeth_vs20.fxc'
-                  else '\t// Transform the position' if name == 'teeth_flashlight_vs20.fxc'
-                  else '\t// Perform skinning')
-        if source.count(anchor) != 1:
-            raise ValueError(f'Human deformation anchor changed: {name}')
-        extra = '''
-#if INTRO
-    if (g_Time >= 2.0 && g_Time < 3.0) XenHumanPulse(vPosition.xyz, g_Time - 2.0);
-#endif
-'''
-        if name == 'Eyes_vs20.fxc':
-            extra = '''
-    float3 xenProjectionPos;
-    SkinPosition(g_bSkinning, vPosition, v.vBoneWeights, v.vBoneIndices, xenProjectionPos);
-''' + extra
-        source = source.replace(anchor,extra+anchor,1)
         source = source.replace('\tWorldSpaceVertexProcess(', '\tif (g_Time < 2.0) WorldSpaceVertexProcess(')
+        extra = """
+#if INTRO
+    if (g_Time >= 2.0 && g_Time < 3.0) XenHumanPulseWorld(worldPos, modelOrigin, g_Time - 2.0);
+#endif
+"""
         if name == 'Eyes_vs20.fxc':
-            # Eye projection vectors are produced by the unwarped model. Sample
-            # with its original position so pupils do not slide over the eye.
+            extra = '\n    float3 xenProjectionPos = worldPos;\n'+extra
             source = source.replace('worldNormal = worldPos - cEyeOrigin;', 'worldNormal = xenProjectionPos - cEyeOrigin;')
             source = source.replace('float4(worldPos, 1)', 'float4(xenProjectionPos, 1)')
-            anchor = '\tif (g_Time < 2.0) WorldSpaceVertexProcess( g_Time, modelOrigin, worldPos, dummy, dummy, dummy );'
-            source = source.replace(anchor, anchor+'\n\tif (g_Time < 2.0) xenProjectionPos = worldPos;')
+            source = once(source, '\tfloat normalDotUp =', """
+    float3 xenLightingUp = cHalfEyeballUp;
+#if INTRO
+    if (g_Time >= 2.0 && g_Time < 3.0)
+        xenLightingUp = -normalize(cIrisProjectionV.xyz) * 0.5;
+#endif
+\tfloat normalDotUp =""")
+            source = source.replace('dot( worldNormal, cHalfEyeballUp)', 'dot( worldNormal, xenLightingUp)')
+            source = source.replace('normalDotUp * cHalfEyeballUp', 'normalDotUp * xenLightingUp')
+        source = once(source, anchor, extra+anchor)
     return source

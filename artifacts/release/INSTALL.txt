@@ -28,8 +28,8 @@ LIMITS
 Compatible surfaces, props, hands/weapons, cutouts and NPC materials receive
 colour. NPCs and cutouts keep their original UVs. Authored animations are retained.
 Special shaders and most translucent/additive layers and some screens are excluded.
-Objects with shared materials can animate together. Classic zombies/headcrabs have an experimental geometry pulse. Alyx and selected human families also have a head/upper-body pulse. This experimental path requires Phong/bump mapping enabled; low-detail fallback and broader NPC/cinematic testing remain pending. Episodes are unvalidated.
+Objects with shared materials can animate together. Classic zombies/headcrabs have an experimental geometry pulse. Alyx and selected human families also have a head/upper-body pulse. The pulse preserves native material lighting/transparency through skin and generic vertex paths; broader low-detail and NPC/cinematic testing remain pending. Episodes are unvalidated.
 
-The VPK contains material definitions, fourteen experimental compiled NPC shaders, original procedural colour data and
+The VPK contains material definitions, twenty compiled vertex shaders, original procedural colour data and
 optional console help. It needs no injector or replacement game executable.
 Original code/data: MIT; Valve-derived definitions and imagery: see NOTICE.md.

@@ -3,7 +3,7 @@ import sys
 import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools'))
-from human_pulse import material
+from human_pulse import material, patch_shader
 from surface_motion import tokens, animate
 from prism_texture import frame_pixels, FRAMES
 
@@ -32,6 +32,28 @@ class HumanPulseTests(unittest.TestCase):
         self.assertIsNone(material('materials/models/props_lab/crate.vmt', source,tokens))
         self.assertIsNone(material('materials/models/alyx/emptool_sheet.vmt',source,tokens))
         self.assertIsNone(material('materials/models/alyx/test.vmt',source[:-1]+' $warpparam .5 }',tokens))
+
+    def test_glasses_keep_original_alpha_and_lighting(self):
+        for name, source in [
+            ('glassesfront_walter', 'VertexLitGeneric { $basetexture front $envmapmask mask }'),
+            ('glass2', 'UnlitGeneric { $basetexture glass $translucent 1 $additive 1 }')]:
+            out = material(f'materials/models/kleiner/{name}.vmt', source, tokens)
+            self.assertIsNotNone(out)
+            self.assertTrue(out.startswith(source[:-1]))
+            self.assertNotIn('$phong', out)
+            self.assertNotIn('$basemapalphaphongmask', out)
+            self.assertIn('translate 1000 0', out)
+
+    def test_eye_flashlight_deformation_does_not_require_intro_combo(self):
+        # Regression: this branch was once misplaced in material(), causing
+        # the compiler to silently erase the generic INTRO-only eye patch.
+        source = ('#include "common_vs_fxc.h"\n'
+                  'const float4 cLightPosition : register( SHADER_SPECIFIC_CONST_0 );\n'
+                  'VS_OUTPUT main() {\n\t// Transform into projection space\nreturn o; }')
+        out = patch_shader('eyes_flashlight_vs20.fxc', source)
+        self.assertNotIn('#if INTRO', out)
+        self.assertIn('XenHumanPulseWorld(worldPos, xenEyeUp.xyz, xenEyeUp.w - 2.0)', out)
+        self.assertIn('xenEyeUp : register( SHADER_SPECIFIC_CONST_7 )', out)
 
     def test_colour_animation_closes_loop_and_changes_shapes(self):
         self.assertEqual(frame_pixels(0), frame_pixels(FRAMES))

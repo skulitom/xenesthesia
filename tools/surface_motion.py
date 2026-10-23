@@ -10,6 +10,7 @@ import re
 from vpk import read_vpk
 import npc_pulse
 import human_pulse
+import surface_shaders
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = Path(r'D:/Steam/steamapps/common/Half-Life 2/hl2')
@@ -78,7 +79,8 @@ def animate(name, source):
     # Standard micrograin layers can be replaced by our own colour+grain field.
     # Special detail blends (cracks, masks, authored animation) remain intact.
     replace_grain = bool(details) and all(d in GRAIN_DETAILS for d in details) and 'proxies' not in values
-    colour = (not details or replace_grain) and '$detailframe' not in values
+    colour = ((not details or replace_grain) and '$detailframe' not in values
+              and (model or '$seamless_scale' not in values))
     if not motion and not colour:
         return None
     seed = int.from_bytes(hashlib.sha256(name.lower().encode()).digest()[:4], 'little')
@@ -95,16 +97,16 @@ def animate(name, source):
     if colour:
         params = {'$detail': 'xenesthesia/prism', '$detailframe': '0',
                   '$detailblendmode': '0', '$detailblendfactor': '0.9',
-                  '$detailscale': f'{(1.0 if model else .5):.3f}'}
+                  '$detailscale': f'{(1.0 if model else -1337.0):.3f}'}
         for key, value in params.items():
             positions = [i+1 for i, v in enumerate(values[:-1]) if v == key]
             if positions:
                 replacements.extend((ts[i].start(), ts[i].end(), f'"{value}"') for i in positions)
             else:
                 declarations.append(f'"{key}" "{value}"')
-        # Per-material rates prevent a whole room changing in lockstep. This
-        # proxy is safe on static props, unlike entity-dependent phase proxies.
-        colour_fps = 7.0 + ((seed >> 20) % 1000) / 250.0
+        # Connected world faces share a clock and world coordinates to avoid
+        # UV/material seams. Movable objects retain their own UV-local clock.
+        colour_fps = (7.0 + ((seed >> 20) % 1000) / 250.0) if model else 8.0
         lines += ['"AnimatedTexture" { "animatedTextureVar" "$detail" '
                   '"animatedTextureFrameNumVar" "$detailframe" '
                   f'"animatedTextureFrameRate" "{colour_fps:.3f}" }}']
@@ -189,6 +191,7 @@ def build(content):
         target.unlink(missing_ok=True)
     record_path.write_text(json.dumps(records, indent=2)+'\n')
     npc_pulse.build(content, read)
+    surface_shaders.build(content, read)
     print(f'Animated {len(records)} installed HL2 materials; textures remain in the base game.')
 
 
