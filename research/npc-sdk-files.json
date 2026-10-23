@@ -1,0 +1,29 @@
+{
+  "commit": "be57e3d01ac7d7aa6a2cacbfef187c0b46616db0",
+  "files": {
+    "vortwarp_vs20.fxc": {
+      "path": "src/materialsystem/stdshaders/vortwarp_vs20.fxc",
+      "sha256": "9afc4cbd0fedcfcd8f7286371fee3df9b70156562aecf66c24cea165e2c001ed"
+    },
+    "vortwarp_vs20_helper.h": {
+      "path": "src/materialsystem/stdshaders/vortwarp_vs20_helper.h",
+      "sha256": "909130fbb8a62b5acf4d2c41e041f287948d6ce86fa8d2fb2dee8f1b5f717360"
+    },
+    "common_vs_fxc.h": {
+      "path": "src/materialsystem/stdshaders/common_vs_fxc.h",
+      "sha256": "f0fd20895b0961b5f07b0c68f8a38c943af8bc2aba9a2e63dc60418b75da97b3"
+    },
+    "common_fxc.h": {
+      "path": "src/materialsystem/stdshaders/common_fxc.h",
+      "sha256": "c2427ece938cedd8e16fb2e3f3d62569300672eec1defe02c9aaad565de6e73a"
+    },
+    "common_pragmas.h": {
+      "path": "src/materialsystem/stdshaders/common_pragmas.h",
+      "sha256": "a4a844949c9b352627e6f3e00d18c32a132451a0d011b62bd0a4d8e269186235"
+    },
+    "common_hlsl_cpp_consts.h": {
+      "path": "src/materialsystem/stdshaders/common_hlsl_cpp_consts.h",
+      "sha256": "147d39bfdf6d0266be3fd6b60dcdbbaf839e2be7853349bac0813d5605de68c5"
+    }
+  }
+}

@@ -1,115 +1,44 @@
 # Xenesthesia
 
-**Playtest build. Not published.** Workshop publication is held until the owner's
-main-desktop playtest and approval. The Workshop text in `artifacts` is a draft.
+**Local playtest. Nothing uploaded to Workshop.** Publication requires the owner's explicit approval after playing the preview.
 
-On the author's local machine, `tools/install-playtest.ps1` installs the preview
-in the normal game's `hl2/custom` folder, disables City 17 ASCII without
-unsubscribing, backs up the original native settings, and selects original HL2.
-`tools/launch-playtest.ps1` opens the native main menu in a bordered 1280x720 window.
-Choose **Half-Life 2 > New Game** or load your usual HL2 save. F4 toggles only the
-optional colour layer; texture motion stays active. F6 opens the pause menu to
-release the mouse. To disable the complete local preview, close HL2 and run
-`tools/disable-playtest.ps1`, then launch HL2 normally. The installer re-enables it.
-The helper does not restore video preferences or F4/F6/F8 bindings; use Options
-to restore your preferred settings. Original config files remain in the private
-backup for reference, but are not blindly copied over newer settings.
-The launcher also accepts `-Scene
-coast` or `-Scene ravenholm` to enter those base-game maps directly. These preview
-helpers and their settings are not included in the Workshop package.
+A native psychedelic material addon for the original Windows Half-Life 2 20th Anniversary edition. Gentle texture breathing and slowly unfolding prismatic colours live in surface coordinates, before camera projection. Walking or turning does not recenter the colour field on Gordon. The original textures, lighting, HUD and screen geometry remain readable.
 
-The earlier custom `-game` harness is retired: the anniversary runtime remounts
-content when switching campaigns, and that harness did not reproduce the native
-menu and Workshop state correctly.
+The current material build covers 2,364 definitions. Compatible world surfaces, props, opaque NPC materials, cutouts, hands and weapons receive colour. The same subtle, two-wave UV motion approved in the previous preview remains on supported world/prop/weapon materials. NPC faces, cutouts and materials with authored animation receive colour without added UV movement. Standard grain detail layers are replaced by the original colour/grain field; special-purpose detail layers are preserved.
 
-A native psychedelic material addon for Half-Life 2's Windows 20th Anniversary
-edition. Brickwork breathes, floors drift and textures gently stretch and turn
-on their surfaces. Motion happens in material coordinates before camera
-projection, so it stays on the surface as you look around. Supported hands and
-weapons have their own restrained settings. Geometry, the HUD and screen edges stay sharp.
-An optional prismatic colour layer adds shifting opalescent hues and soft colour
-bands. It keeps the scene detail sharp and never displaces the image. Texture
-motion combines two slow pulses per axis for a less regular rhythm.
+Objects sharing a material can animate together. This is not object recognition or independent animation of every item. Transparent/additive materials, special shaders, UnlitTwoTexture displays and some map-specific overrides remain outside coverage. Classic zombies and classic headcrabs also have an experimental geometric pulse (up to 0.75 game units of surface-normal expansion). They keep their stock texture colours and use a different lighting shader; human head/eye/teeth deformation is not enabled.
 
-The current build animates 1,917 supported original HL2 materials. World surfaces
-and props have timing derived from their material name; supported first-person
-weapons also use an entity phase. This is not independent animation of every object. Objects
-sharing a material can move together. NPC faces, cutouts, transparent surfaces,
-existing animated materials and special shaders are deliberately excluded.
-These exclusions concern texture motion; the optional colour pass can still
-affect their appearance. For example, the RPG's main cutout material gets colour
-but no UV animation. All ten installed hand material definitions are included.
+## Local preview
 
-## Install
+`tools/install-playtest.ps1` installs the preview in native `hl2/custom`, disables City 17 ASCII without unsubscribing, backs up native settings, and selects original HL2. Run it only while HL2 is closed.
 
-For the optional colour layer, enable **Full HDR** under Options > Video > Advanced and use DirectX 9 with
-Shader Model 2.b support. Disable City 17 ASCII and other post-processing material
-overrides before enabling this addon. Only one of these filters can be active.
+`tools/launch-playtest.ps1` opens the original game's menu in a bordered 1280×720 window. Start Half-Life 2 or load a normal save. F6 opens the pause menu and releases the mouse; F8 opens the console. F4 prints rollback guidance in the console.
 
-For a local install, put `content.vpk` into `Half-Life 2/hl2/custom/` under the name
-`xenesthesia.vpk`, then restart. Remove that file and restart to uninstall.
+**The old F4 colour toggle has been retired.** Colour now lives inside materials and cannot be disabled by switching off bloom. To disable all effects, close HL2, run `tools/disable-playtest.ps1`, then reopen HL2. The installer re-enables them. These helpers do not restore video preferences or F4/F6/F8 bindings; use Options for those. The original private backups are retained for reference.
 
-For Workshop, subscribe, enable the addon in the game's Workshop menu, restart,
-and start/load from the main menu. Direct `+map` startup can bypass Workshop mounting.
+## Manual installation
 
-Optional developer-console commands:
+Put `content.vpk` in `Half-Life 2/hl2/custom/` as `xenesthesia.vpk`, then restart. Remove it and restart to uninstall. Use one Xenesthesia copy at a time. Disable other addons overriding the same materials, including City 17 ASCII. DirectX 9 is required; the new colour path has no custom HDR or bloom hook.
 
-```
-exec xen_on
-exec xen_off
-exec xen_keys
-```
+The addon never changes key bindings automatically. `exec xen_keys` opts into F4 help and restores normal game bloom/colour-correction settings previously changed by the old preview. `exec xen_off` explains removal; it no longer pretends to disable native material effects.
 
-`xen_keys` assigns F4 to toggle the colour layer and replaces any previous F4 binding.
-It is never run automatically by the addon. `xen_off` bypasses only the colour
-layer by disabling bloom and colour correction for the session. Texture motion
-continues. **Disable the addon and restart for a full bypass.** Use `xen_on` or your preferred video
-settings to restore the post-processing passes. Reassign F4 in Controls or use
-`unbind F4` to remove the optional binding.
+## Build and validate
 
-## Compatibility
-
-This is an original content-only VPK. It needs no ReShade, injected DLL or cheats.
-It replaces supported world/prop/weapon materials as well as
-`materials/dev/bloomadd.vmt` and `materials/dev/engine_post.vmt`. It conflicts with
-texture or material packs overriding those files. Normal bloom and colour grading
-are replaced while the optional colour layer runs.
-
-The material animation changes texture coordinates, not geometry, collision, AI
-or gameplay. Painted-on windows, markings and other texture details move too;
-material seams can become visible. Custom materials and untested episode content
-are not guaranteed coverage. The optional colour pass is separate from texture
-motion. It uses the scene's compressed depth cue and soft colour buffer to drive
-hues, not to displace edges or reconstruct object positions.
-
-## Build
-
-Windows, Python 3.11+, and an installed Half-Life 2 are required for development.
-The runtime package has no Python dependency.
+Requires the locally installed original game and Python 3. The NPC build verifies and caches six pinned official SDK source files on first use. The build reads material definitions from that installation; it does not extract or redistribute Valve texture images.
 
 ```
 powershell -File tools/bootstrap.ps1
 python tools/build.py
 python -m unittest discover -s tests -v
+python tools/audit-coverage.py
 ```
 
-The build reads original material definitions from the installed game's
-`hl2_misc_dir.vpk`, preserves their parameters, and adds native animation proxies
-only to supported materials. Generated definitions are not original MIT assets.
-It also uses Valve's verified official shader compiler and installed VPK packer.
-Close the test game before rebuilding an archive it has mounted.
-The build verifies archive bytes against the manifest, including detecting
-packer failures that incorrectly return a successful process exit code.
+`tools/prism_texture.py` generates an original, mipmapped, 128-frame RGB colour field. `tools/surface_motion.py` augments supported VMTs while retaining existing animation blocks and protecting cutout UVs. `tools/build.py` packs the runtime content and verifies every archived byte. Source hashes and output hashes are recorded in `artifacts`.
 
-`src` is the original shader, `content` is the Workshop upload root, `tools`
-contains the build, and `testgame` is a local harness excluded from releases.
+`tools/prepare-release.py` stages an offline review package. It contains no upload calls. Workshop publication, a clean subscribed-install check and final screenshots remain gated on approval of the revised appearance. Earlier staged packages and their screenshots are superseded by the material-colour revision.
 
-`python tools/prepare-release.py` makes a local review folder, an extracted
-Workshop content folder and a manual-install ZIP from the verified archive.
-It never connects to Steam or uploads anything. These are preview candidates;
-the owner's playtest approval and explicit publication go-ahead are still required.
+The old custom `-game` harness is retired; all current tests use the actual anniversary runtime. The previous postprocess shader source is retained for history, but neither its compiled shader nor its bloom/engine_post replacements ship.
 
-## License
+## Licensing
 
-Original source and documentation: MIT, see LICENSE. Generated material overrides
-derive from Valve game definitions and are excluded from that grant. See NOTICE.md.
+Original code and procedural texture data: MIT. Valve-derived material definitions, compiled NPC shaders, game screenshots and promotional art are excluded from that grant. See NOTICE.md. This is an independent addon, not endorsed by Valve.

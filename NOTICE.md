@@ -1,6 +1,6 @@
 # Attribution
 
-The original Xenesthesia shader, build tools and documentation are MIT licensed.
+The original Xenesthesia code, procedural colour texture, build tools and documentation are MIT licensed.
 The packaging and native integration helpers derive from our City 17 ASCII
 project, also MIT licensed: https://github.com/skulitom/city17-ascii
 
@@ -15,7 +15,7 @@ bundles, or artifacts/release/media/cover-prompt.txt in the source tree.
 The MIT grant applies to original code and documentation, not Valve assets,
 screenshots or promotional art.
 
-The generated world/prop/weapon .vmt files preserve material definitions from the
+The generated world/prop/weapon/NPC .vmt files preserve material definitions from the
 owner's installed Half-Life 2 and add our animation proxies. Those definitions,
 including their copies inside content.vpk, are derived Valve game content and
 are NOT licensed under our MIT grant. No Valve texture images or game binaries
@@ -26,3 +26,13 @@ installation; artifacts/surface-materials.json records the source hashes.
 Valve's ShaderCompile2 is fetched from the official Source SDK 2013 and checked
 against its known SHA-256 before use. It is a development tool and is not shipped
 in the runtime content or redistributed as part of the source release.
+
+Experimental NPC deformation compiles two modified VortWarp vertex shaders
+from Valve's Source SDK, pinned by research/npc-sdk-files.json. These compiled
+.vcs files are Valve-derived SDK code, NOT MIT. The SDK's LICENSE and
+thirdpartylegalnotices.txt are retained unmodified in third_party/valve-source-sdk
+and included inside the VPK under xenesthesia/licenses. This addon must remain
+free. Original patch/build code in tools/npc_pulse.py is MIT; the SDK license
+continues to apply to the combined compiled shaders. Stock VortWarp parameters
+0..1 use the original vertex process; the addon marks its own two materials
+with values >=2. Broader cinematic compatibility is a remaining release check.

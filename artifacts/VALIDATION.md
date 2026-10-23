@@ -1,3 +1,21 @@
+# Current revision: material colour and experimental NPC pulse
+
+Runtime SHA-256: `3192e740a1bb70fbfe57a7f5eec4646568f7aa28c70b074e41a88e0be5a68b51`. 2,374 files, 7,391,337 bytes. The previous postprocess candidate below is superseded.
+
+- 15 unit/package checks pass, including exact archive bytes, original animated texture layout, safe alpha/proxy handling, retired camera hooks, native shader combo counts and SDK notices.
+- Native HL2 through Anode: station, coast, Ravenholm and a private lit test room. Colour is visible on walls, physics crates and monitor cases; camera changes were checked with game time frozen. Existing texture motion bounds are unchanged.
+- Classic zombie and classic headcrab geometry visibly inflates/deflates. Captured ten native frames after stopping the zombie model's skeletal playback, isolating the material pulse. Humans receive surface colour only; eyes and teeth are not deformed. NPC VortWarp shading differs from the original Phong shader.
+- Both VS2.0 and VS3.0 compile with combo layouts matching retail. The marker branch preserves stock 0..1 warp source logic. Cinematic/episode regression coverage is incomplete and required before release.
+- Native timedemo reported 363.17 FPS at 1280x720 (2,610 frames), but emitted missing-string-table warnings; treat this as provisional, not a clean performance claim. A fresh recording and 1080p measurement remain release work. The frame cap was restored to 120.
+- Some original materials contain duplicate $surfaceprop declarations; these pre-existing warnings are retained. No new proxy/shader/texture-load errors were observed in the revised native tests.
+- Native original HL2 launched on main session 1 in a bordered 1280x720 window; process responding with the expected game title. User feedback pending. No Workshop item created/uploaded. New store media and clean subscribed-install validation remain gated by appearance approval and explicit upload authorization.
+
+Current test captures: `material-colour/`. The private lab is a diagnostic scene, not a game screenshot for the Workshop gallery. The ten-frame NPC sequence is sampled stills, not continuous video.
+
+---
+
+## Historical validation (earlier shader)
+
 # Playtest validation, 23 October 2026
 
 ## Initial colour-focused build (historical)

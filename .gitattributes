@@ -2,3 +2,10 @@
 /content/** -text
 *.vpk -text
 *.vcs -text
+
+# Preserve upstream licensing notices exactly as downloaded.
+/third_party/** -text
+
+# Retain upstream notice whitespace verbatim.
+/third_party/** -whitespace
+/content/xenesthesia/licenses/** -whitespace

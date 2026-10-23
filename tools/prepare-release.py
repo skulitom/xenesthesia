@@ -17,6 +17,8 @@ def sha(data):
 
 
 def prepare():
+    if not (ROOT / 'artifacts/material-colour/media-approved.json').exists():
+        raise RuntimeError('Current material-colour screenshots and review are not ready for release staging.')
     archive = ROOT / 'content.vpk'
     manifest = json.loads((ROOT / 'artifacts/build-manifest.json').read_text())
     entries, read = read_vpk(archive)
@@ -26,8 +28,14 @@ def prepare():
     for name, expected in manifest.items():
         path = PurePosixPath(name)
         if (path.is_absolute() or '..' in path.parts or ':' in name or '\\' in name
-                or path.suffix not in {'.vmt', '.vcs', '.cfg'}):
+                or path.suffix not in {'.vmt', '.vcs', '.cfg', '.vtf', '.txt'}):
             raise ValueError(f'Unexpected runtime path: {name}')
+        if path.suffix == '.vtf' and name != 'materials/xenesthesia/prism.vtf':
+            raise ValueError(f'Unexpected texture: {name}')
+        if path.suffix == '.txt' and name not in {
+                'xenesthesia/licenses/valve-sdk-license.txt',
+                'xenesthesia/licenses/valve-sdk-thirdpartylegalnotices.txt'}:
+            raise ValueError(f'Unexpected runtime text: {name}')
         body = read(name)
         if sha(body) != expected or body != (ROOT / 'content' / name).read_bytes():
             raise ValueError(f'Stale or corrupt runtime content: {name}')
@@ -40,6 +48,8 @@ def prepare():
         'INSTALL.txt': 'artifacts/release/INSTALL.txt',
         'LICENSE': 'LICENSE',
         'NOTICE.md': 'NOTICE.md',
+        'licenses/Valve-SDK-LICENSE.txt': 'third_party/valve-source-sdk/LICENSE',
+        'licenses/Valve-SDK-thirdpartylegalnotices.txt': 'third_party/valve-source-sdk/thirdpartylegalnotices.txt',
         'VALIDATION.md': 'artifacts/VALIDATION.md',
         'COVERAGE.md': 'artifacts/release/COVERAGE.md',
         'workshop-description.txt': 'artifacts/workshop-description.txt',
@@ -75,12 +85,12 @@ def prepare():
     manual_zip = destination / 'xenesthesia-manual-install.zip'
     with zipfile.ZipFile(manual_zip, 'w', zipfile.ZIP_DEFLATED) as package:
         package.write(archive, 'xenesthesia.vpk')
-        for name in ['INSTALL.txt', 'LICENSE', 'NOTICE.md']:
+        for name in ['INSTALL.txt', 'LICENSE', 'NOTICE.md', 'licenses/Valve-SDK-LICENSE.txt', 'licenses/Valve-SDK-thirdpartylegalnotices.txt']:
             package.write(destination / name, name)
     with zipfile.ZipFile(manual_zip) as package:
         if package.testzip() or sha(package.read('xenesthesia.vpk')) != archive_hash:
             raise ValueError('Manual-install ZIP verification failed.')
-        if set(package.namelist()) != {'xenesthesia.vpk', 'INSTALL.txt', 'LICENSE', 'NOTICE.md'}:
+        if set(package.namelist()) != {'xenesthesia.vpk', 'INSTALL.txt', 'LICENSE', 'NOTICE.md', 'licenses/Valve-SDK-LICENSE.txt', 'licenses/Valve-SDK-thirdpartylegalnotices.txt'}:
             raise ValueError('Unexpected file in manual-install ZIP.')
     for name, expected in manifest.items():
         if sha((content_root / name).read_bytes()) != expected:

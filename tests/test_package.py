@@ -23,7 +23,12 @@ class PackageTests(unittest.TestCase):
     def test_content_only_and_opt_in_binding(self):
         entries, read = read_vpk(ROOT/'content.vpk')
         for name in entries:
-            self.assertIn(Path(name).suffix, {'.vmt','.vcs','.cfg'})
+            self.assertIn(Path(name).suffix, {'.vmt','.vcs','.cfg','.vtf','.txt'})
+            if name.endswith('.txt'):
+                self.assertIn(name, {'xenesthesia/licenses/valve-sdk-license.txt',
+                                    'xenesthesia/licenses/valve-sdk-thirdpartylegalnotices.txt'})
+            if name.endswith('.vtf'):
+                self.assertEqual(name, 'materials/xenesthesia/prism.vtf')
             self.assertNotIn(Path(name).name, {'autoexec.cfg','config.cfg','gameinfo.txt'})
             if name.endswith('.cfg'):
                 lines = [x.strip() for x in read(name).decode('ascii').splitlines()
@@ -33,23 +38,40 @@ class PackageTests(unittest.TestCase):
                 self.assertNotIn('host_writeconfig', commands)
                 if name.endswith('xen_keys.cfg'):
                     self.assertEqual([x for x in lines if x.startswith('bind ')],
-                                     ['bind F4 "exec xen_toggle"'])
+                                     ['bind F4 "exec xen_help"'])
                 else:
                     self.assertNotIn('bind', commands)
 
-    def test_compiled_shader_and_both_postprocess_paths(self):
+    def test_surface_colour_texture_and_retired_camera_hooks(self):
+        entries, read = read_vpk(ROOT/'content.vpk')
+        self.assertNotIn('materials/dev/bloomadd.vmt',entries)
+        self.assertNotIn('materials/dev/engine_post.vmt',entries)
+        self.assertNotIn('shaders/fxc/xenesthesia_ps20b.vcs',entries)
+        data = read('materials/xenesthesia/prism.vtf')
+        signature,major,minor,header,width,height,flags,frames,start = struct.unpack_from('<4sIIIHHIHH',data)
+        self.assertEqual((signature,major,minor,header),(b'VTF\0',7,2,80))
+        self.assertEqual((width,height,frames,start),(64,64,128,0))
+        self.assertEqual(flags,2)  # wrap and trilinear; no alpha/no forced clamping
+        bump,fmt,mips,low_fmt,low_w,low_h,depth = struct.unpack_from('<fIBiBBH',data,48)
+        self.assertEqual((fmt,mips,low_fmt,low_w,low_h,depth),(2,7,-1,0,0,1))
+        self.assertEqual(len(data),80 + frames*3*sum(4**i for i in range(mips)))
+        largest = 64*64*3
+        self.assertNotEqual(data[-largest:],data[-2*largest:-largest])
+
+    def test_experimental_npc_shader_layout_and_markers(self):
         _, read = read_vpk(ROOT/'content.vpk')
-        data = read('shaders/fxc/xenesthesia_ps20b.vcs')
-        version,total,dynamic,flags,centroid,static,crc = struct.unpack_from('<7I',data)
-        self.assertEqual((version,total,dynamic,static),(6,1,1,2))
-        self.assertNotEqual(crc,0)
-        self.assertGreater(len(data),100)
-        a = read('materials/dev/bloomadd.vmt')
-        b = read('materials/dev/engine_post.vmt')
-        self.assertEqual(a,b)
-        self.assertIn(b'"$pixshader" "xenesthesia_ps20"',a)
-        self.assertIn(b'"CurrentTime"',a)
-        self.assertIn(b'"$texture2" "_rt_SmallFB1"',a)
+        for version,total,dynamic,static in [('20',96,24,3),('30',32,16,2)]:
+            header = struct.unpack_from('<6I',read(f'shaders/fxc/vortwarp_vs{version}.vcs'))
+            self.assertEqual(header,(6,total,dynamic,0,0,static))
+        from npc_pulse import MATERIALS, PATCH, ANCHOR
+        self.assertIn('if (g_Time >= 2.0)',PATCH)
+        self.assertEqual(PATCH.count(ANCHOR),1)
+        for name in MATERIALS:
+            source = read(name).decode()
+            self.assertTrue(source.startswith('"VortWarp"'))
+            self.assertIn('"sineMin" "2.04" "sineMax" "2.75"',source)
+            self.assertNotIn('TextureTransform',source)
+        self.assertIn(b'SOURCE 1 SDK LICENSE',read('xenesthesia/licenses/valve-sdk-license.txt'))
 
 if __name__ == '__main__':
     unittest.main()

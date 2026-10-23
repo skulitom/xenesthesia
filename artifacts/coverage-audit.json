@@ -1,5 +1,5 @@
 {
-  "runtime_sha256": "64c9cb296a7c2b7d50bd2769aeac887e39eb1d0afc8e85d00343b892375b5a40",
+  "runtime_sha256": "3192e740a1bb70fbfe57a7f5eec4646568f7aa28c70b074e41a88e0be5a68b51",
   "scope": "Static material references only; excludes visibility, model usage and gameplay behaviour.",
   "viewmodels": {
     "v_357": {
@@ -48,13 +48,9 @@
       "excluded": {}
     },
     "v_rocket_launcher": {
-      "included": 0,
+      "included": 1,
       "total_definitions": 1,
-      "excluded": {
-        "materials/models/weapons/v_rocket_launcher/rocket launcher sheet.vmt": [
-          "$alphatest"
-        ]
-      }
+      "excluded": {}
     },
     "v_shotgun": {
       "included": 1,
@@ -62,16 +58,9 @@
       "excluded": {}
     },
     "v_slam": {
-      "included": 4,
+      "included": 6,
       "total_definitions": 6,
-      "excluded": {
-        "materials/models/weapons/v_slam/new light1.vmt": [
-          "proxies"
-        ],
-        "materials/models/weapons/v_slam/new light2.vmt": [
-          "proxies"
-        ]
-      }
+      "excluded": {}
     },
     "v_smg1": {
       "included": 2,
@@ -103,9 +92,9 @@
     "d1_trainstation_01": {
       "bsp_sha256": "a865921a052bf42c60b1a93dff7465b1aa3147b14cc13f029a88d3459064cb17",
       "material_table_entries": 460,
-      "direct_overrides": 72,
+      "direct_overrides": 81,
       "patches_referencing_overrides": 107,
-      "other_materials": 281,
+      "other_materials": 272,
       "patch_sources": [
         "materials/brick/brickwall034b.vmt",
         "materials/brick/brickwall034d.vmt",
@@ -137,9 +126,9 @@
     "d1_canals_01": {
       "bsp_sha256": "fccb6d0db90d9a51ec083b3d020440a579a497624008aba9c50a8b2a79144e77",
       "material_table_entries": 304,
-      "direct_overrides": 93,
+      "direct_overrides": 103,
       "patches_referencing_overrides": 151,
-      "other_materials": 60,
+      "other_materials": 50,
       "patch_sources": [
         "materials/brick/brickwall034b.vmt",
         "materials/brick/brickwall045c.vmt",
@@ -178,9 +167,9 @@
     "d1_canals_06": {
       "bsp_sha256": "fccfbd3f832b962005ec775e93634af3dd93cbdcb5d52458426c983ed502d632",
       "material_table_entries": 201,
-      "direct_overrides": 53,
+      "direct_overrides": 62,
       "patches_referencing_overrides": 97,
-      "other_materials": 51,
+      "other_materials": 42,
       "patch_sources": [
         "materials/concrete/concretewall046c.vmt",
         "materials/concrete/concretewall046d.vmt",
@@ -200,9 +189,9 @@
     "d1_eli_01": {
       "bsp_sha256": "1a855ae0488092ef8a69aa54204cf8e2f413f52f01d7b894d0f99bc26bebfcd8",
       "material_table_entries": 194,
-      "direct_overrides": 70,
+      "direct_overrides": 76,
       "patches_referencing_overrides": 50,
-      "other_materials": 74,
+      "other_materials": 68,
       "patch_sources": [
         "materials/concrete/concretefloor039a.vmt",
         "materials/metal/metaldoor030a.vmt",
@@ -218,9 +207,9 @@
     "d1_town_01": {
       "bsp_sha256": "0cac9124314d65d129486b82db4873ab90f39b48cdf9303f19b361e7a378cea9",
       "material_table_entries": 379,
-      "direct_overrides": 61,
+      "direct_overrides": 67,
       "patches_referencing_overrides": 272,
-      "other_materials": 46,
+      "other_materials": 40,
       "patch_sources": [
         "materials/brick/brickwall031b.vmt",
         "materials/brick/brickwall031g.vmt",
@@ -246,9 +235,9 @@
     "d2_coast_03": {
       "bsp_sha256": "5994db7c5365b9943dd6d6f29dd3a172f91d5b09d173801de627fdba7f1607f5",
       "material_table_entries": 231,
-      "direct_overrides": 44,
+      "direct_overrides": 51,
       "patches_referencing_overrides": 103,
-      "other_materials": 84,
+      "other_materials": 77,
       "patch_sources": [
         "materials/concrete/concretefloor037b.vmt",
         "materials/metal/metalpipe003a.vmt",
@@ -271,9 +260,9 @@
     "d2_prison_01": {
       "bsp_sha256": "25825a99b30b5f603759822371a92223c33eb288f7531f61748a1924ca590328",
       "material_table_entries": 181,
-      "direct_overrides": 37,
+      "direct_overrides": 43,
       "patches_referencing_overrides": 104,
-      "other_materials": 40,
+      "other_materials": 34,
       "patch_sources": [
         "materials/concrete/concretefloor010b.vmt",
         "materials/concrete/concretefloor038b.vmt",
@@ -289,9 +278,9 @@
     "d3_c17_01": {
       "bsp_sha256": "12512a5ff33e32cc68d4e828af40485edef113d801265fa2efa0180df4ef2dd9",
       "material_table_entries": 158,
-      "direct_overrides": 53,
+      "direct_overrides": 60,
       "patches_referencing_overrides": 56,
-      "other_materials": 49,
+      "other_materials": 42,
       "patch_sources": [
         "materials/metal/metalceiling005a.vmt",
         "materials/metal/metaldoor018a.vmt",

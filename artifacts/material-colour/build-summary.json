@@ -1,0 +1,9 @@
+{
+  "runtime_sha256": "3192e740a1bb70fbfe57a7f5eec4646568f7aa28c70b074e41a88e0be5a68b51",
+  "counts": {
+    "material_definitions": 2364,
+    "colour_materials": 2360,
+    "uv_motion_materials": 1944,
+    "npc_pulse_materials": 2
+  }
+}

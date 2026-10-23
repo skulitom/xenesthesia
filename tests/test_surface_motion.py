@@ -29,11 +29,45 @@ class SurfaceMotionTests(unittest.TestCase):
         self.assertIn('$selfillum 1', out)
         self.assertIn('"resultVar" "$bumptransform"', out)
 
-    def test_skips_special_materials_and_existing_animation(self):
-        for extra in ['Proxies { Sine { resultVar $alpha } }', '$alphatest 1', '$translucent 1', '$basetexturetransform "center .5 .5 scale 2 2"']:
+    def test_skips_translucent_and_interface_materials(self):
+        for extra in ['$translucent 1', '$decal 1', '$additive 1']:
             self.assertIsNone(animate('materials/brick/test.vmt', 'LightmappedGeneric { $basetexture test '+extra+' }'))
         for name in ['materials/vgui/test.vmt', 'materials/decals/test.vmt', 'materials/models/humans/test.vmt']:
             self.assertIsNone(animate(name, 'LightmappedGeneric { $basetexture test }'))
+
+    def test_existing_animation_is_merged_without_moving_its_uvs(self):
+        authored = 'Sine { resultVar $alpha sineMin .7 sineMax 1 }'
+        out = animate('materials/models/props_lab/computer.vmt',
+                      'UnlitGeneric { $basetexture test Proxies { '+authored+' } }')
+        self.assertIn(authored, out)
+        self.assertEqual([t[0].strip('"').lower() for t in tokens(out)].count('proxies'), 1)
+        self.assertIn('"AnimatedTexture"', out)
+        self.assertNotIn('TextureTransform', out)
+
+    def test_cutout_and_face_colour_preserve_uv_and_alpha(self):
+        for name,extra in [('materials/models/weapons/v_rpg/rpg.vmt','$alphatest 1'),
+                           ('materials/models/humans/face.vmt','')]:
+            out = animate(name, 'VertexLitGeneric { $basetexture test '+extra+' }')
+            self.assertIn('"$detailblendmode" "0"', out)
+            self.assertNotIn('TextureTransform', out)
+            self.assertNotIn('EntityRandom', out)
+            if extra:
+                self.assertIn(extra, out)
+
+    def test_authored_detail_layer_is_not_replaced(self):
+        source = 'LightmappedGeneric { $basetexture test $detail original/detail }'
+        out = animate('materials/brick/test.vmt',source)
+        self.assertIn('$detail original/detail', out)
+        self.assertNotIn('xenesthesia/prism',out)
+
+    def test_standard_micrograin_replaced_without_duplicate_keys(self):
+        source = 'LightmappedGeneric { $basetexture a $detail "detail\\plaster_detail_01" $detailscale 4 }'
+        out = animate('materials/plaster/test.vmt',source)
+        values = [t[0].strip('"').lower() for t in tokens(out)]
+        self.assertEqual(values.count('$detailscale'),1)
+        self.assertIn('"$detailframe" "0"',out)
+        self.assertNotIn('plaster_detail_01',out)
+        self.assertIn('"0.500"',out)
 
     def test_static_props_do_not_use_entity_only_proxy(self):
         out = animate('materials/models/props_c17/crate.vmt', 'VertexLitGeneric { $basetexture crate }')
