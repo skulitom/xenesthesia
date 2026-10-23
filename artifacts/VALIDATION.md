@@ -1,12 +1,14 @@
 # Current revision: carpets and generator-tube liquid
 
-Local build only; native visual check awaits restarting the current main-desktop preview. No Workshop activity. Runtime SHA-256: `260d49ed667e6e1a7cb94317592ac7a85c8c018643624b002f7cf9850d412620`. 2,439 files, 17,314,018 bytes; 2,409 material definitions. All 29 unit/package checks pass and all 20 native vertex shader layouts match retail.
+Local preview; targeted native checks completed in Anode. No Workshop activity. Runtime SHA-256: `260d49ed667e6e1a7cb94317592ac7a85c8c018643624b002f7cf9850d412620`. 2,439 files, 17,314,018 bytes; 2,409 material definitions. All 29 unit/package checks pass and all 20 native vertex shader layouts match retail.
 
 Added 17 explicit material targets: six standalone rugs/decal rugs, four runner sections, six carpet-floor definitions, and the generator-tube Refract material. Rugs use a new original 128-frame petal-like colour field with a neutral perimeter. Their original base UVs and alpha remain unchanged; this animates colour through the weave, not the physical carpet motif. Runner sections share the continuous world field; carpet floors use the approved gentle UV motion. The tubes use a 256-frame, 16-second normal-map loop with evolving opposing currents, no linear UV scroll, and lower refraction strength. Their orange tint image, silhouette behavior, blur and fallback remain authored.
 
 The two added textures total 7,689,248 bytes and use mipmaps; their data is original mathematics, not extracted Valve images. Normal vectors are renormalized at each mip, opaque alpha is retained, and temporal/spatial loops are tested. Tests also guard overlay alpha/UV preservation, shared runner clocks, narrow material targeting, authored tank parameters and exact archive bytes. All pre-existing VMT token sequences are unchanged; 108 regenerated human VMTs differ only in line endings. No additional compiled shader paths were introduced. This is not a new performance measurement.
 
-Evidence and current test status: `lab-materials/summary.json`. Workshop gallery, broader campaign tests, clean performance validation and explicit publication approval remain pending.
+Native d1_trainstation_05 checks: rug colour changes between fixed-camera captures, with crisp underlying detail and a stable transparent perimeter. Generator tubes show slow curling refraction while retaining orange glow and intact silhouettes. Twelve native 1280×720 stills retain carpet phases, tank phases and short approach views; each approach moved about 12 units, so these are not a long-walk animation regression or performance benchmark. No new material, proxy or shader errors were observed; existing unrelated startup/config/weapon warnings remain. Normal HUD/viewmodel/forward speed restored, cheats disabled, owned Anode game quit and lease released. Main bordered preview opened successfully in session 1 (PID 119672, responding, native HL2 title); user feedback pending.
+
+Evidence and current test status: `lab-materials/summary.json` and `captures.json`. Workshop gallery, broader campaign tests, clean performance validation and explicit publication approval remain pending.
 
 ---
 

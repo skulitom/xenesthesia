@@ -1,0 +1,74 @@
+[
+  {
+    "file": "carpet-00.jpg",
+    "native_file": "d1_trainstation_050000.jpg",
+    "sha256": "5a3127177d18e3a55fcc1099a9ab2f5a81e71c0172a123d27db16962ee727cff",
+    "captured_local": 1792794322.290082
+  },
+  {
+    "file": "carpet-01.jpg",
+    "native_file": "d1_trainstation_050001.jpg",
+    "sha256": "f1c5dcadf56356d8745c0ddad060ff05a6b0f0b9312c332190872d55bb548c77",
+    "captured_local": 1792794334.731643
+  },
+  {
+    "file": "carpet-02.jpg",
+    "native_file": "d1_trainstation_050002.jpg",
+    "sha256": "907fc65d5a797638ae68b6d089d8a1c8e2930550d00297f3294cffa80cb8ce17",
+    "captured_local": 1792794336.3834755
+  },
+  {
+    "file": "tanks-standing-03.jpg",
+    "native_file": "d1_trainstation_050003.jpg",
+    "sha256": "628c11d53f121a9f5899bac9bab96776692b91157a0280fa4b487b8a9151ca35",
+    "captured_local": 1792794362.4851303
+  },
+  {
+    "file": "tanks-standing-04.jpg",
+    "native_file": "d1_trainstation_050004.jpg",
+    "sha256": "8c25832869a0006b525da05750534513b0049a3eb256c84a8f3b98d824eb4be0",
+    "captured_local": 1792794364.363611
+  },
+  {
+    "file": "tanks-standing-05.jpg",
+    "native_file": "d1_trainstation_050005.jpg",
+    "sha256": "be9d111a6d8142365ba32e10b423910af55e4084c6ec4909ed9883bd98c2b291",
+    "captured_local": 1792794385.3730679
+  },
+  {
+    "file": "tanks-walking-06.jpg",
+    "native_file": "d1_trainstation_050006.jpg",
+    "sha256": "992f1d55e7d5b17fa85a08b73351e5bad92ec1ca3b7b79c62424453e31e28c9f",
+    "captured_local": 1792794386.762706
+  },
+  {
+    "file": "tanks-walking-07.jpg",
+    "native_file": "d1_trainstation_050007.jpg",
+    "sha256": "47ab72a9e27a73d1b9acf301dc2c0eb0f6aff20e5d4e0ce7538fcf81493469a5",
+    "captured_local": 1792794387.7316806
+  },
+  {
+    "file": "tanks-walking-08.jpg",
+    "native_file": "d1_trainstation_050008.jpg",
+    "sha256": "e6bb10fe170305be72d3414871c6ead76d95dfc9002dd4ad2aa3353a1e72dc53",
+    "captured_local": 1792794388.6917295
+  },
+  {
+    "file": "tanks-approach-09.jpg",
+    "native_file": "d1_trainstation_050009.jpg",
+    "sha256": "9279d7290f2da851ba36fb5ee07d2007092f16a99064580975443db56be6de5e",
+    "captured_local": 1792794440.876736
+  },
+  {
+    "file": "tanks-approach-10.jpg",
+    "native_file": "d1_trainstation_050010.jpg",
+    "sha256": "f33a5504b937b98ca2edecb676543d042c7fe03a5c33628d9ddef920c60463e6",
+    "captured_local": 1792794441.861025
+  },
+  {
+    "file": "tanks-approach-11.jpg",
+    "native_file": "d1_trainstation_050011.jpg",
+    "sha256": "35cc986ae6d7f899e10db942c48e1776074829c9996a9ad8939ef07b80499ee7",
+    "captured_local": 1792794442.851417
+  }
+]

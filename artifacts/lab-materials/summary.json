@@ -12,6 +12,11 @@
   "new_materials": 17,
   "new_procedural_textures": 2,
   "previous_material_token_changes": 0,
-  "native_visual_test": "pending restart of current main-seat preview",
-  "workshop": "No item created or uploaded; explicit go required."
+  "native_visual_test": "Passed targeted checks in original d1_trainstation_05 through Anode: rug colour flow, stationary rug alpha boundary, slow tube refraction, orange glow and intact tube outlines. Stationary multi-phase captures plus short approach views retained.",
+  "workshop": "No item created or uploaded; explicit go required.",
+  "native_captures": "captures.json",
+  "movement_scope": "Two short approaches moved about 12 game units each; sampled stills are not proof of uninterrupted animation over a long walk.",
+  "console": "No new material, proxy or shader errors; existing startup/config/weapon warnings remain.",
+  "anode": "Owned game quit; normal HUD/viewmodel/forward speed restored; cheats disabled; lease released.",
+  "main_preview": "Opened successfully in session 1, PID 119672, responding with native HL2 window title; bordered menu launcher used. Feedback pending."
 }
