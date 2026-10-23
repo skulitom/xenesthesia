@@ -52,3 +52,8 @@ The owner is playtesting the gentler revision on the main desktop. The desired
 motion/colour balance, broader campaign coverage and final gallery selection
 remain subject to that feedback. Clean Workshop-download installation can only
 be tested after the owner explicitly authorizes creating and uploading the item.
+
+`COVERAGE.md` records a separate static asset audit of nine chapter maps and the
+installed first-person weapon definitions. This helps choose further playtests;
+it does not substitute for running those maps. All ten hand definitions are
+included. The RPG's cutout texture receives colour but is excluded from movement.

@@ -41,6 +41,7 @@ def prepare():
         'LICENSE': 'LICENSE',
         'NOTICE.md': 'NOTICE.md',
         'VALIDATION.md': 'artifacts/VALIDATION.md',
+        'COVERAGE.md': 'artifacts/release/COVERAGE.md',
         'workshop-description.txt': 'artifacts/workshop-description.txt',
         'media/cover.png': 'artifacts/release/media/cover.png',
         'media/cover-workshop.jpg': 'artifacts/release/media/cover-workshop.jpg',

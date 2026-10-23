@@ -25,7 +25,7 @@ For the optional F4 colour toggle, enter [b]exec xen_keys[/b] once in the develo
 Console commands: [b]exec xen_on[/b] enables the colour layer; [b]exec xen_off[/b] bypasses only that layer. Bypass temporarily disables bloom and colour correction. [b]For a complete return to normal textures, disable the addon and restart.[/b] Restore your preferred video settings afterwards.
 
 [h2]Details[/h2]
-For the Windows 20th Anniversary version of Half-Life 2. Texture coordinates animate before camera projection; geometry, combat, physics and AI stay unchanged. Objects sharing a material may animate together. Some texture seams and moving painted-on features are part of this effect. NPC faces, cutouts, transparent surfaces, existing animated materials and special shaders are excluded. Custom materials and episode content are not guaranteed coverage.
+For the Windows 20th Anniversary version of Half-Life 2. Texture coordinates animate before camera projection; geometry, combat, physics and AI stay unchanged. Objects sharing a material may animate together. Some texture seams and moving painted-on features are part of this effect. NPC faces, cutouts, transparent surfaces, existing animated materials and special shaders are excluded from texture movement, but can still receive the colour effect. The RPG's main cutout material is one such exception. Custom materials and episode content are not guaranteed coverage.
 
 The gallery screenshots are captured in-game. The cover is an illustration. Still images show the colour treatment; the breathing and drifting texture animation is best judged in motion.
 

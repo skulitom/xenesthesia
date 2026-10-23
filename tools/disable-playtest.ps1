@@ -13,3 +13,4 @@ if (Test-Path -LiteralPath $preview) {
     Move-Item -LiteralPath $preview -Destination $saved -Force
 }
 Write-Output 'Xenesthesia preview disabled. Start Half-Life 2 normally. Run install-playtest.ps1 to re-enable it.'
+Write-Output 'This removes the visual addon only. Restore your preferred video settings and F4/F6/F8 bindings in Options if desired.'

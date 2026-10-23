@@ -11,6 +11,9 @@ Choose **Half-Life 2 > New Game** or load your usual HL2 save. F4 toggles only t
 optional colour layer; texture motion stays active. F6 opens the pause menu to
 release the mouse. To disable the complete local preview, close HL2 and run
 `tools/disable-playtest.ps1`, then launch HL2 normally. The installer re-enables it.
+The helper does not restore video preferences or F4/F6/F8 bindings; use Options
+to restore your preferred settings. Original config files remain in the private
+backup for reference, but are not blindly copied over newer settings.
 The launcher also accepts `-Scene
 coast` or `-Scene ravenholm` to enter those base-game maps directly. These preview
 helpers and their settings are not included in the Workshop package.
@@ -33,6 +36,9 @@ and props have timing derived from their material name; supported first-person
 weapons also use an entity phase. This is not independent animation of every object. Objects
 sharing a material can move together. NPC faces, cutouts, transparent surfaces,
 existing animated materials and special shaders are deliberately excluded.
+These exclusions concern texture motion; the optional colour pass can still
+affect their appearance. For example, the RPG's main cutout material gets colour
+but no UV animation. All ten installed hand material definitions are included.
 
 ## Install
 

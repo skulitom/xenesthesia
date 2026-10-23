@@ -1,0 +1,336 @@
+{
+  "runtime_sha256": "64c9cb296a7c2b7d50bd2769aeac887e39eb1d0afc8e85d00343b892375b5a40",
+  "scope": "Static material references only; excludes visibility, model usage and gameplay behaviour.",
+  "viewmodels": {
+    "v_357": {
+      "included": 1,
+      "total_definitions": 1,
+      "excluded": {}
+    },
+    "v_bugbait": {
+      "included": 2,
+      "total_definitions": 2,
+      "excluded": {}
+    },
+    "v_crossbow": {
+      "included": 5,
+      "total_definitions": 5,
+      "excluded": {}
+    },
+    "v_crowbar": {
+      "included": 2,
+      "total_definitions": 2,
+      "excluded": {}
+    },
+    "v_grenade": {
+      "included": 5,
+      "total_definitions": 5,
+      "excluded": {}
+    },
+    "v_hand": {
+      "included": 10,
+      "total_definitions": 10,
+      "excluded": {}
+    },
+    "v_irifle": {
+      "included": 2,
+      "total_definitions": 2,
+      "excluded": {}
+    },
+    "v_physcannon": {
+      "included": 2,
+      "total_definitions": 2,
+      "excluded": {}
+    },
+    "v_pistol": {
+      "included": 1,
+      "total_definitions": 1,
+      "excluded": {}
+    },
+    "v_rocket_launcher": {
+      "included": 0,
+      "total_definitions": 1,
+      "excluded": {
+        "materials/models/weapons/v_rocket_launcher/rocket launcher sheet.vmt": [
+          "$alphatest"
+        ]
+      }
+    },
+    "v_shotgun": {
+      "included": 1,
+      "total_definitions": 1,
+      "excluded": {}
+    },
+    "v_slam": {
+      "included": 4,
+      "total_definitions": 6,
+      "excluded": {
+        "materials/models/weapons/v_slam/new light1.vmt": [
+          "proxies"
+        ],
+        "materials/models/weapons/v_slam/new light2.vmt": [
+          "proxies"
+        ]
+      }
+    },
+    "v_smg1": {
+      "included": 2,
+      "total_definitions": 3,
+      "excluded": {
+        "materials/models/weapons/v_smg1/texture5.vmt": [
+          "$additive",
+          "proxies"
+        ]
+      }
+    },
+    "v_smg2": {
+      "included": 1,
+      "total_definitions": 1,
+      "excluded": {}
+    },
+    "v_stunbaton": {
+      "included": 7,
+      "total_definitions": 7,
+      "excluded": {}
+    },
+    "v_stunstick": {
+      "included": 1,
+      "total_definitions": 1,
+      "excluded": {}
+    }
+  },
+  "maps": {
+    "d1_trainstation_01": {
+      "bsp_sha256": "a865921a052bf42c60b1a93dff7465b1aa3147b14cc13f029a88d3459064cb17",
+      "material_table_entries": 460,
+      "direct_overrides": 72,
+      "patches_referencing_overrides": 107,
+      "other_materials": 281,
+      "patch_sources": [
+        "materials/brick/brickwall034b.vmt",
+        "materials/brick/brickwall034d.vmt",
+        "materials/building_template/building_trainstation_window002c.vmt",
+        "materials/concrete/concretefloor019a.vmt",
+        "materials/concrete/concretefloor039a.vmt",
+        "materials/concrete/concretefloor039b.vmt",
+        "materials/metal/citadel_metalwall063a_cheap.vmt",
+        "materials/metal/metalroof003a.vmt",
+        "materials/metal/metalroof005a.vmt",
+        "materials/metal/metalroof006a.vmt",
+        "materials/metal/metalroof008a.vmt",
+        "materials/metal/metalwall021g.vmt",
+        "materials/metal/metalwall063a.vmt",
+        "materials/metal/metalwall072a.vmt",
+        "materials/metal/metalwall072b.vmt",
+        "materials/metal/metalwall076a.vmt",
+        "materials/metal/metalwall077a.vmt",
+        "materials/metal/metalwall091a.vmt",
+        "materials/nature/gravelfloor002b.vmt",
+        "materials/plaster/plasterwall024b.vmt",
+        "materials/stone/stonestair001a.vmt",
+        "materials/tile/tilefloor010a.vmt",
+        "materials/tile/tilefloor013a.vmt",
+        "materials/tile/tileroof003a.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d1_canals_01": {
+      "bsp_sha256": "fccb6d0db90d9a51ec083b3d020440a579a497624008aba9c50a8b2a79144e77",
+      "material_table_entries": 304,
+      "direct_overrides": 93,
+      "patches_referencing_overrides": 151,
+      "other_materials": 60,
+      "patch_sources": [
+        "materials/brick/brickwall034b.vmt",
+        "materials/brick/brickwall045c.vmt",
+        "materials/brick/brickwall045i.vmt",
+        "materials/brick/brickwall045j.vmt",
+        "materials/brick/brickwall045k.vmt",
+        "materials/brick/brickwall055b.vmt",
+        "materials/building_template/building_template007c.vmt",
+        "materials/building_template/building_template007d.vmt",
+        "materials/building_template/building_template007h.vmt",
+        "materials/building_template/building_template007j.vmt",
+        "materials/building_template/building_template007m.vmt",
+        "materials/building_template/courtyard_template002c.vmt",
+        "materials/building_template/courtyard_template002d.vmt",
+        "materials/concrete/concretefloor010b.vmt",
+        "materials/concrete/concretefloor039a.vmt",
+        "materials/concrete/concretewall026b.vmt",
+        "materials/concrete/concretewall026c.vmt",
+        "materials/concrete/concretewall026f.vmt",
+        "materials/metal/metalfloor001b.vmt",
+        "materials/metal/metalroof003a.vmt",
+        "materials/metal/metalroof004a.vmt",
+        "materials/metal/metalwall001a.vmt",
+        "materials/metal/metalwall018e.vmt",
+        "materials/metal/metalwall066g.vmt",
+        "materials/metal/metalwall070e.vmt",
+        "materials/nature/gravelfloor002b.vmt",
+        "materials/plaster/plasterwall029c.vmt",
+        "materials/tile/tileroof004a.vmt",
+        "materials/tile/tileroof004b.vmt",
+        "materials/tile/tilewall006a.vmt",
+        "materials/tile/tilewall006b.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d1_canals_06": {
+      "bsp_sha256": "fccfbd3f832b962005ec775e93634af3dd93cbdcb5d52458426c983ed502d632",
+      "material_table_entries": 201,
+      "direct_overrides": 53,
+      "patches_referencing_overrides": 97,
+      "other_materials": 51,
+      "patch_sources": [
+        "materials/concrete/concretewall046c.vmt",
+        "materials/concrete/concretewall046d.vmt",
+        "materials/concrete/concretewall046e.vmt",
+        "materials/metal/metalpipe003a.vmt",
+        "materials/metal/metalpipe010a.vmt",
+        "materials/metal/metalpipeendcap001a.vmt",
+        "materials/metal/metalwall001a.vmt",
+        "materials/metal/metalwall076a.vmt",
+        "materials/nature/mudfloor004bs.vmt",
+        "materials/nature/rockwall015a.vmt",
+        "materials/tile/tileroof004a.vmt",
+        "materials/wood/woodfloor008a.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d1_eli_01": {
+      "bsp_sha256": "1a855ae0488092ef8a69aa54204cf8e2f413f52f01d7b894d0f99bc26bebfcd8",
+      "material_table_entries": 194,
+      "direct_overrides": 70,
+      "patches_referencing_overrides": 50,
+      "other_materials": 74,
+      "patch_sources": [
+        "materials/concrete/concretefloor039a.vmt",
+        "materials/metal/metaldoor030a.vmt",
+        "materials/metal/metaldoor046a.vmt",
+        "materials/metal/metalpipe003a.vmt",
+        "materials/metal/metalroof005a.vmt",
+        "materials/metal/metalwall041a.vmt",
+        "materials/metal/metalwall066g.vmt",
+        "materials/plaster/plasterwall030c.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d1_town_01": {
+      "bsp_sha256": "0cac9124314d65d129486b82db4873ab90f39b48cdf9303f19b361e7a378cea9",
+      "material_table_entries": 379,
+      "direct_overrides": 61,
+      "patches_referencing_overrides": 272,
+      "other_materials": 46,
+      "patch_sources": [
+        "materials/brick/brickwall031b.vmt",
+        "materials/brick/brickwall031g.vmt",
+        "materials/brick/brickwall055d.vmt",
+        "materials/metal/metalfloor001a.vmt",
+        "materials/metal/metalwall001a.vmt",
+        "materials/metal/metalwall001b.vmt",
+        "materials/metal/metalwall001d.vmt",
+        "materials/metal/metalwall001f.vmt",
+        "materials/metal/metalwall070e.vmt",
+        "materials/plaster/plasterwall029c.vmt",
+        "materials/plaster/plasterwall029f.vmt",
+        "materials/plaster/plasterwall029g.vmt",
+        "materials/plaster/plasterwall049c.vmt",
+        "materials/stone/stonefloor006a.vmt",
+        "materials/stone/stonefloor006b.vmt",
+        "materials/stone/stonefloor006c.vmt",
+        "materials/tile/tileroof004b.vmt",
+        "materials/wood/woodfloor008a.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d2_coast_03": {
+      "bsp_sha256": "5994db7c5365b9943dd6d6f29dd3a172f91d5b09d173801de627fdba7f1607f5",
+      "material_table_entries": 231,
+      "direct_overrides": 44,
+      "patches_referencing_overrides": 103,
+      "other_materials": 84,
+      "patch_sources": [
+        "materials/concrete/concretefloor037b.vmt",
+        "materials/metal/metalpipe003a.vmt",
+        "materials/metal/metalwall001b.vmt",
+        "materials/plaster/plasterwall029c.vmt",
+        "materials/plaster/plasterwall049c.vmt",
+        "materials/plaster/plasterwallpaper004a.vmt",
+        "materials/plaster/plasterwallpaper005a.vmt",
+        "materials/tile/tilefloor009a.vmt",
+        "materials/tile/tilefloor009b.vmt",
+        "materials/tile/tileroof004a.vmt",
+        "materials/tile/tileroof004b.vmt",
+        "materials/wood/wooddoor032a.vmt",
+        "materials/wood/woodfloor007a.vmt",
+        "materials/wood/woodfloor008a.vmt",
+        "materials/wood/woodstair002a.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d2_prison_01": {
+      "bsp_sha256": "25825a99b30b5f603759822371a92223c33eb288f7531f61748a1924ca590328",
+      "material_table_entries": 181,
+      "direct_overrides": 37,
+      "patches_referencing_overrides": 104,
+      "other_materials": 40,
+      "patch_sources": [
+        "materials/concrete/concretefloor010b.vmt",
+        "materials/concrete/concretefloor038b.vmt",
+        "materials/concrete/concretewall013b.vmt",
+        "materials/metal/metaldoor039a.vmt",
+        "materials/metal/metalpipe003a.vmt",
+        "materials/stone/stonewall017c.vmt",
+        "materials/tile/tileroof004a.vmt",
+        "materials/tile/tileroof004b.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d3_c17_01": {
+      "bsp_sha256": "12512a5ff33e32cc68d4e828af40485edef113d801265fa2efa0180df4ef2dd9",
+      "material_table_entries": 158,
+      "direct_overrides": 53,
+      "patches_referencing_overrides": 56,
+      "other_materials": 49,
+      "patch_sources": [
+        "materials/metal/metalceiling005a.vmt",
+        "materials/metal/metaldoor018a.vmt",
+        "materials/metal/metalfloor001a.vmt",
+        "materials/metal/metalroof008a.vmt",
+        "materials/metal/metalwall033a.vmt",
+        "materials/metal/metalwall056a.vmt",
+        "materials/metal/metalwall061g.vmt",
+        "materials/metal/metalwall061h.vmt",
+        "materials/metal/metalwall076a.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
+    "d3_breen_01": {
+      "bsp_sha256": "e5749dbf4ada4cbdd714de971e64712a774a2a1576ab12d31618556f3d007b0c",
+      "material_table_entries": 447,
+      "direct_overrides": 7,
+      "patches_referencing_overrides": 359,
+      "other_materials": 81,
+      "patch_sources": [
+        "materials/metal/citadel_metalwall063a.vmt",
+        "materials/metal/citadel_metalwall072b.vmt",
+        "materials/metal/citadel_metalwall072b_cheap.vmt",
+        "materials/metal/citadel_metalwall076a.vmt",
+        "materials/metal/citadel_metalwall077a.vmt",
+        "materials/metal/citadel_metalwall078a.vmt",
+        "materials/metal/citadel_metalwall090a.vmt",
+        "materials/metal/citadel_metalwall091a.vmt",
+        "materials/metal/citadel_metalwall091a_cheap.vmt",
+        "materials/metal/citadel_metalwall101a.vmt",
+        "materials/metal/citadel_metalwall101b.vmt",
+        "materials/metal/metalcombine001.vmt",
+        "materials/metal/metalpipe007a.vmt",
+        "materials/metal/metalwall082a.vmt",
+        "materials/tile/tilefloor020a.vmt",
+        "materials/tile/tilefloor020a_cheap.vmt",
+        "materials/tile/tilefloor021a.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    }
+  }
+}

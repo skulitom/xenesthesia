@@ -154,3 +154,20 @@ requested the missing kaleidoscopic colour effect. This revision addresses both.
   notice, media provenance and the publication handoff are included. They label
   F4 as colour-only, the cover as illustration, and the motion clip as a timed
   still-image inspection sequence. Publication remains subject to explicit approval.
+
+## Static coverage audit while the main preview remains in use
+
+- Read installed assets without changing the running game or its configuration.
+  `tools/audit-coverage.py` records the exact runtime and sampled map hashes in
+  `coverage-audit.json`; the readable summary is `release/COVERAGE.md`.
+- All ten installed first-person hand material definitions are included. The
+  RPG's main material is excluded because it uses alpha cutouts. The separate
+  excluded SMG definition uses additive rendering and existing animation proxies.
+  The listing now distinguishes texture-animation exclusions from colour coverage.
+- Followed material-patch includes in nine chapter BSPs, from Trainstation through
+  Breen/Citadel. Directly inspected inherited map patches contained no authored
+  base/bump transforms that conflict with the new proxies. Reference counts are
+  not visible-area percentages and do not prove runtime behaviour in those maps.
+- Reviewed complete removal instructions and clarified that the local disable
+  helper removes the preview VPK but leaves video preferences and F4/F6/F8 bindings
+  for the owner to restore. No settings were changed during this audit.

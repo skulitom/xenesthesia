@@ -48,6 +48,8 @@ Objects sharing a material can animate together. Some seams and painted-on
 features move. NPC faces, cutouts, transparency, existing animated materials and
 special shaders are excluded from texture animation; the colour pass can still
 affect their rendered appearance. Episode and custom-map coverage is unverified.
+The RPG's main material uses cutouts, so its textures stay still while receiving
+the optional colour treatment. All ten installed hand materials are animated.
 
 The VPK contains material definitions, a compiled shader and optional commands.
 No injector, game executable, Valve texture images, Python or separate runtime
