@@ -56,6 +56,9 @@ entity { "id" "55" "classname" "light" "origin" "160 -160 220" "_light" "255 245
 entity { "id" "56" "classname" "light" "origin" "160 160 220" "_light" "255 245 235 50" "_lightHDR" "-1 -1 -1 1" }
 entity { "id" "57" "classname" "prop_dynamic" "model" "models/zombie/classic.mdl" "DefaultAnim" "Idle01" "origin" "-90 0 2" "angles" "0 270 0" "targetname" "xen_test_zombie" "spawnflags" "4" }
 entity { "id" "58" "classname" "prop_dynamic" "model" "models/headcrabclassic.mdl" "DefaultAnim" "Idle01" "origin" "-160 -90 2" "angles" "0 270 0" "targetname" "xen_test_crab" "spawnflags" "4" }
-entity { "id" "59" "classname" "prop_dynamic" "DefaultAnim" "Idle01" "origin" "100 0 2" "angles" "0 270 0" "targetname" "xen_test_citizen" "model" "models/humans/group01/male_07.mdl" "citizentype" "3" "spawnflags" "516" }
+entity { "id" "59" "classname" "prop_dynamic" "DefaultAnim" "Idle01" "origin" "100 0 2" "angles" "0 270 0" "targetname" "xen_test_alyx" "model" "models/alyx.mdl" "citizentype" "3" "spawnflags" "516" }
 entity { "id" "60" "classname" "prop_physics" "origin" "220 0 2" "angles" "0 270 0" "model" "models/props_junk/wood_crate001a.mdl" "solid" "6" }
 entity { "id" "61" "classname" "prop_physics" "origin" "220 0 43" "angles" "0 270 0" "model" "models/props_lab/monitor02.mdl" "solid" "6" }
+entity { "id" "62" "classname" "prop_dynamic" "DefaultAnim" "idle" "origin" "100 130 2" "angles" "0 270 0" "targetname" "xen_test_kleiner" "model" "models/kleiner.mdl" "spawnflags" "4" }
+
+entity { "id" "63" "classname" "npc_alyx" "origin" "0 -20 2" "angles" "0 270 0" "targetname" "xen_real_alyx" "model" "models/alyx.mdl" "spawnflags" "4" }

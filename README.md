@@ -4,9 +4,9 @@
 
 A native psychedelic material addon for the original Windows Half-Life 2 20th Anniversary edition. Gentle texture breathing and slowly unfolding prismatic colours live in surface coordinates, before camera projection. Walking or turning does not recenter the colour field on Gordon. The original textures, lighting, HUD and screen geometry remain readable.
 
-The current material build covers 2,364 definitions. Compatible world surfaces, props, opaque NPC materials, cutouts, hands and weapons receive colour. The same subtle, two-wave UV motion approved in the previous preview remains on supported world/prop/weapon materials. NPC faces, cutouts and materials with authored animation receive colour without added UV movement. Standard grain detail layers are replaced by the original colour/grain field; special-purpose detail layers are preserved.
+The current material build covers 2,391 definitions. Compatible world surfaces, props, opaque NPC materials, cutouts, hands and weapons receive colour. The same subtle, two-wave UV motion approved in the previous preview remains on supported world/prop/weapon materials. NPC faces, cutouts and materials with authored animation receive colour without added UV movement. Standard grain detail layers are replaced by the original colour/grain field; special-purpose detail layers are preserved.
 
-Objects sharing a material can animate together. This is not object recognition or independent animation of every item. Transparent/additive materials, special shaders, UnlitTwoTexture displays and some map-specific overrides remain outside coverage. Classic zombies and classic headcrabs also have an experimental geometric pulse (up to 0.75 game units of surface-normal expansion). They keep their stock texture colours and use a different lighting shader; human head/eye/teeth deformation is not enabled.
+Colour shapes now bend and evolve in texture space, with different playback rates per material. Objects sharing a material can still animate together. This is not object recognition or independent animation of every item. Most transparent/additive materials, special shaders, UnlitTwoTexture displays and some map-specific overrides remain outside coverage. Classic zombies and classic headcrabs also have an experimental geometric pulse (up to 0.75 game units of surface-normal expansion). They keep their stock texture colours and use a different lighting shader; an experimental human head/upper-body pulse now covers 114 definitions for Alyx, Kleiner, Eli, Mossman, Breen and citizens. It preserves native skin lighting and deforms eyes/teeth with the head; Alyx has been checked closely, including flashlight rendering. Other character families still need full gameplay validation. Barney and Combine materials currently receive colour only. High shader detail with Phong and bump mapping enabled is required for this experimental human pulse; low-detail fallback remains release work.
 
 ## Local preview
 
@@ -24,7 +24,7 @@ The addon never changes key bindings automatically. `exec xen_keys` opts into F4
 
 ## Build and validate
 
-Requires the locally installed original game and Python 3. The NPC build verifies and caches six pinned official SDK source files on first use. The build reads material definitions from that installation; it does not extract or redistribute Valve texture images.
+Requires the locally installed original game and Python 3. The NPC build verifies and caches twelve pinned official SDK source files on first use. The build reads material definitions from that installation; it does not extract or redistribute Valve texture images.
 
 ```
 powershell -File tools/bootstrap.ps1
@@ -33,7 +33,7 @@ python -m unittest discover -s tests -v
 python tools/audit-coverage.py
 ```
 
-`tools/prism_texture.py` generates an original, mipmapped, 128-frame RGB colour field. `tools/surface_motion.py` augments supported VMTs while retaining existing animation blocks and protecting cutout UVs. `tools/build.py` packs the runtime content and verifies every archived byte. Source hashes and output hashes are recorded in `artifacts`.
+`tools/human_pulse.py` coordinates human skin, hair, eyes and teeth deformation. Its native shader bytecode layouts are verified against the installed game. `tools/prism_texture.py` generates an original, mipmapped, 128-frame RGB colour field. `tools/surface_motion.py` augments supported VMTs while retaining existing animation blocks and protecting cutout UVs. `tools/build.py` packs the runtime content and verifies every archived byte. Source hashes and output hashes are recorded in `artifacts`.
 
 `tools/prepare-release.py` stages an offline review package. It contains no upload calls. Workshop publication, a clean subscribed-install check and final screenshots remain gated on approval of the revised appearance. Earlier staged packages and their screenshots are superseded by the material-colour revision.
 

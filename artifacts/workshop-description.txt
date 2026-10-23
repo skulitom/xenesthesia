@@ -2,7 +2,7 @@ Xenesthesia — Half-Life 2 material effects
 
 DRAFT — NOT UPLOADED. Requires the owner's explicit go before any Workshop item is created or updated.
 
-City 17's surfaces quietly come alive. Brick, concrete, props and supported weapons breathe with restrained, irregular texture movement. Prismatic colours unfold across their surfaces and stay mapped to the textures as you move through the world.
+City 17's surfaces quietly come alive. Brick, concrete, props and supported weapons breathe with restrained, irregular texture movement. Prismatic colour shapes bend and flow independently across materials and stay mapped to the textures as you move through the world.
 
 • Gentle surface movement rather than camera blur or screen wobble.
 • Material-local colour on compatible walls, props, screens, hands, weapons and NPC materials.
@@ -11,7 +11,7 @@ City 17's surfaces quietly come alive. Brick, concrete, props and supported weap
 
 For the original Windows Half-Life 2 20th Anniversary edition, using DirectX 9. Other episodes and platforms have not been validated.
 
-Coverage varies by material. Transparent/additive surfaces, special shaders and some animated displays remain unchanged. Objects sharing materials can animate together. Classic zombies and classic headcrabs have an experimental shape pulse, with their original texture colours. Other NPC materials receive colour only; human head deformation is not enabled.
+Coverage varies by material. Most transparent/additive surfaces, special shaders and some animated displays remain unchanged. Objects sharing materials can animate together. Classic zombies and classic headcrabs have an experimental shape pulse, with their original texture colours. An experimental head/upper-body pulse also covers Alyx and several human character families, preserving native skin shading. Alyx has been checked in the native game; broader character/cinematic compatibility still needs validation. Barney and Combine materials receive colour only.
 
 Disable conflicting material addons, including City 17 ASCII, before use. Subscribe and enable through the game's Workshop menu, restart, and start/load from the main menu. These Workshop installation steps still require a clean-install test after publication approval.
 

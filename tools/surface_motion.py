@@ -9,6 +9,7 @@ import json
 import re
 from vpk import read_vpk
 import npc_pulse
+import human_pulse
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = Path(r'D:/Steam/steamapps/common/Half-Life 2/hl2')
@@ -101,9 +102,12 @@ def animate(name, source):
                 replacements.extend((ts[i].start(), ts[i].end(), f'"{value}"') for i in positions)
             else:
                 declarations.append(f'"{key}" "{value}"')
+        # Per-material rates prevent a whole room changing in lockstep. This
+        # proxy is safe on static props, unlike entity-dependent phase proxies.
+        colour_fps = 7.0 + ((seed >> 20) % 1000) / 250.0
         lines += ['"AnimatedTexture" { "animatedTextureVar" "$detail" '
                   '"animatedTextureFrameNumVar" "$detailframe" '
-                  '"animatedTextureFrameRate" "8" }']
+                  f'"animatedTextureFrameRate" "{colour_fps:.3f}" }}']
     if motion:
         declarations += [
              '"$xen_center" "[0.5 0.5]"', '"$xen_scale" "[1 1]"',
@@ -167,6 +171,9 @@ def build(content):
         out = npc_pulse.material(name, source, tokens(source))
         if out is None:
             out = animate(name, source)
+        human = human_pulse.material(name, out if out is not None else source, tokens)
+        if human is not None:
+            out = human
         if out is None:
             continue
         target = content / name

@@ -1,0 +1,18 @@
+{
+  "runtime_sha256": "b384d171f1242b6ea560183cd5f443d381b9bdc1ae669aafffc53a8243c7b42d",
+  "counts": {
+    "materials": 2391,
+    "colour": 2360,
+    "uv_motion": 1944,
+    "classic_pulse": 2,
+    "human_pulse": 114
+  },
+  "human_families": {
+    "alyx": 8,
+    "breen": 5,
+    "eli": 5,
+    "humans": 83,
+    "kleiner": 7,
+    "mossman": 6
+  }
+}

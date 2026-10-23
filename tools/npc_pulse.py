@@ -10,6 +10,7 @@ import shutil
 import struct
 import subprocess
 import urllib.request
+import human_pulse
 
 ROOT = Path(__file__).resolve().parents[1]
 MATERIALS = {'materials/models/zombie_classic/zombie_classic_sheet.vmt',
@@ -73,28 +74,34 @@ def build(content, stock_read):
     if source.count(ANCHOR) != 1:
         raise ValueError('SDK shader patch anchor changed')
     shader.write_text(source.replace(ANCHOR, PATCH))
+    shutil.copyfile(ROOT/'src/xen_human_pulse.h', work/'xen_human_pulse.h')
+    for name in human_pulse.SHADERS:
+        target = work/name
+        source = target.read_bytes().decode('cp1252')
+        target.write_bytes(human_pulse.patch_shader(name, source).encode('cp1252'))
     compiler = ROOT/'tools/ShaderCompile2.exe'
     expected = 'df13601822a642d1238d55e65522842fd776911f9e76c9fea1f4cfdf6f220230'
     if not compiler.exists() or hashlib.sha256(compiler.read_bytes()).hexdigest() != expected:
         raise RuntimeError('Run the verified tools/bootstrap.ps1 before building NPC shaders.')
     log = ROOT/'artifacts/private/npc-compile.log'
     with log.open('w') as output:
-        for version in ['20b', '30']:
-            subprocess.run([str(compiler), '-ver', version, '-types', 'vs', '-threads', '2',
-                            '-shaderpath', str(work), '-force', str(shader)],
-                           stdout=output, stderr=subprocess.STDOUT, check=True)
-    for version in ['20', '30']:
-        name = f'shaders/fxc/vortwarp_vs{version}.vcs'
-        raw = (work/name).read_bytes()
-        # Preserve the engine's combo-index contract, not merely shader syntax.
-        if struct.unpack_from('<6I', raw) != struct.unpack_from('<6I', stock_read(name)):
-            raise ValueError(f'Native shader combo layout changed: {name}')
-        target = Path(content)/name
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(raw)
+        for source_name in ['vortwarp_vs20.fxc', *human_pulse.SHADERS]:
+            for version in ['20b', '30']:
+                subprocess.run([str(compiler), '-ver', version, '-types', 'vs', '-threads', '2',
+                                '-shaderpath', str(work), '-force', str(work/source_name)],
+                               stdout=output, stderr=subprocess.STDOUT, check=True)
+            for version in ['20', '30']:
+                name = 'shaders/fxc/'+source_name.lower().replace('_vs20.fxc',f'_vs{version}.vcs')
+                raw = (work/name).read_bytes()
+                # Preserve the engine's combo-index contract, not merely syntax.
+                if struct.unpack_from('<6I', raw) != struct.unpack_from('<6I', stock_read(name)):
+                    raise ValueError(f'Native shader combo layout changed: {name}')
+                target = Path(content)/name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(raw)
     legal = Path(content)/'xenesthesia/licenses'
     legal.mkdir(parents=True, exist_ok=True)
     for source, target in [('LICENSE', 'valve-sdk-license.txt'),
                            ('thirdpartylegalnotices.txt', 'valve-sdk-thirdpartylegalnotices.txt')]:
         shutil.copyfile(ROOT/'third_party/valve-source-sdk'/source, legal/target)
-    print('Built experimental classic zombie/headcrab pulse; native combo layout verified.')
+    print('Built experimental classic and human NPC pulses; native combo layouts verified.')

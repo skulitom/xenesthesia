@@ -27,12 +27,10 @@ Valve's ShaderCompile2 is fetched from the official Source SDK 2013 and checked
 against its known SHA-256 before use. It is a development tool and is not shipped
 in the runtime content or redistributed as part of the source release.
 
-Experimental NPC deformation compiles two modified VortWarp vertex shaders
+Experimental NPC deformation compiles fourteen modified skin, eye, teeth and VortWarp vertex shaders
 from Valve's Source SDK, pinned by research/npc-sdk-files.json. These compiled
 .vcs files are Valve-derived SDK code, NOT MIT. The SDK's LICENSE and
 thirdpartylegalnotices.txt are retained unmodified in third_party/valve-source-sdk
 and included inside the VPK under xenesthesia/licenses. This addon must remain
-free. Original patch/build code in tools/npc_pulse.py is MIT; the SDK license
-continues to apply to the combined compiled shaders. Stock VortWarp parameters
-0..1 use the original vertex process; the addon marks its own two materials
-with values >=2. Broader cinematic compatibility is a remaining release check.
+free. Original patch/build code in tools/npc_pulse.py, tools/human_pulse.py and src/xen_human_pulse.h is MIT; the SDK license
+continues to apply to the combined compiled shaders. Stock VortWarp and INTRO parameters 0..1 use the original vertex process. Classic NPC materials use warpparam >=2; human skin uses a marked UV translation removed before base sampling. Human eyes/teeth use the same local deformation before skinning; eye projection uses the unwarped position. The eye flashlight path carries its marker in the otherwise unused EyeUp fourth component. Broader cinematic compatibility is a remaining release check.

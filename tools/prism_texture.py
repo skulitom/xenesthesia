@@ -13,18 +13,22 @@ FPS = 8
 
 
 def frame_pixels(frame):
-    """A slow 16-second cycle with six-fold, surface-local colour lobes."""
+    """A looping flow field: lobes bend, separate and rejoin in texture space."""
     t = math.tau * frame / FRAMES
     pixels = bytearray()
     for y in range(SIZE):
         v = math.tau * (y + .5) / SIZE
         for x in range(SIZE):
             u = math.tau * (x + .5) / SIZE
-            sx, sy = math.sin(u), math.sin(v)
+            # Independent, periodic cross-currents deform the colour shapes.
+            # They never move the underlying game texture or follow the camera.
+            a = u + .65*math.sin(v+t) + .28*math.sin(2*v-2*t)
+            b = v + .55*math.sin(u-t) + .24*math.cos(2*u+t)
+            sx, sy = math.sin(a), math.sin(b)
             radius = math.hypot(sx, sy)
             fold = math.cos(6 * math.atan2(sy, sx)) * radius
-            phase = t + 2.2 * math.cos(u) * math.cos(v) + 1.1 * fold
-            phase += .22 * math.sin(2*t + radius*3)
+            phase = .45*math.sin(t) + 2.2*math.cos(a)*math.cos(b) + 1.1*fold
+            phase += .35*math.sin(2*t + radius*3)
             grain = (((x*1973 + y*9277) ^ (x*y*26699)) % 256 / 255 - .5) * .025
             for offset in (0, math.tau/3, 2*math.tau/3):
                 # MOD2X: .5 is neutral; keep luminance and texture detail intact.

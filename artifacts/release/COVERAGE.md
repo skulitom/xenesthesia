@@ -1,8 +1,10 @@
 # Material coverage — revised preview
 
-2,364 material definitions: 2,360 receive surface colour, 1,944 receive gentle UV motion, and two classic zombie/headcrab materials use the experimental geometry pulse. Categories overlap. Two special detail layers retain their authored colour.
+2,391 material definitions: 2,360 receive surface colour, 1,944 receive gentle UV motion, two classic zombie/headcrab materials use the experimental geometry pulse, and 114 human material definitions use coordinated head/upper-body expansion. Categories overlap. Two special detail layers retain their authored colour.
 
-All ten installed hand material definitions are included. The RPG cutout receives colour without moving its alpha silhouette. Authored animation blocks are preserved. Transparent/additive materials and unsupported shaders (including UnlitTwoTexture screens) are excluded.
+All ten installed hand material definitions are included. The RPG cutout receives colour without moving its alpha silhouette. Authored animation blocks are preserved. Most transparent/additive materials and unsupported shaders (including UnlitTwoTexture screens) are excluded.
+
+The human family counts are Alyx 8, Breen 5, Eli 5, citizens 83, Kleiner 7 and Mossman 6. Counts include separate eyes and mouth materials. Alyx was checked closely with regular and flashlight rendering; not every family has been visually tested. Barney and Combine remain colour-only.
 
 These are file/reference counts, not a percentage of visible scenery or a full-campaign compatibility claim. Map-specific patches can override inherited parameters. Native checks cover station walls, coast, Ravenholm and a private test room containing character models, a physics crate and computer monitors.
 

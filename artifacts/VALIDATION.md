@@ -1,3 +1,17 @@
+# Current revision: independent colour flow and human pulses
+
+Local review build, not uploaded. Runtime SHA-256: `b384d171f1242b6ea560183cd5f443d381b9bdc1ae669aafffc53a8243c7b42d`. 2,413 files, 7,581,726 bytes. 2,391 material definitions; 114 carry the human pulse. Surface colour shapes now deform in UV space; material clocks range from 7 to 10.996 frames/sec instead of one shared rate. Approved base texture-motion bounds are unchanged.
+
+Human pulse uses marked native skin vertex transforms and the eyes/teeth INTRO paths. Original skin pixel shading and textures remain in use. Head/upper-body expansion runs on a 5.3-second, entity-phased cycle. Named humans and citizen materials are targeted; unsupported special shaders remain excluded. The eye flashlight pass now carries its marker in EyeUp.w while leaving EyeUp.xyz intact. Actual NPC Alyx was visually checked with eyes open and flashlight lighting; six more native frames are saved. Disabling Phong/bump mapping also needs a supported fallback before release.
+
+Validated so far: 19 unit/package tests; all 14 native vertex shader layouts match retail; fixed-camera lab colour motion; eight sampled frames with Alyx skeletal playback stopped show changing head width. Native trainstation_05 loads. These lab captures are diagnostic evidence, not Workshop gallery media. F6 pause/menu and readable HUD were also checked. Phong and bump mapping were both confirmed enabled. No new shader/proxy errors appeared. Full cinematic regression, low-detail fallback, clean performance measurement and user feedback remain pending.
+
+Evidence: `human-flow/`. Main desktop preview launched successfully in session 1 (responding, bordered native HL2 menu); user feedback requested. No Workshop item created or uploaded.
+
+---
+
+## Previous material-colour revision
+
 # Current revision: material colour and experimental NPC pulse
 
 Runtime SHA-256: `3192e740a1bb70fbfe57a7f5eec4646568f7aa28c70b074e41a88e0be5a68b51`. 2,374 files, 7,391,337 bytes. The previous postprocess candidate below is superseded.

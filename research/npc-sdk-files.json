@@ -24,6 +24,30 @@
     "common_hlsl_cpp_consts.h": {
       "path": "src/materialsystem/stdshaders/common_hlsl_cpp_consts.h",
       "sha256": "147d39bfdf6d0266be3fd6b60dcdbbaf839e2be7853349bac0813d5605de68c5"
+    },
+    "skin_vs20.fxc": {
+      "path": "src/materialsystem/stdshaders/skin_vs20.fxc",
+      "sha256": "32d4b04a0523a7a0974737c316198e4356207d299236758c42ccba5575040206"
+    },
+    "Eyes_vs20.fxc": {
+      "path": "src/materialsystem/stdshaders/Eyes_vs20.fxc",
+      "sha256": "2b3567830ae4474b4ccff12180fb9a39b02d17a6a47662cfa64963d2627fcee5"
+    },
+    "teeth_vs20.fxc": {
+      "path": "src/materialsystem/stdshaders/teeth_vs20.fxc",
+      "sha256": "1fd383e0bb434bcfe94527024ec068840646555ea44561d16149c469cf9c6eb2"
+    },
+    "teeth_bump_vs20.fxc": {
+      "path": "src/materialsystem/stdshaders/teeth_bump_vs20.fxc",
+      "sha256": "c8a7cad8392d50caf2f6b9fce5d645e2932779362487c9f5199321515e68044d"
+    },
+    "teeth_flashlight_vs20.fxc": {
+      "path": "src/materialsystem/stdshaders/teeth_flashlight_vs20.fxc",
+      "sha256": "5ed0cc75deb70c376a303348131f4eca51a2f705185bdfbdf4ac25fb094f0c8e"
+    },
+    "eyes_flashlight_vs20.fxc": {
+      "path": "src/materialsystem/stdshaders/eyes_flashlight_vs20.fxc",
+      "sha256": "d42008dc042a7531e00532076f1ac1f72a3dbebdc73d6bcd992f19d3319f9c7a"
     }
   }
 }
