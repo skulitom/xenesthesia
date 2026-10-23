@@ -37,10 +37,10 @@ def patch_shader(name, source):
         source = replace_once(source, 'register( D3DVERTEXTEXTURESAMPLER0, s0 )', 'register( s0 )')
         source = replace_once(source, '\t// Transform into projection space', '''
     float xenMarker = cBaseTexCoordTransform[0].w;
-    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1001.0;
+    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1002.0;
     float3 xenOrigin = float3(cBaseTexCoordTransform[0].x,
                              cBaseTexCoordTransform[1].y, cBaseTexCoordTransform[1].w);
-    if (xenHuman) XenHumanPulseWorld(worldPos, xenOrigin, xenMarker - 1000.0);
+    if (xenHuman) XenNpcPulseWorld(worldPos, worldNormal, xenOrigin, xenMarker);
 \t// Transform into projection space''')
         field = ('baseTexCoord2_tangentSpaceVertToEyeVectorXY' if '_bump_' in name else 'baseTexCoord')
         detail = 'detailTexCoord_atten3' if '_bump_' in name else 'detailTexCoord'

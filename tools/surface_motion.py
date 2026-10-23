@@ -18,7 +18,7 @@ GAME = Path(r'D:/Steam/steamapps/common/Half-Life 2/hl2')
 # Preserve tokens and duplicate keys; comments must not count as declarations.
 TOKEN = re.compile(r'//[^\r\n]*|/\*.*?\*/|"[^"\r\n]*"|[{}]|[^\s{}"]+', re.S)
 WORLD = {'brick', 'concrete', 'metal', 'plaster', 'wood', 'tile', 'nature',
-         'ground', 'stone', 'plasterwall', 'ceiling', 'floor', 'building_template'}
+         'ground', 'stone', 'plasterwall', 'ceiling', 'floor', 'building_template', 'props'}
 GRAIN_DETAILS = {'detail/plaster_detail_01', 'detail/noise_detail_01',
                  'detail/metal_detail_01', 'detail/rock_detail_01'}
 
@@ -90,6 +90,8 @@ def animate(name, source):
     seed = int.from_bytes(hashlib.sha256(name.lower().encode()).digest()[:4], 'little')
     phase = (seed % 1000) / 137.0
     period = 8.0 + ((seed >> 10) % 1000) / 200.0
+    if not model:
+        phase, period = 0.0, 12.0
     # World UVs extend far beyond 0..1. Even modest scale/rotation can therefore
     # move whole facades by metres. Keep those terms tiny, not just the drift.
     scale = 0.006 if model else 0.0012
@@ -163,7 +165,8 @@ def animate(name, source):
     return source
 
 
-def build(content):
+def build_materials(content):
+    """Generate material definitions independently of compiling native shaders."""
     content = Path(content).resolve()
     record_path = ROOT / 'artifacts/surface-materials.json'
     previous = json.loads(record_path.read_text()) if record_path.exists() else {}
@@ -196,9 +199,14 @@ def build(content):
             raise ValueError(f'Unsafe generated-material path: {name}')
         target.unlink(missing_ok=True)
     record_path.write_text(json.dumps(records, indent=2)+'\n')
+    print(f'Animated {len(records)} installed HL2 materials; textures remain in the base game.')
+
+
+def build(content):
+    build_materials(content)
+    _, read = read_vpk(GAME / 'hl2_misc_dir.vpk')
     npc_pulse.build(content, read)
     surface_shaders.build(content, read)
-    print(f'Animated {len(records)} installed HL2 materials; textures remain in the base game.')
 
 
 if __name__ == '__main__':

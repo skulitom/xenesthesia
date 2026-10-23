@@ -20,6 +20,11 @@ def main():
     build_prism_texture(CONTENT)
     build_lab_textures(CONTENT)
     build_surface_motion(CONTENT)
+    package()
+
+
+def package():
+    """Pack and verify the current generated content without compiling it."""
     manifest = {p.relative_to(CONTENT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sorted(CONTENT.rglob('*')) if p.is_file()}
     if any(name != name.lower() for name in manifest):

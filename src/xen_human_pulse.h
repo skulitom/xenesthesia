@@ -15,3 +15,12 @@ void XenHumanPulseWorld(inout float3 worldPos, float3 entityOrigin, float amount
     XenHumanPulse(localPos, amount);
     worldPos = entityOrigin + localPos;
 }
+
+void XenNpcPulseWorld(inout float3 worldPos, float3 worldNormal,
+                     float3 entityOrigin, float marker)
+{
+    if (marker < 1001.0)
+        XenHumanPulseWorld(worldPos, entityOrigin, marker - 1000.0);
+    else
+        worldPos += worldNormal * ((marker - 1001.0) * 8.0);
+}

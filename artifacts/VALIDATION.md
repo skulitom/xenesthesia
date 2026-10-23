@@ -1,3 +1,19 @@
+# Current revision: shared world motion, enemy pulses, full animation retained
+
+Local preview. No Workshop activity. Runtime SHA-256: `6d3db43d0ff80abb8664eec9df87dccae94399cff91e301c21d941471df74de7` (case-insensitive). 2,564 files, 17,730,563 bytes, 2,534 generated material definitions. Thirty unit/package checks pass; all 20 native vertex shader layouts match retail.
+
+The animation-simplification experiment was reverted before playtest installation. All original harmonics, amplitude bounds and animation texture frames remain. World materials now share phase/period; props/weapons keep their individual rhythms. Compatible opaque world materials under props/ gain coverage, including floors/panels. This reduces independent movement at joins, but does not eliminate authored UV/lighting boundaries.
+
+Five Combine soldier variants plus police/Barney materials use the coordinated humanoid pulse. Fifteen additional creature definitions use a gentle normal expansion after skinning, preserving native Phong, alpha masks and shader families. A private native room validates Combine elite model pulse phases, an actual metrocop and antlion/guard rendering. Six native stills are retained; the initial unready fixture (hostile NPCs) was corrected before these captures. Wider enemy combat, death/ragdoll, low-detail and cinematic testing remains pending.
+
+PresentMon frame-time recordings reproduce the reported problem and separate first-observed from repeat passes. The previous build's first observed canal sweep had frequent large spikes; its later unchanged repeat was fast. The revised full-quality build's 42-second sweeps on both reported maps had no frames over 33.3 ms. Cache state was not controlled, and a material-reload probe preceded the revised canal run: these results are NOT proof of an optimization fix. First-use preparation/caching is an investigation lead, and performance remains a release blocker. See seams-enemies/PERFORMANCE.md and the raw traces.
+
+Main preview opened successfully in session 1 (PID 134540, responding, native HL2 window). Steam’s normal launch was waiting on a config.cfg cloud conflict, so the installed game was launched directly with the same native arguments and connected to the running Steam client. Neither cloud copy was selected/overwritten; that settings conflict remains pending.
+
+HUD/viewmodel, VSync and camera speed were restored. The owned Anode game exited and the desktop lease was released. No server/map gameplay changes ship; the diagnostic fixture remains outside the package. The local Workshop draft and coverage/review notes reflect the new scope and unresolved performance work.
+
+---
+
 # Current revision: carpets and generator-tube liquid
 
 Local preview; targeted native checks completed in Anode. No Workshop activity. Runtime SHA-256: `260d49ed667e6e1a7cb94317592ac7a85c8c018643624b002f7cf9850d412620`. 2,439 files, 17,314,018 bytes; 2,409 material definitions. All 29 unit/package checks pass and all 20 native vertex shader layouts match retail.

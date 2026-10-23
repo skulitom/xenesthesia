@@ -4,14 +4,19 @@ Marked base transforms transport pulse + origin to skin/generic vertex paths;
 their UVs are restored before sampling. Eyes/teeth keep native shader families.
 """
 
-FOLDERS = {'alyx', 'barney', 'kleiner', 'eli', 'mossman', 'breen', 'humans'}
+FOLDERS = {'alyx', 'barney', 'kleiner', 'eli', 'mossman', 'breen', 'humans',
+           'combine_soldier', 'police'}
+# These creatures do not share the upright human head height. Inflate along
+# their skinned normals instead, retaining native Phong, cutouts and lighting.
+CREATURE_FOLDERS = {'zombie_fast', 'zombie_poison', 'headcrab', 'headcrab_black',
+                    'antlion', 'antlion_guard'}
 SHADERS = ('skin_vs20.fxc', 'Eyes_vs20.fxc', 'teeth_vs20.fxc', 'teeth_bump_vs20.fxc',
            'teeth_flashlight_vs20.fxc', 'eyes_flashlight_vs20.fxc')
 
 
 def material(name, source, tokens):
     parts = name.split('/')
-    if len(parts) < 4 or parts[1] != 'models' or parts[2] not in FOLDERS:
+    if len(parts) < 4 or parts[1] != 'models' or parts[2] not in FOLDERS | CREATURE_FOLDERS:
         return None
     if any(word in parts[-1] for word in ('emptool', 'glint', 'pupil')):
         return None
@@ -25,16 +30,17 @@ def material(name, source, tokens):
         return None
     if '$additive' in vals and not lens:
         return None
-    declarations = ['// Xenesthesia human pulse; all parts share the entity phase.',
+    marker = 1001 if parts[2] in CREATURE_FOLDERS else 1000
+    declarations = ['// Xenesthesia NPC pulse; all parts share the entity phase.',
                     '"$xen_hphase" "0"', '"$entityorigin" "[0 0 0]"']
     proxies = ['"EntityRandom" { "scale" "7" "resultVar" "$xen_hphase" }',
                '"EntityOrigin" { }']
     if shader in {'vertexlitgeneric', 'unlitgeneric'}:
         # Preserve native alpha/lighting semantics. Both skin and generic
         # vertex paths understand the marker, including the glasses lenses.
-        declarations += ['"$xen_hshift" "[1000 0]"', '"$xen_hcenter" "[0 0]"',
-                         '"$basetexturetransform" "center 0 0 scale 1 1 rotate 0 translate 1000 0"']
-        proxies += ['"Sine" { "sinePeriod" "5.3" "sineMin" "1000.01" "sineMax" "1000.16" "timeOffset" "$xen_hphase" "resultVar" "$xen_hshift[0]" }',
+        declarations += [f'"$xen_hshift" "[{marker} 0]"', '"$xen_hcenter" "[0 0]"',
+                         f'"$basetexturetransform" "center 0 0 scale 1 1 rotate 0 translate {marker} 0"']
+        proxies += [f'"Sine" {{ "sinePeriod" "5.3" "sineMin" "{marker}.01" "sineMax" "{marker}.16" "timeOffset" "$xen_hphase" "resultVar" "$xen_hshift[0]" }}',
                     '"LinearRamp" { "rate" "0" "initialValue" "$entityorigin[2]" "resultVar" "$xen_hshift[1]" }',
                     '"TextureTransform" { "centerVar" "$xen_hcenter" "scaleVar" "$entityorigin" "translateVar" "$xen_hshift" "resultVar" "$basetexturetransform" }']
     else:
@@ -76,10 +82,10 @@ def patch_shader(name, source):
     if name == 'skin_vs20.fxc':
         extra = """
     float xenMarker = cBaseTexCoordTransform[0].w;
-    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1001.0;
+    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1002.0;
     float3 xenOrigin = float3(cBaseTexCoordTransform[0].x,
                              cBaseTexCoordTransform[1].y, cBaseTexCoordTransform[1].w);
-    if (xenHuman) XenHumanPulseWorld(worldPos, xenOrigin, xenMarker - 1000.0);
+    if (xenHuman) XenNpcPulseWorld(worldPos, worldNormal, xenOrigin, xenMarker);
 """
         source = once(source, anchor, extra+anchor)
         for field, uv, transform in [('x', 'x', 'cBaseTexCoordTransform[0]'),

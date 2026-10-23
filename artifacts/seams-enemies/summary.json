@@ -1,0 +1,81 @@
+{
+  "runtime_sha256": "6d3db43d0ff80abb8664eec9df87dccae94399cff91e301c21d941471df74de7",
+  "runtime_bytes": 17730563,
+  "runtime_files": 2564,
+  "generated_materials": 2534,
+  "unit_package_checks": 30,
+  "native_vertex_layouts": 20,
+  "full_two_wave_animation_retained": true,
+  "native_checks": [
+    "d1_canals_01 camera sweeps",
+    "d1_trainstation_05 camera sweeps",
+    "Combine elite prop model pulse phases",
+    "actual npc_metropolice render phases",
+    "antlion and antlion guard model render phases"
+  ],
+  "limits": [
+    "Initial performance spikes remain unresolved",
+    "Camera sweeps are not walking/combat benchmarks",
+    "Only selected new enemies visually inspected",
+    "Authored UV and lighting seams can remain",
+    "No Workshop upload or final gallery approval"
+  ],
+  "screenshots": [
+    {
+      "file": "antlion-phase-a.jpg",
+      "sha256": "6f05f7c544aa777c952b3b0f05b56c30678971888db1d58cdceb10f786963090",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "antlion-phase-b.jpg",
+      "sha256": "2a37c263ed26cf5c46aff1274cb500dd357cfd3ce025c66d3434c1c7f3f21016",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "combine-phase-a.jpg",
+      "sha256": "088c98d06c383d824fc6ba9e411f125bed354486f43629acb4911e0df4461d0a",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "combine-phase-b.jpg",
+      "sha256": "e470365e5a134fc74f07a8d3e82565d31a01fbaa1df4c66aa6e74ab6bcfef05b",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "police-phase-a.jpg",
+      "sha256": "6fb180bd50056b2f0049a53d87822f27e00f4605c9eb0f25b554e8822915594f",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "police-phase-b.jpg",
+      "sha256": "51e41c7448a03eef1cbeeeb226d073de41e42a16dcf6dcbc1116d194d2c583c7",
+      "pixels": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "main_preview": {
+    "pid": 134540,
+    "session": 1,
+    "responding": true,
+    "title": "HALF-LIFE 2 - Direct3D 9",
+    "launch": "native executable, same Steam/runtime arguments",
+    "steam_settings_cloud_conflict": "pending, neither copy selected"
+  }
+}

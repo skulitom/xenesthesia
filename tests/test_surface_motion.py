@@ -103,7 +103,7 @@ class SurfaceMotionTests(unittest.TestCase):
         a = animate('materials/brick/a.vmt', source)
         self.assertIsNotNone(a)
         self.assertEqual(a, animate('materials/brick/a.vmt', source))
-        self.assertNotEqual(a, animate('materials/brick/b.vmt', source))
+        self.assertEqual(a, animate('materials/brick/b.vmt', source))
         self.assertIsNone(animate('materials/brick/a.vmt', source + ' }'))
 
 

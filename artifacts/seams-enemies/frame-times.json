@@ -1,0 +1,144 @@
+{
+  "runtime_sha256": "6d3db43d0ff80abb8664eec9df87dccae94399cff91e301c21d941471df74de7",
+  "previous_runtime_sha256": "260d49ed667e6e1a7cb94317592ac7a85c8c018643624b002f7cf9850d412620",
+  "presentmon_version": "2.6.0",
+  "presentmon_sha256": "b2a706bc6ad475749e3b7e3409263aa1e6906d45bdcf993f6dbc0f660188f1af",
+  "settings": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "windowed": true,
+    "vsync": 0,
+    "fps_max": 300,
+    "mat_queue_mode": -1,
+    "desktop": "Anode session 3"
+  },
+  "cameras": {
+    "d1_canals_01": {
+      "setpos": [
+        -257.392,
+        -6953.54,
+        649
+      ],
+      "setang": [
+        0,
+        0,
+        0
+      ]
+    },
+    "d1_trainstation_05": {
+      "setpos": [
+        -6700,
+        -1470,
+        64
+      ],
+      "setang": [
+        0,
+        132,
+        0
+      ]
+    }
+  },
+  "sweep_degrees_per_second": 18,
+  "captures": [
+    {
+      "file": "before-canals-active.csv",
+      "frames": 631,
+      "seconds": 21.940469999999994,
+      "average_fps": 28.759639150847725,
+      "median_ms": 13.0607,
+      "p95_ms": 131.7869,
+      "p99_ms": 256.5141,
+      "worst_ms": 930.6358,
+      "frames_over_33ms": 179,
+      "frames_over_50ms": 125,
+      "present_api_median_ms": 1.6909,
+      "sha256": "2261a42ce18721e17afd52e5370cf6ff1e9cdf7f7960db98cae3f7b2739d1c01"
+    },
+    {
+      "file": "stock-canals-active.csv",
+      "frames": 6466,
+      "seconds": 21.965422100000065,
+      "average_fps": 294.3717616972177,
+      "median_ms": 3.3829,
+      "p95_ms": 4.372,
+      "p99_ms": 4.9218,
+      "worst_ms": 14.1097,
+      "frames_over_33ms": 0,
+      "frames_over_50ms": 0,
+      "present_api_median_ms": 0.2041,
+      "sha256": "dc717930ad300dd89c0a098195e1e82e5b8be9783ec21cdb60d74a4a718047b1"
+    },
+    {
+      "file": "before-train-active.csv",
+      "frames": 3605,
+      "seconds": 21.733108099999953,
+      "average_fps": 165.875952183756,
+      "median_ms": 3.5821,
+      "p95_ms": 11.7186,
+      "p99_ms": 35.8216,
+      "worst_ms": 825.8513,
+      "frames_over_33ms": 45,
+      "frames_over_50ms": 25,
+      "present_api_median_ms": 0.6314,
+      "sha256": "b6d0b5419e684c900b30e2b8948f576388db2711d3231df8821361f77edb187a"
+    },
+    {
+      "file": "stock-train-active.csv",
+      "frames": 5927,
+      "seconds": 21.202973100000023,
+      "average_fps": 279.5362693734682,
+      "median_ms": 3.3952,
+      "p95_ms": 4.706,
+      "p99_ms": 9.6293,
+      "worst_ms": 59.8522,
+      "frames_over_33ms": 3,
+      "frames_over_50ms": 2,
+      "present_api_median_ms": 0.3646,
+      "sha256": "bf267e5d07b351672dbfde715e9ef7b03baf8c2585cceb027cda6953989593c5"
+    },
+    {
+      "file": "original-canals-repeat.csv",
+      "frames": 11734,
+      "seconds": 41.9841040000001,
+      "average_fps": 279.48673145436186,
+      "median_ms": 3.39435,
+      "p95_ms": 4.7405,
+      "p99_ms": 8.6088,
+      "worst_ms": 63.77480000000001,
+      "frames_over_33ms": 9,
+      "frames_over_50ms": 4,
+      "present_api_median_ms": 0.1885,
+      "sha256": "3f20f9c8c699a094dca940b37e2a2e85a9c4c3b0693ee7af7bce00cf28752983"
+    },
+    {
+      "file": "full-quality-canals.csv",
+      "frames": 12311,
+      "seconds": 41.958980299999816,
+      "average_fps": 293.4056049975075,
+      "median_ms": 3.3839,
+      "p95_ms": 4.2224,
+      "p99_ms": 5.0596,
+      "worst_ms": 10.1436,
+      "frames_over_33ms": 0,
+      "frames_over_50ms": 0,
+      "present_api_median_ms": 0.1637,
+      "sha256": "f9a7abacdec39249a99a9a9acf5e4b9f584e945425c412f9e9cc98f8600fc749"
+    },
+    {
+      "file": "full-quality-train.csv",
+      "frames": 12378,
+      "seconds": 41.972922499999896,
+      "average_fps": 294.904411290398,
+      "median_ms": 3.3862,
+      "p95_ms": 3.7231,
+      "p99_ms": 4.0462,
+      "worst_ms": 12.6552,
+      "frames_over_33ms": 0,
+      "frames_over_50ms": 0,
+      "present_api_median_ms": 0.1775,
+      "sha256": "aa42c2f4a3c1cb12e3f31e4e12b4cd30bd8e3747d822effcea64190ace464f5b"
+    }
+  ]
+}

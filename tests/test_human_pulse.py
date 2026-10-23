@@ -33,6 +33,17 @@ class HumanPulseTests(unittest.TestCase):
         self.assertIsNone(material('materials/models/alyx/emptool_sheet.vmt',source,tokens))
         self.assertIsNone(material('materials/models/alyx/test.vmt',source[:-1]+' $warpparam .5 }',tokens))
 
+    def test_enemy_pulses_preserve_native_shading_and_masks(self):
+        source = 'VertexLitGeneric { $basetexture enemy $bumpmap normal $phong 1 $selfillum 1 $alphatest 1 }'
+        for folder, marker in [('combine_soldier', 1000), ('police', 1000),
+                               ('zombie_fast', 1001), ('zombie_poison', 1001),
+                               ('headcrab_black', 1001), ('antlion', 1001), ('antlion_guard', 1001)]:
+            out = material(f'materials/models/{folder}/test.vmt', source, tokens)
+            self.assertTrue(out.startswith(source[:-1]))
+            self.assertIn(f'translate {marker} 0', out)
+            self.assertNotIn('VortWarp', out)
+        self.assertIsNone(material('materials/models/police/glint.vmt', source, tokens))
+
     def test_glasses_keep_original_alpha_and_lighting(self):
         for name, source in [
             ('glassesfront_walter', 'VertexLitGeneric { $basetexture front $envmapmask mask }'),
