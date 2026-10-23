@@ -19,9 +19,10 @@ step. Existing proxies/transforms, transparent and cutout materials are skipped.
 The generator currently produces 1,917 material overrides from installed HL2,
 retaining Valve parameters and texture references. No texture images are copied.
 
-The current post-process is one unshifted full-frame sample with optional subtle
-colour. All depth displacement, local blur, contour glow and double edges were
-removed. F4 controls that colour layer only. Material animation needs addon
+The current post-process uses one unshifted full-frame sample for sharp detail
+and one native blurred-buffer sample to drive broad prismatic colour regions.
+The compressed scene-alpha depth cue influences hue only. All screen-space
+displacement and double edges were removed. F4 controls that colour layer only. Material animation needs addon
 disable/restart for a complete bypass; the installed client exposes no generic
 ConVar-reading material proxy to support a native global on/off switch here.
 

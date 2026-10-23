@@ -51,17 +51,20 @@ def animate(name, source):
         return None
     seed = int.from_bytes(hashlib.sha256(name.lower().encode()).digest()[:4], 'little')
     phase = (seed % 1000) / 137.0
-    period = 6.0 + ((seed >> 10) % 1000) / 250.0
-    scale = 0.018 if model else 0.065
-    drift = 0.010 if model else 0.045
-    rotate = 0.6 if model else 1.8
+    period = 8.0 + ((seed >> 10) % 1000) / 200.0
+    # World UVs extend far beyond 0..1. Even modest scale/rotation can therefore
+    # move whole facades by metres. Keep those terms tiny, not just the drift.
+    scale = 0.006 if model else 0.0012
+    drift = 0.003 if model else 0.0035
+    rotate = 0.12 if model else 0.006
     lines = ['\n// Xenesthesia: animate UVs in the material, before scene projection.',
              '"$xen_center" "[0.5 0.5]"', '"$xen_scale" "[1 1]"',
              '"$xen_shift" "[0 0]"', '"$xen_rotate" "0"',
-             f'"$xen_phase" "{phase:.4f}"', '"Proxies"', '{']
+             f'"$xen_phase" "{phase:.4f}"',
+             '"$xen_a" "0"', '"$xen_b" "0"', '"Proxies"', '{']
     # Static props can bind a renderable with no C_BaseEntity. HL2's EntityRandom
-    # dereferences that entity without checking it, so use only for weapons.
-    if model and parts[2] == 'weapons':
+    # dereferences that entity without checking it, so use only for viewmodels.
+    if model and parts[2] == 'weapons' and len(parts) > 3 and parts[3].startswith('v_'):
         lines += ['"EntityRandom" { "scale" "8" "resultVar" "$xen_phase" }']
     for result, amplitude, base, rate in [
         ('$xen_scale[0]', scale, 1, 1.0),
@@ -70,9 +73,16 @@ def animate(name, source):
         ('$xen_shift[1]', drift, 0, 1.13),
         ('$xen_rotate', rotate, 0, 1.53),
     ]:
-        lines.append(f'"Sine" {{ "sinePeriod" "{period*rate:.4f}" '
-                     f'"sineMin" "{base-amplitude:.4f}" "sineMax" "{base+amplitude:.4f}" '
-                     f'"timeOffset" "$xen_phase" "resultVar" "{result}" }}')
+        # Two slow, incommensurate pulses give each axis an evolving rhythm.
+        # Sum their bounded amplitudes; the total never exceeds amplitude.
+        for weight, frequency, baseline, target in [
+            (0.65, 1.0, base, '$xen_a'), (0.35, 1.61803399, 0, '$xen_b')
+        ]:
+            amount = amplitude * weight
+            lines.append(f'"Sine" {{ "sinePeriod" "{period*rate*frequency:.6f}" '
+                         f'"sineMin" "{baseline-amount:.6f}" "sineMax" "{baseline+amount:.6f}" '
+                         f'"timeOffset" "$xen_phase" "resultVar" "{target}" }}')
+        lines.append(f'"Add" {{ "srcVar1" "$xen_a" "srcVar2" "$xen_b" "resultVar" "{result}" }}')
     transforms = ['$basetexturetransform']
     # HL2's WorldVertexTransition shares BASETEXTURETRANSFORM for both layers.
     if '$bumpmap' in values:

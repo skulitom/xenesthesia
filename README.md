@@ -20,16 +20,17 @@ content when switching campaigns, and that harness did not reproduce the native
 menu and Workshop state correctly.
 
 A native psychedelic material addon for Half-Life 2's Windows 20th Anniversary
-edition. Brickwork breathes, floors drift and textures slowly stretch and rotate
+edition. Brickwork breathes, floors drift and textures gently stretch and turn
 on their surfaces. Motion happens in material coordinates before camera
 projection, so it stays on the surface as you look around. Hands and weapons are
 included, at a gentler strength. Geometry, the HUD and screen edges stay sharp.
-An optional subtle colour layer adds a slow opalescent tint; it never blurs or
-displaces the image. There are no screen-centred ripples or double-edge effects.
+An optional prismatic colour layer adds shifting opalescent hues and soft colour
+bands. It keeps the scene detail sharp and never displaces the image. Texture
+motion combines two slow pulses per axis for a less regular rhythm.
 
 The current build animates 1,917 supported original HL2 materials. World surfaces
-and props have timing derived from their material name; supported weapons also
-use an entity phase. This is not independent animation of every object. Objects
+and props have timing derived from their material name; supported first-person
+weapons also use an entity phase. This is not independent animation of every object. Objects
 sharing a material can move together. NPC faces, cutouts, transparent surfaces,
 existing animated materials and special shaders are deliberately excluded.
 
@@ -72,7 +73,8 @@ The material animation changes texture coordinates, not geometry, collision, AI
 or gameplay. Painted-on windows, markings and other texture details move too;
 material seams can become visible. Custom materials and untested episode content
 are not guaranteed coverage. The optional colour pass is separate from texture
-motion and no longer uses an approximate depth buffer.
+motion. It uses the scene's compressed depth cue and soft colour buffer to drive
+hues, not to displace edges or reconstruct object positions.
 
 ## Build
 

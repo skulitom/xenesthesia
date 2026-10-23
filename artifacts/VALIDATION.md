@@ -68,7 +68,7 @@ and restored the shader; F6 opened the pause menu and released gameplay mouse in
   revision has been checked at 720p. Main-desktop subjective playtest and eventual
   clean Workshop-download validation remain pending. Nothing has been published.
 
-## Material-coordinate revision (current)
+## Material-coordinate revision (earlier, excessive-motion version)
 
 User feedback rejected the surface-flow approximation: it still appeared attached
 to the player and primarily produced blurry outlines. Those visual-quality claims
@@ -101,3 +101,39 @@ above are superseded. The current build animates supported materials directly.
   One local run, not a full-game or minimum-performance guarantee. Restored 120 fps.
 - Native tested scenes ran without further crashes. Broader campaign, 1080p and
   final Workshop-download checks remain pending. No Workshop upload or item exists.
+
+## Subtle motion and restored prismatic colour (current)
+
+The owner found the previous texture movement excessive and too regular, and
+requested the missing kaleidoscopic colour effect. This revision addresses both.
+
+- World material scale amplitude reduced from 6.5% to 0.12%, translation from
+  4.5% to 0.35% of a texture repeat, and rotation from 1.8 to 0.006 degrees.
+  World UVs can extend far beyond 0..1, so reducing scale/rotation was essential
+  to avoid large sliding facades. Model limits: 0.6%, 0.3%, 0.12 degrees.
+- Each parameter combines two bounded sine waves, weighted 65%/35%, with
+  different periods. Base periods are 8–13 seconds, with slower axis variations.
+  This gives gentler, less regular motion without unbounded texture drift.
+- EntityRandom is now restricted to first-person weapon materials. World weapon
+  models use the same safe material phase as other potentially static props.
+- Restored prismatic hues and moving colour bands. The first revised colour
+  prototype made fine asphalt grains overly colourful; using the native soft
+  buffer only to drive hue resolved that speckling. Final detail comes from one
+  sharp, unshifted full-frame sample. No spatial echoes or radial warp returned.
+- Final shader compiled and all 10 package/generator tests passed. Native archive
+  installation verified. SHA-256:
+  `64c9cb296a7c2b7d50bd2769aeac887e39eb1d0afc8e85d00343b892375b5a40`.
+- Native Anode 1920x1080: coast daylight, pistol/hands, Ravenholm darkness,
+  flashlight, SMG, walking and camera turns checked. F4 bypass/restoration checked;
+  F6 opened the pause menu. No generated-proxy errors or new crashes observed.
+- Native coast timedemo: 2,610 frames in 7.741 seconds, 337.16 fps (2.97 ms/frame).
+  This single local 1080p run is not a cost comparison with earlier 720p runs or
+  a campaign-wide performance guarantee. Restored the 120 fps cap.
+- Real 1080p screenshots retained in `subtle-motion`. Twelve stationary wall
+  captures with the colour layer off preserve evidence of the reduced native UV
+  animation. `wall-motion.mp4` is a 2 fps sequence of those timed screenshots,
+  not a continuous gameplay recording. Older `material-motion` media shows the
+  rejected excessive-motion build and must not represent the current release.
+- Main-desktop subjective approval, final release media, broader campaign checks
+  and eventual clean Workshop-download validation remain pending. No Workshop
+  item has been created or uploaded.

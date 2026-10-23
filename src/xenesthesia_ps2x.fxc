@@ -1,8 +1,9 @@
 // Xenesthesia's optional colour layer. Original code, MIT.
 // Surface motion lives in native material UV proxies, before camera projection.
-// This pass deliberately never displaces pixels or samples neighbouring edges.
-// c0: strength, reserved, reserved, palette mix. c1: time, reserved, reserved, saturation.
+// Scene detail stays sharp and unshifted; the native soft buffer drives colour only.
+// c0: strength, reserved, reserved, palette mix. c1: time, colour-band frequency, band strength, saturation.
 sampler2D Scene : register(s0);
+sampler2D SoftScene : register(s2);
 float4 Style : register(c0);
 float4 Motion : register(c1);
 float4 PixelSize : register(c4);
@@ -22,11 +23,28 @@ float4 main(float2 bloomUV : TEXCOORD0) : COLOR
     float2 span = floor(size * 0.25 + 0.01) - float2(1.0, 0.5);
     float2 pixel = (bloomUV / BloomPixelSize.xy - float2(0.5, 0.0)) * (size - 1.0) / span;
     float2 uv = (pixel + 0.5) * PixelSize.xy;
-    float3 original = tex2D(Scene, clamp(uv, PixelSize.xy * 0.5, 1.0 - PixelSize.xy * 0.5)).rgb;
+    float4 scene = tex2D(Scene, clamp(uv, PixelSize.xy * 0.5, 1.0 - PixelSize.xy * 0.5));
+    float3 original = scene.rgb;
     float light = dot(original, float3(0.2126, 0.7152, 0.0722));
     float3 colour = lerp(light.xxx, original, Motion.w);
-    float3 tint = spectrum(light * 0.4 - Motion.x * 0.025);
-    float3 opal = lerp(light.xxx, tint * light * 1.4, 0.8);
-    colour = lerp(colour, opal, saturate(Style.w));
+    // The native blurred buffer avoids colouring each asphalt grain differently.
+    // It controls hue only: texture detail always comes from the sharp scene.
+    float3 localColour = tex2D(SoftScene, clamp(bloomUV, BloomPixelSize.xy * 0.5,
+                                               1.0 - BloomPixelSize.xy * 0.5)).rgb;
+    float localLight = dot(localColour, float3(0.2126, 0.7152, 0.0722));
+    // Colour phase follows broad colour regions and Source's compressed depth cue.
+    // There is no crosshair distance or screen-coordinate pattern in this field.
+    float field = localLight * 0.7 + dot(localColour, float3(0.22, -0.1, 0.3)) + saturate(scene.a) * 1.7;
+    float phase = field * 0.7 - Motion.x * 0.025 + sin(field * 3.8 + Motion.x * 0.13) * 0.06;
+    float3 tint = spectrum(phase);
+    float3 opal = lerp(original, tint * (light * 1.65 + 0.015), 0.85);
+    float darkGuard = smoothstep(0.012, 0.16, light);
+    colour = lerp(colour, opal, saturate(Style.w) * darkGuard);
+    // Folded colour bands restore the prismatic look without spatial echoes.
+    float band = abs(frac(field * Motion.y - Motion.x * 0.055) - 0.5) * 2.0;
+    band = 1.0 - smoothstep(0.08, 0.32, band);
+    colour += tint * band * Motion.z * darkGuard;
+    float peak = max(colour.r, max(colour.g, colour.b));
+    colour /= 1.0 + max(peak - 0.88, 0.0) * 0.5;
     return float4(saturate(lerp(original, colour, saturate(Style.x))), 1.0);
 }

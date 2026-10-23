@@ -1,7 +1,7 @@
 [h1]Xenesthesia[/h1]
 Half-Life 2 seen through a slowly shifting alien dream.
 
-Brickwork breathes. Floor markings drift. Concrete, rock and metal slowly stretch and turn on the surfaces they belong to. The movement stays in the world as you look around, with gentler animation on hands and weapons. An optional subtle colour layer adds a slowly shifting opalescent tint.
+Brickwork breathes. Floor markings drift. Concrete, rock and metal gently stretch and turn on the surfaces they belong to. Small overlapping pulses give the movement a less regular rhythm, and it stays in the world as you look around. Supported hands and weapons animate too. An optional prismatic colour layer adds shifting opalescent hues and soft colour bands while keeping the scene detail sharp.
 
 [h2]What it does[/h2]
 [list]

@@ -39,6 +39,21 @@ class SurfaceMotionTests(unittest.TestCase):
         out = animate('materials/models/props_c17/crate.vmt', 'VertexLitGeneric { $basetexture crate }')
         self.assertIsNotNone(out)
         self.assertNotIn('EntityRandom', out)
+        world_weapon = animate('materials/models/weapons/w_pistol/test.vmt', 'VertexLitGeneric { $basetexture pistol }')
+        self.assertNotIn('EntityRandom', world_weapon)
+
+    def test_small_world_motion_has_bounded_harmonics(self):
+        import re
+        out = animate('materials/brick/test.vmt', 'LightmappedGeneric { $basetexture test }')
+        waves = re.findall(r'"Sine" \{ "sinePeriod" "([^"]+)" "sineMin" "([^"]+)" "sineMax" "([^"]+)"', out)
+        self.assertEqual(len(waves), 10)
+        limits = [0.0012, 0.0012, 0.0035, 0.0035, 0.006]
+        for i, limit in enumerate(limits):
+            a, b = waves[i*2:i*2+2]
+            self.assertGreater(float(a[0]), 7.9)
+            self.assertGreater(float(b[0]), float(a[0]) * 1.6)
+            total = (float(a[2])-float(a[1])+float(b[2])-float(b[1]))/2
+            self.assertAlmostEqual(total, limit, places=6)
 
     def test_comments_do_not_change_eligibility_and_phase_is_stable(self):
         source = '// Proxies { }\nLightmappedGeneric { $basetexture test /* $alphatest 1 */ }'
