@@ -1,6 +1,6 @@
 # Attribution
 
-The original Xenesthesia code, procedural colour texture, build tools and documentation are MIT licensed.
+The original Xenesthesia code, procedural colour/normal texture data, build tools and documentation are MIT licensed.
 The packaging and native integration helpers derive from our City 17 ASCII
 project, also MIT licensed: https://github.com/skulitom/city17-ascii
 

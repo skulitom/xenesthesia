@@ -10,7 +10,7 @@ import zipfile
 from surface_motion import GAME, ROOT, tokens
 from vpk import read_vpk
 
-MAPS = ['d1_trainstation_01', 'd1_canals_01', 'd1_canals_06', 'd1_eli_01',
+MAPS = ['d1_trainstation_01', 'd1_trainstation_05', 'd1_canals_01', 'd1_canals_06', 'd1_eli_01',
         'd1_town_01', 'd2_coast_03', 'd2_prison_01', 'd3_c17_01', 'd3_breen_01']
 
 

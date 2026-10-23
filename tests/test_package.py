@@ -28,7 +28,9 @@ class PackageTests(unittest.TestCase):
                 self.assertIn(name, {'xenesthesia/licenses/valve-sdk-license.txt',
                                     'xenesthesia/licenses/valve-sdk-thirdpartylegalnotices.txt'})
             if name.endswith('.vtf'):
-                self.assertEqual(name, 'materials/xenesthesia/prism.vtf')
+                self.assertIn(name, {'materials/xenesthesia/prism.vtf',
+                                     'materials/xenesthesia/weave.vtf',
+                                     'materials/xenesthesia/eddy_normal.vtf'})
             self.assertNotIn(Path(name).name, {'autoexec.cfg','config.cfg','gameinfo.txt'})
             if name.endswith('.cfg'):
                 lines = [x.strip() for x in read(name).decode('ascii').splitlines()

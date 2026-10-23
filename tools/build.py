@@ -6,6 +6,7 @@ import subprocess
 from vpk import read_vpk
 from surface_motion import build as build_surface_motion
 from prism_texture import build as build_prism_texture
+from lab_textures import build as build_lab_textures
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / 'content'
@@ -17,6 +18,7 @@ def main():
                 'shaders/fxc/xenesthesia_ps20b.vcs']:
         (CONTENT / old).unlink(missing_ok=True)
     build_prism_texture(CONTENT)
+    build_lab_textures(CONTENT)
     build_surface_motion(CONTENT)
     manifest = {p.relative_to(CONTENT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sorted(CONTENT.rglob('*')) if p.is_file()}

@@ -4,4 +4,6 @@ No Workshop item has been created or uploaded. Do not publish until the owner ex
 
 The previous release candidate is superseded. The current build anchors world colour continuously across material borders and keeps movable objects’ colour in their UVs and preserves the approved gentle texture motion. Coverage includes additional props, screens and NPC materials. F4 is now help only; full removal requires a restart.
 
+The lab revision adds colour flow inside supported rugs without moving their alpha edges, continuous colour on runner pieces, six carpet-floor materials, and slow refraction eddies in Kleiner's generator tubes. Native visual checks and user feedback for these additions must be recorded before release approval.
+
 Experimental geometry pulses now cover classic zombies/headcrabs and selected human families. Human skin, hair, eyes and teeth share a deformation field, with native skin lighting retained. Alyx and Kleiner have been checked in Anode; Kleiner’s detached facial fragment is fixed by deforming after native animation; broader character/cinematic compatibility and low-detail validation remains release work. Old screenshots and the 337 FPS result describe the previous postprocess build, not this revision. Current captures, a fresh performance benchmark and final playtest feedback must be recorded before this review is marked ready.

@@ -11,6 +11,7 @@ from vpk import read_vpk
 import npc_pulse
 import human_pulse
 import surface_shaders
+import lab_materials
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = Path(r'D:/Steam/steamapps/common/Half-Life 2/hl2')
@@ -29,8 +30,11 @@ def tokens(source):
 def animate(name, source):
     """Return an augmented VMT, or None for unsupported/special materials."""
     parts = name.lower().split('/')
+    rug = name.lower() in lab_materials.RUGS
+    overlay = rug or name.lower() in lab_materials.RUNNERS
+    carpet = overlay or name.lower() in lab_materials.CARPET_FLOORS
     model = len(parts) > 2 and parts[1] == 'models'
-    if not model and (len(parts) < 3 or parts[1] not in WORLD):
+    if not model and not carpet and (len(parts) < 3 or parts[1] not in WORLD):
         return None
     ts = tokens(source)
     values = [m[0].strip('"').lower() for m in ts]
@@ -41,7 +45,7 @@ def animate(name, source):
     if shader not in allowed or '$basetexture' not in values:
         return None
     # Alpha-tested surfaces can receive MOD2X colour without moving their mask.
-    excluded = {'$translucent', '$decal', '$additive'}
+    excluded = {'$additive'} if overlay else {'$translucent', '$decal', '$additive'}
     if any(x in values for x in excluded):
         return None
     depth = 0
@@ -74,7 +78,7 @@ def animate(name, source):
     # are tested separately instead of sliding eyes/mouths across their faces.
     prop = model and (parts[2].startswith('props') or parts[2] == 'weapons'
                      or parts[2] in {'combine_room', 'combine_apc', 'items'})
-    motion = not any(x in values for x in unsafe_motion) and (not model or prop)
+    motion = not overlay and not any(x in values for x in unsafe_motion) and (not model or prop)
     details = [values[i+1].replace('\\', '/') for i, v in enumerate(values[:-1]) if v == '$detail']
     # Standard micrograin layers can be replaced by our own colour+grain field.
     # Special detail blends (cracks, masks, authored animation) remain intact.
@@ -95,9 +99,9 @@ def animate(name, source):
     lines = []
     replacements = []
     if colour:
-        params = {'$detail': 'xenesthesia/prism', '$detailframe': '0',
+        params = {'$detail': 'xenesthesia/weave' if rug else 'xenesthesia/prism', '$detailframe': '0',
                   '$detailblendmode': '0', '$detailblendfactor': '0.9',
-                  '$detailscale': f'{(1.0 if model else -1337.0):.3f}'}
+                  '$detailscale': f'{(1.0 if model or rug else -1337.0):.3f}'}
         for key, value in params.items():
             positions = [i+1 for i, v in enumerate(values[:-1]) if v == key]
             if positions:
@@ -170,7 +174,9 @@ def build(content):
             continue
         raw = read(name)
         source = raw.decode('utf8', errors='strict').replace('\r\r\n', '\n')
-        out = npc_pulse.material(name, source, tokens(source))
+        out = lab_materials.tank_material(name, source, tokens)
+        if out is None:
+            out = npc_pulse.material(name, source, tokens(source))
         if out is None:
             out = animate(name, source)
         human = human_pulse.material(name, out if out is not None else source, tokens)

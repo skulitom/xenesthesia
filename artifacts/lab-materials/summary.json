@@ -1,0 +1,17 @@
+{
+  "runtime_sha256": "260d49ed667e6e1a7cb94317592ac7a85c8c018643624b002f7cf9850d412620",
+  "runtime_bytes": 17314018,
+  "runtime_files": 2439,
+  "material_definitions": 2409,
+  "colour_definitions": 2376,
+  "uv_motion_definitions": 1950,
+  "world_colour_definitions": 1281,
+  "human_pulse_definitions": 115,
+  "unit_package_tests_passed": 29,
+  "native_shader_layouts_verified": 20,
+  "new_materials": 17,
+  "new_procedural_textures": 2,
+  "previous_material_token_changes": 0,
+  "native_visual_test": "pending restart of current main-seat preview",
+  "workshop": "No item created or uploaded; explicit go required."
+}

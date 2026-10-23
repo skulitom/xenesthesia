@@ -1,5 +1,5 @@
 {
-  "runtime_sha256": "275ae692f996b78ef988d90d9eab211d44a34130cee98278ec5ff56f0dbe7a8b",
+  "runtime_sha256": "260d49ed667e6e1a7cb94317592ac7a85c8c018643624b002f7cf9850d412620",
   "scope": "Static material references only; excludes visibility, model usage and gameplay behaviour.",
   "viewmodels": {
     "v_357": {
@@ -123,6 +123,40 @@
       ],
       "patches_with_authored_transforms": []
     },
+    "d1_trainstation_05": {
+      "bsp_sha256": "fc252f90ebc9ea5f5e1ac713285ea1d95461c25523120a3d65f9c38b09fd5e5c",
+      "material_table_entries": 238,
+      "direct_overrides": 87,
+      "patches_referencing_overrides": 98,
+      "other_materials": 53,
+      "patch_sources": [
+        "materials/brick/brickwall034b.vmt",
+        "materials/building_template/building_template007c.vmt",
+        "materials/building_template/building_template007d.vmt",
+        "materials/building_template/building_template007h.vmt",
+        "materials/building_template/building_template007m.vmt",
+        "materials/concrete/concretefloor039a.vmt",
+        "materials/metal/metaldoor018a.vmt",
+        "materials/metal/metalroof003a.vmt",
+        "materials/metal/metalroof006a.vmt",
+        "materials/metal/metalroof008a.vmt",
+        "materials/metal/metalwall021d.vmt",
+        "materials/metal/metalwall021g.vmt",
+        "materials/metal/metalwall032d.vmt",
+        "materials/metal/metalwall032g.vmt",
+        "materials/metal/metalwall033a.vmt",
+        "materials/metal/metalwall041a.vmt",
+        "materials/metal/metalwall056a.vmt",
+        "materials/metal/metalwall061g.vmt",
+        "materials/metal/metalwall061h.vmt",
+        "materials/metal/metalwall063a.vmt",
+        "materials/metal/metalwall070e.vmt",
+        "materials/metal/metalwall072b.vmt",
+        "materials/tile/tilefloor020a.vmt",
+        "materials/tile/tilefloor021a.vmt"
+      ],
+      "patches_with_authored_transforms": []
+    },
     "d1_canals_01": {
       "bsp_sha256": "fccb6d0db90d9a51ec083b3d020440a579a497624008aba9c50a8b2a79144e77",
       "material_table_entries": 304,
@@ -189,9 +223,9 @@
     "d1_eli_01": {
       "bsp_sha256": "1a855ae0488092ef8a69aa54204cf8e2f413f52f01d7b894d0f99bc26bebfcd8",
       "material_table_entries": 194,
-      "direct_overrides": 76,
+      "direct_overrides": 79,
       "patches_referencing_overrides": 50,
-      "other_materials": 68,
+      "other_materials": 65,
       "patch_sources": [
         "materials/concrete/concretefloor039a.vmt",
         "materials/metal/metaldoor030a.vmt",
@@ -278,9 +312,9 @@
     "d3_c17_01": {
       "bsp_sha256": "12512a5ff33e32cc68d4e828af40485edef113d801265fa2efa0180df4ef2dd9",
       "material_table_entries": 158,
-      "direct_overrides": 60,
+      "direct_overrides": 62,
       "patches_referencing_overrides": 56,
-      "other_materials": 42,
+      "other_materials": 40,
       "patch_sources": [
         "materials/metal/metalceiling005a.vmt",
         "materials/metal/metaldoor018a.vmt",
@@ -297,9 +331,9 @@
     "d3_breen_01": {
       "bsp_sha256": "e5749dbf4ada4cbdd714de971e64712a774a2a1576ab12d31618556f3d007b0c",
       "material_table_entries": 447,
-      "direct_overrides": 7,
+      "direct_overrides": 11,
       "patches_referencing_overrides": 359,
-      "other_materials": 81,
+      "other_materials": 77,
       "patch_sources": [
         "materials/metal/citadel_metalwall063a.vmt",
         "materials/metal/citadel_metalwall072b.vmt",

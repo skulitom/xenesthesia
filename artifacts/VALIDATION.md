@@ -1,4 +1,16 @@
-# Current revision: intact faces and continuous world colour
+# Current revision: carpets and generator-tube liquid
+
+Local build only; native visual check awaits restarting the current main-desktop preview. No Workshop activity. Runtime SHA-256: `260d49ed667e6e1a7cb94317592ac7a85c8c018643624b002f7cf9850d412620`. 2,439 files, 17,314,018 bytes; 2,409 material definitions. All 29 unit/package checks pass and all 20 native vertex shader layouts match retail.
+
+Added 17 explicit material targets: six standalone rugs/decal rugs, four runner sections, six carpet-floor definitions, and the generator-tube Refract material. Rugs use a new original 128-frame petal-like colour field with a neutral perimeter. Their original base UVs and alpha remain unchanged; this animates colour through the weave, not the physical carpet motif. Runner sections share the continuous world field; carpet floors use the approved gentle UV motion. The tubes use a 256-frame, 16-second normal-map loop with evolving opposing currents, no linear UV scroll, and lower refraction strength. Their orange tint image, silhouette behavior, blur and fallback remain authored.
+
+The two added textures total 7,689,248 bytes and use mipmaps; their data is original mathematics, not extracted Valve images. Normal vectors are renormalized at each mip, opaque alpha is retained, and temporal/spatial loops are tested. Tests also guard overlay alpha/UV preservation, shared runner clocks, narrow material targeting, authored tank parameters and exact archive bytes. All pre-existing VMT token sequences are unchanged; 108 regenerated human VMTs differ only in line endings. No additional compiled shader paths were introduced. This is not a new performance measurement.
+
+Evidence and current test status: `lab-materials/summary.json`. Workshop gallery, broader campaign tests, clean performance validation and explicit publication approval remain pending.
+
+---
+
+# Previous revision: intact faces and continuous world colour
 
 Local preview only. Runtime SHA-256: `275ae692f996b78ef988d90d9eab211d44a34130cee98278ec5ff56f0dbe7a8b`. 2,420 files, 9,602,875 bytes. 2,392 generated materials: 2,360 colour, 1,944 subtle UV motion, 115 human pulse definitions; 1,271 world colour materials now share a continuous position field and 8 fps clock. Categories overlap. No Workshop item created or uploaded.
 

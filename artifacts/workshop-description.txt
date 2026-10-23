@@ -6,6 +6,7 @@ City 17's surfaces quietly come alive. Brick, concrete, props and supported weap
 
 • Gentle surface movement rather than camera blur or screen wobble.
 • Material-local colour on compatible walls, props, screens, hands, weapons and NPC materials.
+• Flowing colour patterns inside supported rugs, and slow liquid eddies in Kleiner's generator tubes.
 • Keeps the HUD readable and world geometry stable.
 • Native game content; no injector or replacement game executable.
 
