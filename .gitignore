@@ -12,6 +12,7 @@ __pycache__/
 *.key
 *.pem
 *.sound.cache
+/dist/
 # Generated from the owner's installed Valve materials; reproduce via build.py.
 /content/materials/*
 !/content/materials/dev/

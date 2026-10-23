@@ -8,6 +8,13 @@ Half-Life 2, game assets and Valve trademarks belong to Valve. In-game screensho
 demonstrate the addon and are not covered by the MIT grant for our original code.
 This is an independent addon and is not endorsed by Valve.
 
+The promotional cover is an AI-generated illustration made with the built-in
+image-generation tool. It is labelled "ILLUSTRATED COVER" and is not an in-game
+screenshot. Its prompt and provenance are in media/cover-prompt.txt in release
+bundles, or artifacts/release/media/cover-prompt.txt in the source tree.
+The MIT grant applies to original code and documentation, not Valve assets,
+screenshots or promotional art.
+
 The generated world/prop/weapon .vmt files preserve material definitions from the
 owner's installed Half-Life 2 and add our animation proxies. Those definitions,
 including their copies inside content.vpk, are derived Valve game content and

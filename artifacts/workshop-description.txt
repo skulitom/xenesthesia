@@ -27,6 +27,6 @@ Console commands: [b]exec xen_on[/b] enables the colour layer; [b]exec xen_off[/
 [h2]Details[/h2]
 For the Windows 20th Anniversary version of Half-Life 2. Texture coordinates animate before camera projection; geometry, combat, physics and AI stay unchanged. Objects sharing a material may animate together. Some texture seams and moving painted-on features are part of this effect. NPC faces, cutouts, transparent surfaces, existing animated materials and special shaders are excluded. Custom materials and episode content are not guaranteed coverage.
 
-Screenshots are captured in-game. Motion is best judged in the accompanying gameplay clip; a still image cannot show the breathing and drifting animation.
+The gallery screenshots are captured in-game. The cover is an illustration. Still images show the colour treatment; the breathing and drifting texture animation is best judged in motion.
 
 Our original generator, shader and tools are MIT licensed. Generated material definitions derive from Half-Life 2 and are excluded from that grant. Half-Life 2 and its assets belong to Valve; no texture images or game binaries are included.

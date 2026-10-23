@@ -1,0 +1,54 @@
+XENESTHESIA — LOCAL PREVIEW
+Original Half-Life 2, Windows 20th Anniversary edition
+
+This candidate has not been published to Steam Workshop.
+
+INSTALL
+1. Close Half-Life 2.
+2. Disable City 17 ASCII and other post-processing or material replacement addons.
+3. In Steam, right-click Half-Life 2 > Manage > Browse local files.
+4. Open hl2, then custom. Create the custom folder if it does not exist.
+5. Copy xenesthesia.vpk from this ZIP into that folder.
+   Use only one copy of Xenesthesia. The development preview is called
+   xenesthesia_playtest.vpk; remove that copy before installing this one.
+6. Start Half-Life 2 normally and select the original Half-Life 2 campaign.
+7. For the colour layer, select Full HDR in Video > Advanced. Start or load a game
+   from the main menu. DirectX 9 / Shader Model 2.b support is required.
+
+CONTROLS
+The package does not automatically change your keys.
+To enable an optional F4 colour toggle, enable the developer console in
+Options > Keyboard > Advanced, open the console and enter: exec xen_keys
+This replaces any existing F4 binding. Reassign it in Controls if needed.
+
+Console commands:
+  exec xen_on    Enable the colour layer.
+  exec xen_off   Bypass the colour layer, leaving texture movement active.
+  exec xen_help  Show help.
+
+F4 changes colours only. Texture motion requires removing/disabling the addon
+and restarting the game. The ordinary pause menu releases the mouse.
+The development preview's F6 shortcut is not automatically installed by this ZIP.
+
+REMOVE / RETURN TO NORMAL
+1. Close Half-Life 2.
+2. Move xenesthesia.vpk out of hl2/custom, or delete that one file.
+3. Start the game again. Restore your preferred graphics and key settings.
+   If you used xen_off, it also disabled bloom and colour correction. Their
+   normal enabled values are mat_disable_bloom 0 and mat_colorcorrection 1.
+   Use your own previous settings if they differ.
+4. Re-enable other visual addons if desired.
+
+If installed from Workshop later, disable/unsubscribe the Workshop item as well.
+A remaining local VPK continues to apply even when a Workshop subscription is off.
+
+LIMITS
+Supported textures animate; geometry, collision, combat and AI are unchanged.
+Objects sharing a material can animate together. Some seams and painted-on
+features move. NPC faces, cutouts, transparency, existing animated materials and
+special shaders are excluded from texture animation; the colour pass can still
+affect their rendered appearance. Episode and custom-map coverage is unverified.
+
+The VPK contains material definitions, a compiled shader and optional commands.
+No injector, game executable, Valve texture images, Python or separate runtime
+is needed to play. Original source is MIT; see LICENSE and NOTICE.md for scope.

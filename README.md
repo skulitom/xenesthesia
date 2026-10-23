@@ -22,8 +22,8 @@ menu and Workshop state correctly.
 A native psychedelic material addon for Half-Life 2's Windows 20th Anniversary
 edition. Brickwork breathes, floors drift and textures gently stretch and turn
 on their surfaces. Motion happens in material coordinates before camera
-projection, so it stays on the surface as you look around. Hands and weapons are
-included, at a gentler strength. Geometry, the HUD and screen edges stay sharp.
+projection, so it stays on the surface as you look around. Supported hands and
+weapons have their own restrained settings. Geometry, the HUD and screen edges stay sharp.
 An optional prismatic colour layer adds shifting opalescent hues and soft colour
 bands. It keeps the scene detail sharp and never displaces the image. Texture
 motion combines two slow pulses per axis for a less regular rhythm.
@@ -97,6 +97,11 @@ packer failures that incorrectly return a successful process exit code.
 
 `src` is the original shader, `content` is the Workshop upload root, `tools`
 contains the build, and `testgame` is a local harness excluded from releases.
+
+`python tools/prepare-release.py` makes a local review folder, an extracted
+Workshop content folder and a manual-install ZIP from the verified archive.
+It never connects to Steam or uploads anything. These are preview candidates;
+the owner's playtest approval and explicit publication go-ahead are still required.
 
 ## License
 

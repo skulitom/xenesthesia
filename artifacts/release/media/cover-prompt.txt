@@ -1,0 +1,12 @@
+Xenesthesia cover provenance
+Created 23 October 2026 using the built-in image_gen tool (not CLI/API fallback).
+Original output: 1254 x 1254 PNG, retained byte-for-byte as cover.png.
+cover-workshop.jpg and cover-workshop.png are 512 x 512 exports, resized only for the upload thumbnail.
+This is promotional illustration, not a game screenshot. Gallery captures are separate.
+
+Final prompt:
+Use case: ads-marketing.
+Asset type: square illustrated Steam Workshop cover for Xenesthesia, a Half-Life 2 visual mod.
+Create a striking, professionally composed 1024 x 1024 cover poster. Illustrated industrial concrete and red-brick walls, a recessed dark doorway and metal drainpipe; clean, straight architecture. Soft flowing opalescent bands of cyan, magenta, amber and acid green wash across the rough wall textures. Rich shadow areas balance the prismatic colour. The atmosphere is a slowly shifting alien dream. Clearly a graphic illustration, with tactile printed-poster texture, not a game screenshot or a photograph.
+Typography is the primary hierarchy: very large, perfectly legible white condensed uppercase title "XENESTHESIA" across the upper third. Spell exactly X E N E S T H E S I A. Leave a dark quiet area behind the title. A smaller line directly below reads "HALF-LIFE 2 VISUAL MOD". A discreet footer reads "ILLUSTRATED COVER". Keep text comfortably inside a 7% safe margin. The title must still read at small thumbnail size.
+No characters, guns, HUD, lambda logo, Valve logo, official endorsement, floating kaleidoscope objects, folded geometry, melting buildings, camera blur or simulated gameplay. Do not imply geometry changes; the visual motif is colour flowing across intact textured surfaces. Full-bleed opaque image.

@@ -137,3 +137,20 @@ requested the missing kaleidoscopic colour effect. This revision addresses both.
 - Main-desktop subjective approval, final release media, broader campaign checks
   and eventual clean Workshop-download validation remain pending. No Workshop
   item has been created or uploaded.
+
+## Local release preparation
+
+- Created a separate illustrated cover, checked its title at thumbnail size, and
+  retained the exact built-in image-generation prompt. The game gallery remains
+  unretouched native captures from the current subtle-motion candidate.
+- Exported 512x512 PNG/JPEG cover thumbnails. Both thumbnails and both selected
+  screenshots are below 1,000,000 bytes. The full-resolution cover master is
+  separate and is not the upload thumbnail.
+- `tools/prepare-release.py` verified and staged all 1,925 runtime files from the
+  tested VPK and checked the manual-install ZIP. Review materials are copied by
+  explicit allowlist, excluding local saves, backups and the retired harness.
+  This command has no Steam/API/upload operations.
+- Local review copy, installation/removal instructions, listing text, licensing
+  notice, media provenance and the publication handoff are included. They label
+  F4 as colour-only, the cover as illustration, and the motion clip as a timed
+  still-image inspection sequence. Publication remains subject to explicit approval.
