@@ -3,9 +3,18 @@
 **Playtest build. Not published.** Workshop publication is held until the owner's
 main-desktop playtest and approval. The Workshop text in `artifacts` is a draft.
 
-On the author's prepared local machine, `tools/launch-playtest.ps1` opens the
-isolated coast preview; `-Scene ravenholm` opens the saved night scene. F4 toggles
-the effect and F5 quicksaves. This local harness is excluded from the release.
+On the author's local machine, `tools/install-playtest.ps1` installs the preview
+in the normal game's `hl2/custom` folder, disables City 17 ASCII without
+unsubscribing, backs up the original native settings, and selects original HL2.
+`tools/launch-playtest.ps1` opens the native main menu in a bordered 1280x720 window.
+Choose **Half-Life 2 > New Game** or load your usual HL2 save. F4 toggles the effect;
+F6 opens the pause menu to release the mouse. The launcher also accepts `-Scene
+coast` or `-Scene ravenholm` to enter those base-game maps directly. These preview
+helpers and their settings are not included in the Workshop package.
+
+The earlier custom `-game` harness is retired: the anniversary runtime remounts
+content when switching campaigns, and that harness did not reproduce the native
+menu and Workshop state correctly.
 
 A native psychedelic shader for Half-Life 2's Windows 20th Anniversary edition.
 Depth and light turn familiar surfaces into slowly flowing opalescent colour,
