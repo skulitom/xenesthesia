@@ -5,6 +5,7 @@ import json
 import shutil
 import subprocess
 from vpk import read_vpk
+from surface_motion import build as build_surface_motion
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / 'content'
@@ -20,13 +21,13 @@ def material():
     "$linearwrite" "1"
     "$ignorez" "1"
     "$c0_x" "1"
-    "$c0_y" "0.021"
-    "$c0_z" "0.016"
-    "$c0_w" "0.24"
+    "$c0_y" "0"
+    "$c0_z" "0"
+    "$c0_w" "0.13"
     "$c1_x" "0"
-    "$c1_y" "4.8"
-    "$c1_z" "0.11"
-    "$c1_w" "1.12"
+    "$c1_y" "0"
+    "$c1_z" "0"
+    "$c1_w" "1.08"
     "Proxies"
     {
         "CurrentTime"
@@ -40,6 +41,7 @@ def material():
 def main():
     for folder in ['materials/dev', 'shaders/fxc', 'cfg']:
         (CONTENT / folder).mkdir(parents=True, exist_ok=True)
+    build_surface_motion(CONTENT)
     compiler = ROOT / 'tools/ShaderCompile2.exe'
     expected = 'df13601822a642d1238d55e65522842fd776911f9e76c9fea1f4cfdf6f220230'
     if hashlib.sha256(compiler.read_bytes()).hexdigest() != expected:

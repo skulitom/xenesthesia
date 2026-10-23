@@ -7,8 +7,11 @@ On the author's local machine, `tools/install-playtest.ps1` installs the preview
 in the normal game's `hl2/custom` folder, disables City 17 ASCII without
 unsubscribing, backs up the original native settings, and selects original HL2.
 `tools/launch-playtest.ps1` opens the native main menu in a bordered 1280x720 window.
-Choose **Half-Life 2 > New Game** or load your usual HL2 save. F4 toggles the effect;
-F6 opens the pause menu to release the mouse. The launcher also accepts `-Scene
+Choose **Half-Life 2 > New Game** or load your usual HL2 save. F4 toggles only the
+optional colour layer; texture motion stays active. F6 opens the pause menu to
+release the mouse. To disable the complete local preview, close HL2 and run
+`tools/disable-playtest.ps1`, then launch HL2 normally. The installer re-enables it.
+The launcher also accepts `-Scene
 coast` or `-Scene ravenholm` to enter those base-game maps directly. These preview
 helpers and their settings are not included in the Workshop package.
 
@@ -16,16 +19,23 @@ The earlier custom `-game` harness is retired: the anniversary runtime remounts
 content when switching campaigns, and that harness did not reproduce the native
 menu and Workshop state correctly.
 
-A native psychedelic shader for Half-Life 2's Windows 20th Anniversary edition.
-Surface detail and depth make textures curl, edges split and rejoin, and local
-regions breathe at different phases. Moving relief and restrained opalescent
-colour support the liquid distortion. Hands and weapons are included; menus,
-subtitles and the HUD remain readable. The echoes are spatial double images,
-not stored past frames.
+A native psychedelic material addon for Half-Life 2's Windows 20th Anniversary
+edition. Brickwork breathes, floors drift and textures slowly stretch and rotate
+on their surfaces. Motion happens in material coordinates before camera
+projection, so it stays on the surface as you look around. Hands and weapons are
+included, at a gentler strength. Geometry, the HUD and screen edges stay sharp.
+An optional subtle colour layer adds a slow opalescent tint; it never blurs or
+displaces the image. There are no screen-centred ripples or double-edge effects.
+
+The current build animates 1,917 supported original HL2 materials. World surfaces
+and props have timing derived from their material name; supported weapons also
+use an entity phase. This is not independent animation of every object. Objects
+sharing a material can move together. NPC faces, cutouts, transparent surfaces,
+existing animated materials and special shaders are deliberately excluded.
 
 ## Install
 
-Enable **Full HDR** under Options > Video > Advanced and use DirectX 9 with
+For the optional colour layer, enable **Full HDR** under Options > Video > Advanced and use DirectX 9 with
 Shader Model 2.b support. Disable City 17 ASCII and other post-processing material
 overrides before enabling this addon. Only one of these filters can be active.
 
@@ -43,26 +53,26 @@ exec xen_off
 exec xen_keys
 ```
 
-`xen_keys` assigns F4 to toggle the filter and replaces any previous F4 binding.
-It is never run automatically by the addon. `xen_off` bypasses the filter by
-disabling bloom and colour correction for the session. Disable the addon and
-restart to restore the original materials; use `xen_on` or your preferred video
+`xen_keys` assigns F4 to toggle the colour layer and replaces any previous F4 binding.
+It is never run automatically by the addon. `xen_off` bypasses only the colour
+layer by disabling bloom and colour correction for the session. Texture motion
+continues. **Disable the addon and restart for a full bypass.** Use `xen_on` or your preferred video
 settings to restore the post-processing passes. Reassign F4 in Controls or use
 `unbind F4` to remove the optional binding.
 
 ## Compatibility
 
 This is an original content-only VPK. It needs no ReShade, injected DLL or cheats.
-It replaces `materials/dev/bloomadd.vmt` and `materials/dev/engine_post.vmt`, so it
-conflicts with addons replacing either material. Normal bloom and colour grading
-are replaced while the effect runs. The effect also affects the weapon viewmodel.
+It replaces supported world/prop/weapon materials as well as
+`materials/dev/bloomadd.vmt` and `materials/dev/engine_post.vmt`. It conflicts with
+texture or material packs overriding those files. Normal bloom and colour grading
+are replaced while the optional colour layer runs.
 
-The shader has no object IDs. Smoothed light, colour and approximate depth guide
-local surface motion; they cannot isolate every individual object or keep the
-effect perfectly attached to it as the camera moves. The scene-alpha depth cue is
-compressed; sky, transparency and water can behave differently. The shader does
-not reconstruct world positions or change geometry, collision, AI or gameplay.
-Custom maps/settings that suppress the post-process may suppress the effect.
+The material animation changes texture coordinates, not geometry, collision, AI
+or gameplay. Painted-on windows, markings and other texture details move too;
+material seams can become visible. Custom materials and untested episode content
+are not guaranteed coverage. The optional colour pass is separate from texture
+motion and no longer uses an approximate depth buffer.
 
 ## Build
 
@@ -75,8 +85,11 @@ python tools/build.py
 python -m unittest discover -s tests -v
 ```
 
-The build uses Valve's verified official shader compiler and the installed
-game's VPK packer. Close the test game before rebuilding an archive it has mounted.
+The build reads original material definitions from the installed game's
+`hl2_misc_dir.vpk`, preserves their parameters, and adds native animation proxies
+only to supported materials. Generated definitions are not original MIT assets.
+It also uses Valve's verified official shader compiler and installed VPK packer.
+Close the test game before rebuilding an archive it has mounted.
 The build verifies archive bytes against the manifest, including detecting
 packer failures that incorrectly return a successful process exit code.
 
@@ -85,5 +98,5 @@ contains the build, and `testgame` is a local harness excluded from releases.
 
 ## License
 
-Original source and documentation: MIT, see LICENSE. See NOTICE.md for Valve
-assets, screenshots and development tools.
+Original source and documentation: MIT, see LICENSE. Generated material overrides
+derive from Valve game definitions and are excluded from that grant. See NOTICE.md.

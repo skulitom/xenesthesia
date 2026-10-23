@@ -1,23 +1,18 @@
-// Xenesthesia: original native HL2 psychedelic post-process.
-// c0: strength, surface-flow amplitude, echo separation, palette mix.
-// c1: current time, contour frequency, contour amount, saturation.
-// Scene alpha is Source's compressed depth cue, not linear world depth.
-// No object IDs are available: local colour/depth regions approximate surfaces.
+// Xenesthesia's optional colour layer. Original code, MIT.
+// Surface motion lives in native material UV proxies, before camera projection.
+// This pass deliberately never displaces pixels or samples neighbouring edges.
+// c0: strength, reserved, reserved, palette mix. c1: time, reserved, reserved, saturation.
 sampler2D Scene : register(s0);
-sampler2D SoftScene : register(s2);
 float4 Style : register(c0);
 float4 Motion : register(c1);
 float4 PixelSize : register(c4);
 float4 BloomPixelSize : register(c6);
 
-float luminance(float3 c) { return dot(c, float3(0.2126, 0.7152, 0.0722)); }
-
 float3 spectrum(float phase)
 {
     float3 p = abs(frac(phase + float3(0.0, 0.333333, 0.666667)) * 6.0 - 3.0);
     float3 c = saturate(p - 1.0);
-    c = c * c * (3.0 - 2.0 * c);
-    return 0.12 + 0.88 * c;
+    return 0.12 + 0.88 * c * c * (3.0 - 2.0 * c);
 }
 
 float4 main(float2 bloomUV : TEXCOORD0) : COLOR
@@ -27,88 +22,11 @@ float4 main(float2 bloomUV : TEXCOORD0) : COLOR
     float2 span = floor(size * 0.25 + 0.01) - float2(1.0, 0.5);
     float2 pixel = (bloomUV / BloomPixelSize.xy - float2(0.5, 0.0)) * (size - 1.0) / span;
     float2 uv = (pixel + 0.5) * PixelSize.xy;
-    float2 lo = PixelSize.xy * 0.5;
-    float2 hi = 1.0 - lo;
-    float4 original = tex2D(Scene, clamp(uv, lo, hi));
-    float depth = saturate(original.a);
-    float strength = clamp(Style.x, 0.0, 1.8);
-    float time = Motion.x;
-
-    // Follow scene features instead of distance from the crosshair. A broad,
-    // depth-aware neighbourhood keeps fine textures from becoming noisy seeds.
-    float2 aspect = float2(size.y / size.x, 1.0);
-    float2 radius = aspect * 0.014;
-    float4 left = tex2D(Scene, clamp(uv - float2(radius.x, 0), lo, hi));
-    float4 right = tex2D(Scene, clamp(uv + float2(radius.x, 0), lo, hi));
-    float4 up = tex2D(Scene, clamp(uv - float2(0, radius.y), lo, hi));
-    float4 down = tex2D(Scene, clamp(uv + float2(0, radius.y), lo, hi));
-    // The native bloom buffer is already blurred. Use it only to drive smooth
-    // motion, never as replacement scene detail. Full-resolution colour taps
-    // made individual asphalt grains warp in unrelated directions.
-    float2 softLo = BloomPixelSize.xy * 0.5;
-    float2 softHi = 1.0 - softLo;
-    float2 softStep = BloomPixelSize.xy * 2.0;
-    float3 localColour = tex2D(SoftScene, clamp(bloomUV, softLo, softHi)).rgb;
-    float3 softRight = tex2D(SoftScene, clamp(bloomUV + float2(softStep.x, 0), softLo, softHi)).rgb;
-    float3 softDown = tex2D(SoftScene, clamp(bloomUV + float2(0, softStep.y), softLo, softHi)).rgb;
-    float localLight = luminance(localColour);
-    float2 shadeGradient = float2(luminance(softRight) - localLight,
-                                 luminance(softDown) - localLight);
-    float2 depthGradient = float2(right.a - left.a, down.a - up.a);
-    float2 gradient = shadeGradient * 3.0 + depthGradient * 4.0;
-    float2 tangent = float2(-gradient.y, gradient.x) / sqrt(dot(gradient, gradient) + 0.025);
-
-    // Different surface colours, brightnesses and depths have different phases.
-    // There is deliberately no screen-centred radial field or fixed screen grid.
-    float seed = dot(localColour, float3(2.1, 3.7, 1.3)) + depth * 5.3;
-    float phase = time * 0.62;
-    float2 flow = float2(sin(seed * 2.3 + phase), cos(seed * 3.1 - phase * 0.81));
-    float breath = sin(seed * 4.2 - phase * 1.17);
-    float structure = saturate(length(shadeGradient) * 12.0 + length(depthGradient) * 8.0);
-    float surfaceWeight = 0.22 + structure * 0.78;
-    float2 warp = (flow * 0.55 + tangent * breath * 1.15) * aspect
-                * Style.y * strength * surfaceWeight;
-    float2 warpedUV = clamp(uv + warp, lo, hi);
-    float4 centre = tex2D(Scene, warpedUV);
-    // Do not pull a distant background across a nearby silhouette.
-    float continuity = 1.0 - smoothstep(0.025, 0.10, abs(centre.a - depth));
-    warpedUV = lerp(uv, warpedUV, continuity);
-    centre = tex2D(Scene, warpedUV);
-
-    // Local double images fold back into each surface, rather than radiating
-    // from the player. Compare depth for each echo to protect silhouettes.
-    float2 prism = (tangent * (0.7 + 0.3 * breath) + flow * 0.45) * aspect
-                 * Style.z * strength * surfaceWeight;
-    float4 echoA = tex2D(Scene, clamp(warpedUV + prism, lo, hi));
-    float4 echoB = tex2D(Scene, clamp(warpedUV - prism, lo, hi));
-    float aGuard = 1.0 - smoothstep(0.025, 0.10, abs(echoA.a - centre.a));
-    float bGuard = 1.0 - smoothstep(0.025, 0.10, abs(echoB.a - centre.a));
-    float3 doubleImage = (lerp(centre.rgb, echoA.rgb, aGuard)
-                       + lerp(centre.rgb, echoB.rgb, bGuard)) * 0.5;
-    float3 colour = lerp(centre.rgb, doubleImage, (0.18 + 0.17 * breath) * structure);
-    colour.r = lerp(colour.r, echoA.r, aGuard * structure * 0.25);
-    colour.b = lerp(colour.b, echoB.b, bGuard * structure * 0.25);
-    float light = luminance(colour);
-    colour = lerp(light.xxx, colour, Motion.w);
-
-    // Moving relief and interference bands make textures appear to breathe.
-    // Colour supports that motion; it no longer replaces most of the scene.
-    float field = localLight * 1.6 + depth * 1.3 + dot(localColour, float3(0.5, -0.2, 0.7));
-    float3 tint = spectrum(field * 0.55 - time * 0.025);
-    float3 opal = lerp(light.xxx, tint * (light * 1.35 + 0.025), 0.8);
-    float paletteWeight = Style.w * strength * (0.25 + 0.75 * surfaceWeight);
-    colour = lerp(colour, opal, saturate(paletteWeight));
-
-    float contour = abs(frac(field * Motion.y - time * 0.11) - 0.5) * 2.0;
-    contour = 1.0 - smoothstep(0.05, 0.23, contour);
-    float detail = saturate(abs(luminance(echoA.rgb) - luminance(echoB.rgb)) * 4.0);
-    float darkGuard = smoothstep(0.015, 0.16, light);
-    float relief = dot(shadeGradient, flow) * 1.6 * strength;
-    colour *= 1.0 + clamp(relief, -0.25, 0.25);
-    colour += tint * (contour * Motion.z * surfaceWeight + detail * 0.07) * strength * darkGuard;
-    // Gentle shoulder retains colour in bright outdoor skies.
-    colour = max(colour, 0.0);
-    float peak = max(colour.r, max(colour.g, colour.b));
-    colour = colour / (1.0 + max(peak - 0.85, 0.0) * 0.55);
-    return float4(saturate(lerp(original.rgb, colour, saturate(strength))), 1.0);
+    float3 original = tex2D(Scene, clamp(uv, PixelSize.xy * 0.5, 1.0 - PixelSize.xy * 0.5)).rgb;
+    float light = dot(original, float3(0.2126, 0.7152, 0.0722));
+    float3 colour = lerp(light.xxx, original, Motion.w);
+    float3 tint = spectrum(light * 0.4 - Motion.x * 0.025);
+    float3 opal = lerp(light.xxx, tint * light * 1.4, 0.8);
+    colour = lerp(colour, opal, saturate(Style.w));
+    return float4(saturate(lerp(original, colour, saturate(Style.x))), 1.0);
 }

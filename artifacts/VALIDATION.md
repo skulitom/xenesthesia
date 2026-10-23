@@ -67,3 +67,37 @@ and restored the shader; F6 opened the pause menu and released gameplay mouse in
 - The previous 1080p measurements above describe the initial build only. This
   revision has been checked at 720p. Main-desktop subjective playtest and eventual
   clean Workshop-download validation remain pending. Nothing has been published.
+
+## Material-coordinate revision (current)
+
+User feedback rejected the surface-flow approximation: it still appeared attached
+to the player and primarily produced blurry outlines. Those visual-quality claims
+above are superseded. The current build animates supported materials directly.
+
+- 1,917 native material overrides generated from installed original HL2. Original
+  shader parameters and texture references retained; no texture images included.
+- Native Sine/TextureTransform proxies animate scale, drift and rotation. Static
+  props use a material phase. EntityRandom is restricted to weapon materials.
+- First broad EntityRandom prototype exited during map startup. Inspection of
+  Valve's implementation found an unchecked null entity for static renderables.
+  Removing that proxy from static prop materials resolved both tested map loads.
+- Corrected WorldVertexTransition to share the base texture transform, matching
+  its shader definition. No generated-proxy initialization errors on the corrected
+  Ravenholm/coast loads. Existing base-game material warnings remain.
+- Stationary Ravenholm capture with post-process OFF proves texture interiors
+  move: brick/window/concrete patterns change while the drainpipe, geometric wall
+  outline and crosshair stay fixed. Eighteen native JPEG captures form the local
+  4.5-second `material-motion/wall-motion.gif`; source frames are retained.
+- Coast capture with post-process OFF proves road markings/cracks/rock details
+  move with fixed scenery. Six native JPEG frames saved in `material-motion`.
+  Pistol, hands and SMG included; forward movement and camera turns checked.
+- All screen-space displacement, depth effects, blur and double edges removed.
+  Current optional colour shader takes one unshifted full-frame sample. F4 checked
+  off/on: colour changes while material motion continues. This is not full bypass.
+- Nine package/generator tests passed. Full local disable/re-enable helpers tested
+  with HL2 closed. Archive SHA-256:
+  `e26da391e43b782425c3f62f30127069c2e371ceefefdceae446ccb8b2e178d9`.
+- Final 720p native coast timedemo: 2,610 frames, 385.35 fps (2.60 ms/frame).
+  One local run, not a full-game or minimum-performance guarantee. Restored 120 fps.
+- Native tested scenes ran without further crashes. Broader campaign, 1080p and
+  final Workshop-download checks remain pending. No Workshop upload or item exists.

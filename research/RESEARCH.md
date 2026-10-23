@@ -2,6 +2,37 @@
 
 23 October 2026.
 
+## Current approach: native material animation
+
+User testing rejected the screen-space approximation below: it still felt tied
+to the player and emphasized blurry outlines instead of moving texture interiors.
+The current build uses native Sine and TextureTransform material proxies to
+animate scale, translation and rotation before the camera projects a surface.
+World/prop phases are deterministic per material; weapons also use EntityRandom.
+Static props must not use EntityRandom: the public implementation dereferences
+BindArgToEntity without testing the returned pointer. That prototype crashed;
+removing the entity-only proxy from static props resolved the tested crashes.
+
+WorldVertexTransition shares BASETEXTURETRANSFORM for its two base layers; there
+is no separate $basetexturetransform2 in this runtime. Bump transforms are kept in
+step. Existing proxies/transforms, transparent and cutout materials are skipped.
+The generator currently produces 1,917 material overrides from installed HL2,
+retaining Valve parameters and texture references. No texture images are copied.
+
+The current post-process is one unshifted full-frame sample with optional subtle
+colour. All depth displacement, local blur, contour glow and double edges were
+removed. F4 controls that colour layer only. Material animation needs addon
+disable/restart for a complete bypass; the installed client exposes no generic
+ConVar-reading material proxy to support a native global on/off switch here.
+
+Primary implementation references:
+- https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/client/matrixproxy.cpp
+- https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/client/mathproxy.cpp
+- https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/client/proxyplayer.cpp
+- https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/materialsystem/stdshaders/worldvertextransition.cpp
+
+## Earlier screen-space prototypes (superseded)
+
 The concept combines local liquid distortion, moving relief, luminous contour
 bands, and depth-guarded double edges in a native HL2 post-process. This is an
 independent shader; there is no third-party shader code in the package.

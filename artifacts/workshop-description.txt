@@ -1,31 +1,32 @@
 [h1]Xenesthesia[/h1]
 Half-Life 2 seen through a slowly shifting alien dream.
 
-Concrete curls like liquid. Texture details breathe, and edges split apart and fold back together. Different surface regions move at different phases, guided by their light and depth. Hands and weapons join the distortion, with restrained opalescent colour and travelling contours.
+Brickwork breathes. Floor markings drift. Concrete, rock and metal slowly stretch and turn on the surfaces they belong to. The movement stays in the world as you look around, with gentler animation on hands and weapons. An optional subtle colour layer adds a slowly shifting opalescent tint.
 
 [h2]What it does[/h2]
 [list]
-[*]Locally curling textures, moving relief and luminous contour bands.
-[*]Depth-aware liquid distortion and double edges, including hands and weapons.
+[*]Animated native textures across 1,917 supported original Half-Life 2 materials.
+[*]Different timings for different materials, including supported props, hands and weapons.
+[*]Sharp geometry and silhouettes: no screen-centred ripples or blurry double edges.
 [*]Native HUD, subtitles and menus remain readable.
-[*]Optional F4 toggle for instant comparison.
+[*]Optional F4 toggle for the colour layer. Texture animation remains active until the addon is disabled and the game restarted.
 [*]Runs inside Half-Life 2's native shader system. No external injector, DLL or cheats required.
 [/list]
 
 [h2]Getting started[/h2]
 Subscribe, enable Xenesthesia in the in-game Workshop menu, and restart Half-Life 2. Start or load a game from the main menu.
 
-Use [b]Full HDR[/b] in Options > Video > Advanced, with DirectX 9 / Shader Model 2.b support.
+For the optional colour layer, use [b]Full HDR[/b] in Options > Video > Advanced, with DirectX 9 / Shader Model 2.b support.
 
-[b]Disable City 17 ASCII and other post-processing overrides first.[/b] They replace the same materials and cannot run together.
+[b]Disable City 17 ASCII, other post-processing overrides, and conflicting material/texture packs first.[/b] They replace some of the same files.
 
-For the optional F4 toggle, enter [b]exec xen_keys[/b] once in the developer console. This replaces your current F4 binding. No keys are rebound automatically.
+For the optional F4 colour toggle, enter [b]exec xen_keys[/b] once in the developer console. This replaces your current F4 binding. No keys are rebound automatically.
 
-Console commands: [b]exec xen_on[/b] enables the effect; [b]exec xen_off[/b] bypasses it. Bypass temporarily disables bloom and colour correction. To restore the original rendering, disable the addon and restart; restore your preferred video settings afterwards.
+Console commands: [b]exec xen_on[/b] enables the colour layer; [b]exec xen_off[/b] bypasses only that layer. Bypass temporarily disables bloom and colour correction. [b]For a complete return to normal textures, disable the addon and restart.[/b] Restore your preferred video settings afterwards.
 
 [h2]Details[/h2]
-An original visual addon for the Windows 20th Anniversary version of Half-Life 2. It changes the scene and weapon rendering, not levels, combat, physics or AI. Local surface regions approximate independent motion; the shader cannot identify or deform individual objects. The double images are spatial offsets, not accumulated past frames. Sky, water and transparent surfaces can react differently to the approximate depth cue. Custom maps that suppress post-processing may suppress the effect.
+For the Windows 20th Anniversary version of Half-Life 2. Texture coordinates animate before camera projection; geometry, combat, physics and AI stay unchanged. Objects sharing a material may animate together. Some texture seams and moving painted-on features are part of this effect. NPC faces, cutouts, transparent surfaces, existing animated materials and special shaders are excluded. Custom materials and episode content are not guaranteed coverage.
 
-Screenshots are captured in-game. The colour pattern changes continuously, so your view will not match a still image exactly.
+Screenshots are captured in-game. Motion is best judged in the accompanying gameplay clip; a still image cannot show the breathing and drifting animation.
 
-Original shader source is MIT licensed. Half-Life 2 and its assets belong to Valve.
+Our original generator, shader and tools are MIT licensed. Generated material definitions derive from Half-Life 2 and are excluded from that grant. Half-Life 2 and its assets belong to Valve; no texture images or game binaries are included.
