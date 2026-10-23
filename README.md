@@ -17,9 +17,11 @@ content when switching campaigns, and that harness did not reproduce the native
 menu and Workshop state correctly.
 
 A native psychedelic shader for Half-Life 2's Windows 20th Anniversary edition.
-Depth and light turn familiar surfaces into slowly flowing opalescent colour,
-travelling contour bands and prismatic edge echoes. Menus, subtitles and the HUD
-remain readable. The echoes are spatial colour offsets, not stored past frames.
+Surface detail and depth make textures curl, edges split and rejoin, and local
+regions breathe at different phases. Moving relief and restrained opalescent
+colour support the liquid distortion. Hands and weapons are included; menus,
+subtitles and the HUD remain readable. The echoes are spatial double images,
+not stored past frames.
 
 ## Install
 
@@ -55,8 +57,10 @@ It replaces `materials/dev/bloomadd.vmt` and `materials/dev/engine_post.vmt`, so
 conflicts with addons replacing either material. Normal bloom and colour grading
 are replaced while the effect runs. The effect also affects the weapon viewmodel.
 
-The scene-alpha depth cue is compressed and approximate. Sky, transparency and
-water can behave differently. The shader uses this as an artistic cue; it does
+The shader has no object IDs. Smoothed light, colour and approximate depth guide
+local surface motion; they cannot isolate every individual object or keep the
+effect perfectly attached to it as the camera moves. The scene-alpha depth cue is
+compressed; sky, transparency and water can behave differently. The shader does
 not reconstruct world positions or change geometry, collision, AI or gameplay.
 Custom maps/settings that suppress the post-process may suppress the effect.
 

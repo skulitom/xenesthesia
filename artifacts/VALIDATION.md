@@ -1,5 +1,7 @@
 # Playtest validation, 23 October 2026
 
+## Initial colour-focused build (historical)
+
 - Native Half-Life 2 Windows runtime, Anode session; no injected DLL, sv_cheats 0.
 - Shader compilation and archive byte verification passed.
 - Three package tests passed: exact archived content, compiled shader/native
@@ -38,3 +40,30 @@ native campaign menus and standard window borders. Publication remains on hold.
 Native UI regression check passed: **Half-Life 2 > New Game > Highway 17** loaded
 the original HL2 chapter with Xenesthesia visible, no ASCII rendering. F4 bypassed
 and restored the shader; F6 opened the pause menu and released gameplay mouse input.
+
+## Local surface-flow revision
+
+- Removed the radial/crosshair field. Smoothed local colour and approximate depth
+  now drive curling textures, spatial double edges and moving relief. Reduced
+  palette mix from 0.58 to 0.24. No object IDs or geometry changes are claimed.
+- Rejected an initial version whose full-resolution motion seeds made fine road
+  textures too noisy. The retained version uses the existing blurred bloom buffer
+  for the control field, preserving full-resolution detail in the final scene.
+- Compiled successfully; all three package tests passed. The installed native VPK
+  matches SHA-256 `1a41d9ba6f1b4f92dafc54d7ef66d8b93adda5995f4e619d43513878a0b66678`.
+- Native 1280x720 Anode checks: coast road, railings, cliffs, pistol and hands;
+  camera turn and forward movement; Ravenholm darkness and flashlight with SMG.
+  Local motion remained visible while the HUD stayed sharp. Dark areas retain a
+  gentler effect; object boundaries are approximate and can visibly bend.
+- F4 bypass/restoration and F6 pause menu checked in Ravenholm. No ASCII output
+  appeared during either native map load.
+- A new native coast demo completed 2,610 benchmark frames: 410.05 fps with the
+  effect requested on, 398.91 fps with bypass requested. These single 720p runs
+  demonstrate successful real-time playback, not a reliable shader-cost estimate;
+  run-to-run variation is larger than the measured difference. Bypass also disables
+  normal bloom/colour correction. Restored the 120 fps cap afterwards.
+- The old custom-harness demo was rejected by the native game-directory check;
+  its accompanying frame report is invalid and excluded from these results.
+- The previous 1080p measurements above describe the initial build only. This
+  revision has been checked at 720p. Main-desktop subjective playtest and eventual
+  clean Workshop-download validation remain pending. Nothing has been published.

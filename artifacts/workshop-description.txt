@@ -1,12 +1,12 @@
 [h1]Xenesthesia[/h1]
 Half-Life 2 seen through a slowly shifting alien dream.
 
-Concrete turns opalescent. Coloured contours travel across surfaces. Distant scenery bends gently, while prismatic colour echoes follow edges. The effect responds to the scene's light and depth, rather than simply putting a rainbow over the screen.
+Concrete curls like liquid. Texture details breathe, and edges split apart and fold back together. Different surface regions move at different phases, guided by their light and depth. Hands and weapons join the distortion, with restrained opalescent colour and travelling contours.
 
 [h2]What it does[/h2]
 [list]
-[*]Animated liquid colour and luminous contour bands.
-[*]Subtle depth-aware distortion and coloured edge separation.
+[*]Locally curling textures, moving relief and luminous contour bands.
+[*]Depth-aware liquid distortion and double edges, including hands and weapons.
 [*]Native HUD, subtitles and menus remain readable.
 [*]Optional F4 toggle for instant comparison.
 [*]Runs inside Half-Life 2's native shader system. No external injector, DLL or cheats required.
@@ -24,7 +24,7 @@ For the optional F4 toggle, enter [b]exec xen_keys[/b] once in the developer con
 Console commands: [b]exec xen_on[/b] enables the effect; [b]exec xen_off[/b] bypasses it. Bypass temporarily disables bloom and colour correction. To restore the original rendering, disable the addon and restart; restore your preferred video settings afterwards.
 
 [h2]Details[/h2]
-An original visual addon for the Windows 20th Anniversary version of Half-Life 2. It changes the scene and weapon rendering, not levels, combat, physics or AI. The colour echoes are spatial offsets, not accumulated past frames. Sky, water and transparent surfaces can react differently to the approximate depth cue. Custom maps that suppress post-processing may suppress the effect.
+An original visual addon for the Windows 20th Anniversary version of Half-Life 2. It changes the scene and weapon rendering, not levels, combat, physics or AI. Local surface regions approximate independent motion; the shader cannot identify or deform individual objects. The double images are spatial offsets, not accumulated past frames. Sky, water and transparent surfaces can react differently to the approximate depth cue. Custom maps that suppress post-processing may suppress the effect.
 
 Screenshots are captured in-game. The colour pattern changes continuously, so your view will not match a still image exactly.
 

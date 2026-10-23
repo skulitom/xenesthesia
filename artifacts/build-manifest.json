@@ -4,7 +4,7 @@
   "cfg/xen_off.cfg": "84562166e201f0efdd5920738f9dccbf363ed30287b824a4f1e230cf2311e5f8",
   "cfg/xen_on.cfg": "e578de3616e9f283b3f8ff1af4c354cbb110dc4e7c0a5b3c63d6729492452d48",
   "cfg/xen_toggle.cfg": "7cc968408a6a143fd7a097209b50ad56f09fe0aadc2a67bde143b32e98e73705",
-  "materials/dev/bloomadd.vmt": "7252afdbc57f8ec432b07e00bc97dcdff2c83bbf2abb251458d4dce5af4f4eb7",
-  "materials/dev/engine_post.vmt": "7252afdbc57f8ec432b07e00bc97dcdff2c83bbf2abb251458d4dce5af4f4eb7",
-  "shaders/fxc/xenesthesia_ps20b.vcs": "a9ba1fd045488a8a9ef3a73366a7788860ec9a053a3748e550c58f0598b9c0ef"
+  "materials/dev/bloomadd.vmt": "ffcccdc8445f7ee98ed077a500e09d1d318df3a320b16542062b2303da17869c",
+  "materials/dev/engine_post.vmt": "ffcccdc8445f7ee98ed077a500e09d1d318df3a320b16542062b2303da17869c",
+  "shaders/fxc/xenesthesia_ps20b.vcs": "441fd193028a279075788496987e40bc5390d0463e9e1ad6aed7bea3b2b3f880"
 }
