@@ -1,0 +1,14 @@
+/tools/*.exe
+/testgame/
+/src/include/
+/src/shaders/
+/content/sound/
+/artifacts/private/
+/artifacts/*.log
+/artifacts/workshop*.json
+__pycache__/
+.env
+.env.*
+*.key
+*.pem
+*.sound.cache

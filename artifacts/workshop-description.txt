@@ -1,0 +1,31 @@
+[h1]Xenesthesia[/h1]
+Half-Life 2 seen through a slowly shifting alien dream.
+
+Concrete turns opalescent. Coloured contours travel across surfaces. Distant scenery bends gently, while prismatic colour echoes follow edges. The effect responds to the scene's light and depth, rather than simply putting a rainbow over the screen.
+
+[h2]What it does[/h2]
+[list]
+[*]Animated liquid colour and luminous contour bands.
+[*]Subtle depth-aware distortion and coloured edge separation.
+[*]Native HUD, subtitles and menus remain readable.
+[*]Optional F4 toggle for instant comparison.
+[*]Runs inside Half-Life 2's native shader system. No external injector, DLL or cheats required.
+[/list]
+
+[h2]Getting started[/h2]
+Subscribe, enable Xenesthesia in the in-game Workshop menu, and restart Half-Life 2. Start or load a game from the main menu.
+
+Use [b]Full HDR[/b] in Options > Video > Advanced, with DirectX 9 / Shader Model 2.b support.
+
+[b]Disable City 17 ASCII and other post-processing overrides first.[/b] They replace the same materials and cannot run together.
+
+For the optional F4 toggle, enter [b]exec xen_keys[/b] once in the developer console. This replaces your current F4 binding. No keys are rebound automatically.
+
+Console commands: [b]exec xen_on[/b] enables the effect; [b]exec xen_off[/b] bypasses it. Bypass temporarily disables bloom and colour correction. To restore the original rendering, disable the addon and restart; restore your preferred video settings afterwards.
+
+[h2]Details[/h2]
+An original visual addon for the Windows 20th Anniversary version of Half-Life 2. It changes the scene and weapon rendering, not levels, combat, physics or AI. The colour echoes are spatial offsets, not accumulated past frames. Sky, water and transparent surfaces can react differently to the approximate depth cue. Custom maps that suppress post-processing may suppress the effect.
+
+Screenshots are captured in-game. The colour pattern changes continuously, so your view will not match a still image exactly.
+
+Original shader source is MIT licensed. Half-Life 2 and its assets belong to Valve.

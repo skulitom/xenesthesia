@@ -1,0 +1,79 @@
+// Xenesthesia: original native HL2 psychedelic post-process.
+// c0: strength, ripple amplitude, prism separation, palette mix.
+// c1: current time, contour frequency, contour amount, saturation.
+// Scene alpha is Source's compressed depth cue, not linear world depth.
+sampler2D Scene : register(s0);
+float4 Style : register(c0);
+float4 Motion : register(c1);
+float4 PixelSize : register(c4);
+float4 BloomPixelSize : register(c6);
+
+float luminance(float3 c) { return dot(c, float3(0.2126, 0.7152, 0.0722)); }
+
+float3 spectrum(float phase)
+{
+    float3 p = abs(frac(phase + float3(0.0, 0.333333, 0.666667)) * 6.0 - 3.0);
+    float3 c = saturate(p - 1.0);
+    c = c * c * (3.0 - 2.0 * c);
+    return 0.12 + 0.88 * c;
+}
+
+float4 main(float2 bloomUV : TEXCOORD0) : COLOR
+{
+    // Undo Source's quarter-resolution post-process rectangle mapping.
+    float2 size = 1.0 / PixelSize.xy;
+    float2 span = floor(size * 0.25 + 0.01) - float2(1.0, 0.5);
+    float2 pixel = (bloomUV / BloomPixelSize.xy - float2(0.5, 0.0)) * (size - 1.0) / span;
+    float2 uv = (pixel + 0.5) * PixelSize.xy;
+    float2 lo = PixelSize.xy * 0.5;
+    float2 hi = 1.0 - lo;
+    float4 original = tex2D(Scene, clamp(uv, lo, hi));
+    float depth = saturate(original.a);
+    float strength = clamp(Style.x, 0.0, 1.8);
+    float time = Motion.x;
+
+    // Smooth and bounded; no whole-frame flashes or camera rotation.
+    float2 p = (uv - 0.5) * float2(size.x / size.y, 1.0);
+    float peripheral = smoothstep(0.035, 0.38, dot(p, p));
+    float distanceWeight = 0.2 + 0.8 * smoothstep(0.04, 0.65, depth);
+    float phase = time * 0.32;
+    float2 ripple = float2(sin(p.y * 11.0 + depth * 6.0 + phase),
+                           cos(p.x * 9.0 - depth * 5.0 + phase * 0.77));
+    float2 warp = ripple * Style.y * strength * distanceWeight * (0.3 + peripheral * 0.7);
+    float2 warpedUV = clamp(uv + warp, lo, hi);
+    float4 centre = tex2D(Scene, warpedUV);
+    // Do not pull a distant background across a nearby silhouette.
+    float continuity = 1.0 - smoothstep(0.04, 0.16, abs(centre.a - depth));
+    warpedUV = lerp(uv, warpedUV, continuity);
+    centre = tex2D(Scene, warpedUV);
+
+    float2 prism = (p * 0.45 + ripple * 0.23) * Style.z * strength * distanceWeight;
+    float4 echoA = tex2D(Scene, clamp(warpedUV + prism, lo, hi));
+    float4 echoB = tex2D(Scene, clamp(warpedUV - prism, lo, hi));
+    float aGuard = 1.0 - smoothstep(0.04, 0.16, abs(echoA.a - centre.a));
+    float bGuard = 1.0 - smoothstep(0.04, 0.16, abs(echoB.a - centre.a));
+    float3 colour = float3(lerp(centre.r, echoA.r, aGuard), centre.g,
+                           lerp(centre.b, echoB.b, bGuard));
+    float light = luminance(colour);
+    colour = lerp(light.xxx, colour, Motion.w);
+
+    // The palette follows depth AND the scene's own light: grey concrete
+    // becomes opalescent while its texture, shadows and silhouettes survive.
+    float field = depth * 1.7 + light * 0.7 + 0.12 * sin(p.x * 4.0 + p.y * 3.0 + phase * 0.4);
+    float3 tint = spectrum(field - time * 0.018);
+    float3 opal = lerp(light.xxx, tint * (light * 1.35 + 0.025), 0.8);
+    float paletteWeight = Style.w * strength * (0.45 + 0.55 * distanceWeight);
+    colour = lerp(colour, opal, saturate(paletteWeight));
+
+    // Slowly travelling luminous isolines, attached to the depth/light field.
+    float contour = abs(frac(field * Motion.y - time * 0.055) - 0.5) * 2.0;
+    contour = 1.0 - smoothstep(0.035, 0.16, contour);
+    float detail = saturate(abs(luminance(echoA.rgb) - luminance(echoB.rgb)) * 4.0);
+    float darkGuard = smoothstep(0.015, 0.16, light);
+    colour += tint * (contour * Motion.z + detail * 0.1) * strength * darkGuard;
+    // Gentle shoulder retains colour in bright outdoor skies.
+    colour = max(colour, 0.0);
+    float peak = max(colour.r, max(colour.g, colour.b));
+    colour = colour / (1.0 + max(peak - 0.85, 0.0) * 0.55);
+    return float4(saturate(lerp(original.rgb, colour, saturate(strength))), 1.0);
+}

@@ -1,0 +1,4 @@
+# Runtime bytes are checked against the build manifest and shipped VPK.
+/content/** -text
+*.vpk -text
+*.vcs -text
