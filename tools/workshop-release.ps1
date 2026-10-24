@@ -31,6 +31,9 @@ public static class XenWorkshop {
     public static extern bool SteamAPI_ISteamUGC_SetItemDescription(IntPtr self, ulong update, string description);
     [DllImport(Dll, CallingConvention=CallingConvention.Cdecl, CharSet=CharSet.Ansi)]
     [return: MarshalAs(UnmanagedType.I1)]
+    public static extern bool SteamAPI_ISteamUGC_SetItemTitle(IntPtr self, ulong update, string title);
+    [DllImport(Dll, CallingConvention=CallingConvention.Cdecl, CharSet=CharSet.Ansi)]
+    [return: MarshalAs(UnmanagedType.I1)]
     public static extern bool SteamAPI_ISteamUGC_AddItemPreviewFile(IntPtr self, ulong update, string file, int type);
     [DllImport(Dll, CallingConvention=CallingConvention.Cdecl, CharSet=CharSet.Ansi)]
     public static extern ulong SteamAPI_ISteamUGC_SubmitItemUpdate(IntPtr self, ulong update, string note);
@@ -82,6 +85,7 @@ try {
         $update = [XenWorkshop]::SteamAPI_ISteamUGC_StartItemUpdate($ugc, 220, $item)
         if ($update -eq [UInt64]::MaxValue) { throw 'Invalid update handle.' }
         if ($Action -eq 'publish' -and -not [XenWorkshop]::SteamAPI_ISteamUGC_SetItemVisibility($ugc, $update, 0)) { throw 'Could not set Public visibility.' }
+        if (-not [XenWorkshop]::SteamAPI_ISteamUGC_SetItemTitle($ugc, $update, 'Xenesthesia - Breathing Textures & Prismatic Colour [Setup Required]')) { throw 'Could not set setup notice in title.' }
         if (-not [XenWorkshop]::SteamAPI_ISteamUGC_SetItemDescription($ugc, $update, $description)) { throw 'Could not set description.' }
         foreach ($name in $(if ($Action -eq 'gallery') { @('carpet.jpg','canals.jpg','storefront.jpg') } else { @() })) {
             $preview = Join-Path $project ('artifacts\release\gameplay\' + $name)

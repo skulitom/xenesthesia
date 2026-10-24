@@ -1,3 +1,5 @@
+[b]Required setup: subscribe, then add the Steam launch option below before playing. Subscribe alone is not sufficient for this shader addon.[/b]
+
 [h1]City 17 is starting to breathe.[/h1]
 Xenesthesia is a psychedelic visual addon for Half-Life 2. Familiar surfaces gently move, prismatic colours unfold across the world, and characters and supplies develop subtle pulses. The effects live on the materials, so they stay with the scenery as you look around.
 
@@ -12,12 +14,19 @@ Xenesthesia is a psychedelic visual addon for Half-Life 2. Familiar surfaces gen
 [/list]
 
 [h2]Install[/h2]
-Subscribe, enable Xenesthesia in Half-Life 2's Workshop menu, then restart the game. Start or load the original Half-Life 2 campaign from the main menu. Disable conflicting material/shader addons, including City 17 ASCII, and remove any older manual Xenesthesia copy first.
+1. Subscribe and wait for Steam to finish downloading the addon. Close Half-Life 2.
+2. In Steam Library, right-click Half-Life 2 > Properties > General > Launch Options. Add this line, keeping any existing options:
+[code]-insert_search_path "../../workshop/content/220/3826155980/workshop_dir.vpk"[/code]
+3. Launch Half-Life 2, enable Xenesthesia in its Workshop menu, and start/load the original campaign from the main menu.
+
+This startup option loads the subscribed shaders before the game's shader cache is built. Without it, late Workshop mounting can crash the game with a shader decompression error. It uses the normal Steam library layout; custom game paths may need the absolute path to this item's workshop_dir.vpk instead. No separate download or installer is needed.
+
+Disable conflicting material/shader addons, including City 17 ASCII, and remove any older manual Xenesthesia copy first.
 
 Tested on the Windows 20th Anniversary version of the original Half-Life 2 using DirectX 9. Episodes, Linux and Steam Deck are not validated.
 
 [h2]Switching it off[/h2]
-Disable the addon in the Workshop menu and restart. No keys are rebound automatically. The developer preview's F5 live toggle uses a separate local helper; it is not included or started by this Workshop addon.
+Close the game, remove the Xenesthesia -insert_search_path option from Steam's Launch Options, disable the addon in the Workshop menu, and restart. Remove that option before unsubscribing too. Disabling the Workshop checkbox alone will not switch off a package explicitly loaded by the launch option. No keys are rebound automatically. The developer preview's F5 live toggle uses a separate local helper; it is not included or started by this Workshop addon.
 
 [h2]Coverage and limitations[/h2]
 The release covers 2,632 material definitions, with an asset audit across 68 original-campaign maps. This is broad coverage, not a promise that every surface or every scene is affected. Most transparent/additive layers, special shaders and some animated screens stay unchanged. Shared materials can animate together, and some texture/lighting seams remain visible.

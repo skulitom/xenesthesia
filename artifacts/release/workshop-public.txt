@@ -1,0 +1,267 @@
+Browser tab: 611063649, Title: "Steam Workshop::Xenesthesia - Breathing Textures & Prismatic Colour [Setup Required]", URL: "https://steamcommunity.com/sharedfiles/filedetails/?id=3826155980".
+1 AXWebArea Steam Workshop::Xenesthesia - Breathing Textures & Prismatic Colour [Setup Required], URL: steamcommunity.com/sharedfiles/filedetails/
+	2 container
+		3 container
+			4 link Description: Link to the Steam Homepage, Value: store.steampowered.com/
+			5 container Global Menu
+				6 link Description: STORE, Value: store.steampowered.com/
+				7 link Description: COMMUNITY, Value: steamcommunity.com/
+				8 link Description: ABOUT, Value: store.steampowered.com/about/
+				9 link Description: SUPPORT, Value: help.steampowered.com/en/
+			10 container Description: Account Menu, ID: global_action_menu
+				11 link Description: Install Steam, Value: store.steampowered.com/about/
+				12 link Description: sign in, Value: steamcommunity.com/login/home/
+				13 text   |
+				14 text language
+		15 container responsive_page_template_content
+			16 container
+				17 link Description: Store Page, Value: store.steampowered.com/app/220
+				18 text Half-Life 2
+				19 link Description: All, Value: steamcommunity.com/app/220
+				20 link Description: Discussions, Value: steamcommunity.com/app/220/discussions/
+				21 link Description: Screenshots, Value: steamcommunity.com/app/220/screenshots/
+				22 link Description: Artwork, Value: steamcommunity.com/app/220/images/
+				23 link Description: Broadcasts, Value: steamcommunity.com/app/220/broadcasts/
+				24 link Description: Videos, Value: steamcommunity.com/app/220/videos/
+				25 link Description: Workshop, Value: steamcommunity.com/app/220/workshop/
+				26 link Description: News, Value: steamcommunity.com/app/220/allnews/
+				27 link Description: Guides, Value: steamcommunity.com/app/220/guides/
+				28 link Description: Reviews, Value: steamcommunity.com/app/220/reviews/
+			29 container
+				30 link Description: Half-Life 2, Value: steamcommunity.com/app/220
+				31 text  >
+				32 link Description: Workshop, Value: steamcommunity.com/app/220/workshop/
+				33 text >
+				34 link Description: Skulitom's Workshop, Value: steamcommunity.com/id/skulitom/myworkshopfiles/
+			35 container mainContents
+				36 container detailsHeaderRight
+					37 text Not enough ratings
+				38 text Xenesthesia - Breathing Textures & Prismatic Colour [Setup Required]
+				39 container
+					40 link Description: Description, Value: steamcommunity.com/sharedfiles/filedetails/
+					41 link Description: Discussions0, Value: steamcommunity.com/sharedfiles/filedetails/discussions/3826155980
+					42 link Description: Comments0, Value: steamcommunity.com/sharedfiles/filedetails/comments/3826155980
+					43 link Description: Change Notes, Value: steamcommunity.com/sharedfiles/filedetails/changelog/3826155980
+				44 container
+					45 container ItemControls
+						46 button Award
+							47 image
+							48 text Award
+						49 button Favorite, ID: FavoriteItemBtn
+							50 text Favorite
+						51 button Share, ID: ShareItemBtn
+						52 button Add to Collection, ID: AddToCollectionBtn
+					53 text type:
+					54 link Description: assets, Value: steamcommunity.com/workshop/browse/
+					55 text contains:
+					56 link Description: materials, Value: steamcommunity.com/workshop/browse/
+					57 text weapons:
+					58 link Description: crowbar, Value: steamcommunity.com/workshop/browse/
+					59 text ,
+					60 link Description: pistol, Value: steamcommunity.com/workshop/browse/
+					61 text ,
+					62 link Description: smg1, Value: steamcommunity.com/workshop/browse/
+					63 text ,
+					64 link Description: ar2, Value: steamcommunity.com/workshop/browse/
+					65 text ,
+					66 link Description: 357, Value: steamcommunity.com/workshop/browse/
+					67 text ,
+					68 link Description: alyxgun, Value: steamcommunity.com/workshop/browse/
+					69 text ,
+					70 link Description: bugbait, Value: steamcommunity.com/workshop/browse/
+					71 text ,
+					72 link Description: citizenpackage, Value: steamcommunity.com/workshop/browse/
+					73 text ,
+					74 link Description: crossbow, Value: steamcommunity.com/workshop/browse/
+					75 text ,
+					76 link Description: frag, Value: steamcommunity.com/workshop/browse/
+					77 text ,
+					78 link Description: physcannon, Value: steamcommunity.com/workshop/browse/
+					79 text ,
+					80 link Description: rpg, Value: steamcommunity.com/workshop/browse/
+					81 text ,
+					82 link Description: shotgun, Value: steamcommunity.com/workshop/browse/
+					83 text vehicles:
+					84 link Description: jeep, Value: steamcommunity.com/workshop/browse/
+					85 text ,
+					86 link Description: airboat, Value: steamcommunity.com/workshop/browse/
+					87 text ,
+					88 link Description: crane, Value: steamcommunity.com/workshop/browse/
+					89 text npcs:
+					90 link Description: alyx, Value: steamcommunity.com/workshop/browse/
+					91 text ,
+					92 link Description: gman, Value: steamcommunity.com/workshop/browse/
+					93 text ,
+					94 link Description: kleiner, Value: steamcommunity.com/workshop/browse/
+					95 text ,
+					96 link Description: dog, Value: steamcommunity.com/workshop/browse/
+					97 text ,
+					98 link Description: citizen, Value: steamcommunity.com/workshop/browse/
+					99 text ,
+					100 link Description: combine_soldier, Value: steamcommunity.com/workshop/browse/
+					101 text ,
+					102 link Description: metrocop, Value: steamcommunity.com/workshop/browse/
+					103 text ,
+					104 link Description: vortigaunt, Value: steamcommunity.com/workshop/browse/
+					105 text ,
+					106 link Description: antlion, Value: steamcommunity.com/workshop/browse/
+					107 text ,
+					108 link Description: antlion_guard, Value: steamcommunity.com/workshop/browse/
+					109 text ,
+					110 link Description: headcrab, Value: steamcommunity.com/workshop/browse/
+					111 text ,
+					112 link Description: zombie, Value: steamcommunity.com/workshop/browse/
+					113 text ,
+					114 link Description: fast_zombie, Value: steamcommunity.com/workshop/browse/
+					115 text ,
+					116 link Description: fast_headcrab, Value: steamcommunity.com/workshop/browse/
+					117 text ,
+					118 link Description: poison_zombie, Value: steamcommunity.com/workshop/browse/
+					119 text ,
+					120 link Description: advisor, Value: steamcommunity.com/workshop/browse/
+					121 text ,
+					122 link Description: barnacle, Value: steamcommunity.com/workshop/browse/
+					123 text ,
+					124 link Description: hunter, Value: steamcommunity.com/workshop/browse/
+					125 text ,
+					126 link Description: leech, Value: steamcommunity.com/workshop/browse/
+					127 text ,
+					128 link Description: mossman, Value: steamcommunity.com/workshop/browse/
+					129 text ,
+					130 link Description: stalker, Value: steamcommunity.com/workshop/browse/
+					131 text ,
+					132 link Description: grigori, Value: steamcommunity.com/workshop/browse/
+					133 text ,
+					134 link Description: strider, Value: steamcommunity.com/workshop/browse/
+					135 text ,
+					136 link Description: scanner, Value: steamcommunity.com/workshop/browse/
+					137 text ,
+					138 link Description: rollermine, Value: steamcommunity.com/workshop/browse/
+					139 text ,
+					140 link Description: odessa, Value: steamcommunity.com/workshop/browse/
+					141 text ,
+					142 link Description: pigeon, Value: steamcommunity.com/workshop/browse/
+					143 text ,
+					144 link Description: crow, Value: steamcommunity.com/workshop/browse/
+					145 text ,
+					146 link Description: gunship, Value: steamcommunity.com/workshop/browse/
+					147 text ,
+					148 link Description: dropship, Value: steamcommunity.com/workshop/browse/
+					149 text ,
+					150 link Description: eli, Value: steamcommunity.com/workshop/browse/
+					151 text ,
+					152 link Description: helicopter, Value: steamcommunity.com/workshop/browse/
+					153 text ,
+					154 link Description: manhack, Value: steamcommunity.com/workshop/browse/
+					155 text ,
+					156 link Description: breen, Value: steamcommunity.com/workshop/browse/
+					157 text Tags:
+					158 link Description: turrets, Value: steamcommunity.com/workshop/browse/
+					159 text File Size Posted 18.411 MB 24 Oct @ 2:57pm 1 Change Note
+					160 link Description: ( view ), Value: steamcommunity.com/sharedfiles/filedetails/changelog/3826155980
+				161 container sharedfiles_content_ctn
+					162 container
+						163 text CREATED BY
+						164 link steamcommunity.com/id/skulitom
+						165 container
+							166 text Skulitom
+							167 text Offline
+						168 container
+							169 container 1
+								170 text 1
+							171 container Unique Visitors
+								172 text Unique Visitors
+						173 container
+							174 container 1
+								175 text 1
+							176 container Current Subscribers
+								177 text Current Subscribers
+						178 container
+							179 container 0
+								180 text 0
+							181 container Current Favorites
+								182 text Current Favorites
+					183 container
+						184 heading Subscribe to download Xenesthesia - Breathing Textures & Prismatic Colour [Setup Required], Value: 1
+							185 text Subscribe to download
+							186 text Xenesthesia - Breathing Textures & Prismatic Colour [Setup Required]
+						187 link Description: Subscribe, ID: SubscribeItemBtn
+							188 text Subscribe
+						189 text DESCRIPTION
+						190 container highlightContent
+							191 text Required setup: subscribe, then add the Steam launch option below before playing. Subscribe alone is not sufficient for this shader addon.
+							192 text City 17 is starting to breathe.
+							193 text Xenesthesia is a psychedelic visual addon for Half-Life 2. Familiar surfaces gently move, prismatic colours unfold across the world, and characters and supplies develop subtle pulses. The effects live on the materials, so they stay with the scenery as you look around.
+							194 text What's inside
+							195 content list
+								196 container
+									197 AXListMarker •
+									198 text Restrained, irregular texture movement on compatible walls, floors, stairs, grates and props.
+								199 container
+									200 AXListMarker •
+									201 text Slowly evolving colour across connected world surfaces, with texture-local colour on supported props, hands and weapons.
+								202 container
+									203 AXListMarker •
+									204 text Flowing carpets and swirling liquid in Kleiner's lab tanks.
+								205 container
+									206 AXListMarker •
+									207 text Gentle character and enemy pulses, including a subtle Combine head pulse that follows ragdolls.
+								208 container
+									209 AXListMarker •
+									210 text Breathing health kits, batteries and wall chargers, plus drifting ink echoes on supported signs.
+								211 container
+									212 AXListMarker •
+									213 text Native materials and shaders: no injector or replacement game executable. HUD elements stay readable.
+							214 text Install
+							215 text 1. Subscribe and wait for Steam to finish downloading the addon. Close Half-Life 2.
+							216 text 2. In Steam Library, right-click Half-Life 2 > Properties > General > Launch Options. Add this line, keeping any existing options:
+							217 text -insert_search_path "../../workshop/content/220/3826155980/workshop_dir.vpk"
+							218 text 3. Launch Half-Life 2, enable Xenesthesia in its Workshop menu, and start/load the original campaign from the main menu.
+							219 text This startup option loads the subscribed shaders before the game's shader cache is built. Without it, late Workshop mounting can crash the game with a shader decompression error. It uses the normal Steam library layout; custom game paths may need the absolute path to this item's workshop_dir.vpk instead. No separate download or installer is needed.
+							220 text Disable conflicting material/shader addons, including City 17 ASCII, and remove any older manual Xenesthesia copy first.
+							221 text Tested on the Windows 20th Anniversary version of the original Half-Life 2 using DirectX 9. Episodes, Linux and Steam Deck are not validated.
+							222 text Switching it off
+							223 text Close the game, remove the Xenesthesia -insert_search_path option from Steam's Launch Options, disable the addon in the Workshop menu, and restart. Remove that option before unsubscribing too. Disabling the Workshop checkbox alone will not switch off a package explicitly loaded by the launch option. No keys are rebound automatically. The developer preview's F5 live toggle uses a separate local helper; it is not included or started by this Workshop addon.
+							224 text Coverage and limitations
+							225 text The release covers 2,632 material definitions, with an asset audit across 68 original-campaign maps. This is broad coverage, not a promise that every surface or every scene is affected. Most transparent/additive layers, special shaders and some animated screens stay unchanged. Shared materials can animate together, and some texture/lighting seams remain visible.
+							226 text Character deformation is experimental. Alyx, Kleiner, selected enemy models and Combine ragdolls received close-up checks; every character, cinematic and detail setting has not been tested. Classic zombies/headcrabs use a different lighting path. First-use shader/asset loading may still cause occasional stutters; performance varies by system and scene.
+							227 text All listing images are genuine captures of this release build. Still images show the colours and distortion; the texture flow and pulses animate in game.
+							228 text Original code and procedural texture data are MIT licensed. Valve-derived material definitions, compiled shaders and game imagery are excluded; notices are included in the addon. Free, independent addon; not affiliated with or endorsed by Valve.
+			229 container footer
+				230 link store.steampowered.com/
+				231 link valvesoftware.com/
+				232 container
+					233 text © 2026 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.
+					234 text VAT included in all prices where applicable.
+				235 link youtube.com/@Steam
+				236 link bsky.app/profile/steampowered.com
+				237 link facebook.com/steam
+				238 link twitter.com/steam
+				239 heading STEAM, Value: 3
+					240 text STEAM
+				241 link Description: About Steam, Value: store.steampowered.com/about/
+				242 link Description: Steam SSA, Value: store.steampowered.com/subscriber_agreement/
+				243 link Description: Steamworks, Value: partner.steamgames.com/
+				244 link Description: Steam Distribution, Value: partner.steamgames.com/steamdirect
+				245 link Description: Gift Cards, Value: store.steampowered.com/digitalgiftcards/
+				246 heading VALVE, Value: 3
+					247 text VALVE
+				248 link Description: About Valve, Value: valvesoftware.com/about
+				249 link Description: Jobs, Value: valvesoftware.com/
+				250 link Description: Hardware, Value: store.steampowered.com/hardware/
+				251 link Description: Recycling, Value: store.steampowered.com/hardware_recycling/
+				252 heading LEGAL, Value: 3
+					253 text LEGAL
+				254 link Description: Privacy, Value: store.steampowered.com/privacy_agreement/
+				255 link Description: Accessibility, Value: help.steampowered.com/faqs/view/10BB-D27A-6378-4436
+				256 link Description: Notices & Policies, Value: store.steampowered.com/legal/
+				257 link Description: Cookies, Value: store.steampowered.com/account/cookiepreferences/
+				258 link Description: Refunds, Value: store.steampowered.com/steam_refunds/
+				259 heading MORE, Value: 3
+					260 text MORE
+				261 link Description: Get Steam, Value: store.steampowered.com/about/
+				262 link Description: Get Mobile Apps, Value: store.steampowered.com/mobile/
+				263 link Description: Get Support, Value: help.steampowered.com/
+				264 link Description: My Account, Value: store.steampowered.com/account/
+
+The focused UI element is 1 AXWebArea Steam Workshop::Xenesthesia - Breathing Textures & Prismatic Colour [Setup Required], URL: steamcommunity.com/sharedfiles/filedetails/

@@ -1,6 +1,6 @@
 # Xenesthesia
 
-**Release approved on 24 October 2026.** Workshop upload and subscribed-install verification are in progress. The listing uses current in-game screenshots only.
+**Published on 24 October 2026:** [Xenesthesia on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3826155980). The public listing uses four genuine gameplay images. A clean downloaded installation passed native gameplay checks with the required early-load option below; subscribing alone is insufficient.
 
 A native psychedelic material addon for the original Windows Half-Life 2 20th Anniversary edition. Gentle texture breathing and slowly unfolding prismatic colours live in surface coordinates, before camera projection. Walking or turning does not recenter the colour field on Gordon. The original textures, lighting, HUD and screen geometry remain readable.
 
@@ -22,6 +22,25 @@ F5 uses an optional Windows companion built from `tools/live_toggle.cs` using th
 
 For complete removal, close HL2, run `tools/disable-playtest.ps1`, then reopen HL2. The installer re-enables the preview. These helpers do not restore video preferences or F4/F5/F6/F8 bindings; use Options for those. The original private backups are retained for reference.
 
+## Workshop installation
+
+Workshop installation requires an early-load launch option. The native uploader
+and downloaded files are correct, but retail HL2 can retain stock shader indexes
+before mounting Workshop shader replacements; ordinary late mounting crashed in
+clean-install testing. After subscribing, append this in Steam > Half-Life 2 >
+Properties > General > Launch Options:
+
+```
+-insert_search_path "../../workshop/content/220/3826155980/workshop_dir.vpk"
+```
+
+This loads the actual subscribed archive before shader initialization, preserving
+the complete visual effect. The path assumes the normal Steam library layout.
+**To disable or unsubscribe, remove this option as well as disabling the addon,
+then restart.** The Workshop checkbox alone does not disable an explicit startup
+search path. `tools/launch-workshop.ps1` provides a local bordered-window launcher
+using the installed Steam library and subscribed archive, without a dev VPK.
+
 ## Manual installation
 
 Put `content.vpk` in `Half-Life 2/hl2/custom/` as `xenesthesia.vpk`, then restart. Remove it and restart to uninstall. Use one Xenesthesia copy at a time. Disable other addons overriding the same materials, including City 17 ASCII. DirectX 9 is required; the new colour path has no custom HDR or bloom hook.
@@ -41,7 +60,7 @@ python tools/audit-coverage.py
 
 `tools/human_pulse.py` coordinates human skin, hair, eyes, teeth and Kleiner’s glasses deformation. `tools/surface_shaders.py` preserves generic material shading and gives world colour a continuous coordinate field. Its native shader bytecode layouts are verified against the installed game. `tools/prism_texture.py` generates an original, mipmapped, 128-frame RGB colour field. `tools/lab_textures.py` adds the rug colour field and a 256-frame liquid normal map; `tools/lab_materials.py` limits special-material changes to explicit names. `tools/surface_motion.py` augments supported VMTs while retaining existing animation blocks and protecting cutout UVs. `tools/build.py` packs the runtime content and verifies every archived byte. Source hashes and output hashes are recorded in `artifacts`. The coverage audit now scans all 68 non-empty original-campaign BSPs, recording inherited material references, assigned effect types and remaining exclusions. The installed empty d2_coast_02 placeholder is reported separately. This is a file audit, not a full campaign playthrough.
 
-`tools/prepare-release.py` stages and verifies the release package. It contains no upload calls. Current screenshot provenance is recorded in `artifacts/release/gameplay-media.json`; only genuine captures matching the runtime hash are accepted. The earlier generated cover and old preview media are excluded. See `artifacts/release/PUBLISHING.md` for the authorized publication process and `artifacts/release/PUBLICATION.md` for its eventual receipts and install checks.
+`tools/prepare-release.py` stages and verifies the release package. It contains no upload calls. Current screenshot provenance is recorded in `artifacts/release/gameplay-media.json`; only genuine captures matching the runtime hash are accepted. The earlier generated cover and old preview media are excluded. See `artifacts/release/PUBLISHING.md` for the authorized publication process and `artifacts/release/PUBLICATION.md` for the completed receipts and install checks.
 
 The old custom `-game` harness is retired; all current tests use the actual anniversary runtime. The previous postprocess shader source is retained for history, but neither its compiled shader nor its bloom/engine_post replacements ship.
 

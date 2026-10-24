@@ -20,12 +20,18 @@ on the listing. No visual-quality reduction was made for release.
 
 The Workshop runtime is content only. The local preview F5 companion is not
 shipped and is not advertised as a Workshop feature. Disable/restart is the
-supported Workshop removal path. No user key bindings change automatically.
+supported Workshop removal path only after also removing the required early-load
+launch option. No user key bindings change automatically. Clean-install testing
+exposed a late-mount shader cache crash; loading the subscribed VPK through
+`-insert_search_path` before shader initialization preserves the full visuals.
+The title and beginning of the listing explicitly flag the required setup.
 
 The thumbnail and gallery come from the current runtime. gameplay-media.json
 records their source paths and hashes. Generated artwork and its prompt are
 excluded from staging. The staging tool verifies every runtime file and the
 manual-install ZIP before any upload.
 
-Publication receipts and the subscribed-only runtime check are recorded separately
-in artifacts/release/PUBLICATION.md after Steam confirms them.
+Published publicly on 24 October 2026 as item 3826155980. Steam accepted the content,
+gallery and public-visibility updates. The logged-out page shows the correct real
+gameplay cover, three gallery images, setup instructions and Subscribe control.
+Publication receipts and subscribed-only checks are in PUBLICATION.md.

@@ -2,17 +2,25 @@ XENESTHESIA
 Original Half-Life 2, Windows 20th Anniversary edition, DirectX 9
 
 WORKSHOP INSTALL
-Subscribe, enable Xenesthesia in the game's Workshop menu, and restart HL2.
-Start/load the original campaign from the main menu. Disable conflicting material
-or shader addons, including City 17 ASCII. Use only one Xenesthesia copy.
+Subscribe and wait for the download. Close HL2. In Steam Library > Half-Life 2 >
+Properties > General > Launch Options, append this required option:
+-insert_search_path "../../workshop/content/220/3826155980/workshop_dir.vpk"
+Keep existing options. Enable Xenesthesia in the game's Workshop menu and start/load
+the original campaign from the main menu. This option loads shaders early; without
+it, late Workshop mounting can crash with a shader decompression error. The relative
+path assumes the normal Steam library layout. Custom layouts may need an absolute
+path to the downloaded workshop_dir.vpk instead. Disable conflicting material/shader
+addons, including City 17 ASCII. Use only one Xenesthesia copy.
 
 MANUAL INSTALL (alternative to Workshop)
 Close HL2. Copy xenesthesia.vpk into Half-Life 2/hl2/custom, then restart.
 Do not install both the manual VPK and Workshop version.
 
 CONTROLS AND REMOVAL
-No keys change automatically. Disable the Workshop addon and restart to remove
-the effect. For a manual installation, close HL2 and remove xenesthesia.vpk.
+No keys change automatically. Close HL2, remove this -insert_search_path option,
+disable the Workshop addon and restart to remove the effect. Remove the option
+before unsubscribing too; the Workshop checkbox alone cannot disable that startup
+path. For a manual installation, close HL2 and remove xenesthesia.vpk.
 The developer preview's F5 live toggle requires its separate Windows companion;
 the Workshop addon does not contain or start that companion. The optional
 exec xen_keys developer configuration is not needed for normal Workshop use.
