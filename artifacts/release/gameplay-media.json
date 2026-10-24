@@ -1,0 +1,37 @@
+{
+  "runtime_sha256": "0bb326b0b729c0b348af976e983ba5cc125c0a092fbf4e2df265d2795385beef",
+  "recorded_utc": "2026-10-24T13:45:36.863493+00:00",
+  "generated_art_used": false,
+  "thumbnail": "lab.jpg",
+  "method": "Native HL2 jpeg command; no visual edits. HUD hidden for gallery.",
+  "images": {
+    "lab.jpg": {
+      "source": "artifacts/release/gameplay/lab.jpg",
+      "native_source": "D:\\Steam\\steamapps\\common\\Half-Life 2\\hl2\\screenshots\\xen_release_lab.jpg",
+      "sha256": "0ca0ca944b5c26185df96134bc807caeae2185bfce346d40d19ecff41b22be00",
+      "map": "d1_trainstation_05",
+      "bytes": 365094
+    },
+    "carpet.jpg": {
+      "source": "artifacts/release/gameplay/carpet.jpg",
+      "native_source": "D:\\Steam\\steamapps\\common\\Half-Life 2\\hl2\\screenshots\\xen_release_carpet_final.jpg",
+      "sha256": "113ecbb65be4aac5271a4a759c0e9bd0ca0d3262def869b22df85d6a6d9bfcdd",
+      "map": "d1_trainstation_05",
+      "bytes": 528931
+    },
+    "canals.jpg": {
+      "source": "artifacts/release/gameplay/canals.jpg",
+      "native_source": "C:\\DEV\\HL2Xenesthesia\\artifacts\\campaign-coverage\\xen_canals_match_b.jpg",
+      "sha256": "339cdcdeccf1e88ef56a18605163320253045ec400ec9ae98e43f64045a1979a",
+      "map": "d1_canals_01",
+      "bytes": 158106
+    },
+    "storefront.jpg": {
+      "source": "artifacts/release/gameplay/storefront.jpg",
+      "native_source": "C:\\DEV\\HL2Xenesthesia\\artifacts\\campaign-coverage\\xen_c17_storefront_b.jpg",
+      "sha256": "95d507987f4defce5b1d792e3903178c4697ad2ed300837b4172c0807fabb289",
+      "map": "d3_c17_13",
+      "bytes": 136648
+    }
+  }
+}

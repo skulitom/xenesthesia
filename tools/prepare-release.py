@@ -17,8 +17,13 @@ def sha(data):
 
 
 def prepare():
-    if not (ROOT / 'artifacts/material-colour/media-approved.json').exists():
-        raise RuntimeError('Current material-colour screenshots and review are not ready for release staging.')
+    media = json.loads((ROOT / 'artifacts/release/gameplay-media.json').read_text())
+    archive_hash = sha((ROOT / 'content.vpk').read_bytes())
+    if media['runtime_sha256'] != archive_hash or media['generated_art_used']:
+        raise RuntimeError('Release media must show the current build and use no generated artwork.')
+    for name, evidence in media['images'].items():
+        if sha((ROOT / evidence['source']).read_bytes()) != evidence['sha256']:
+            raise ValueError(f'Release screenshot differs from recorded capture: {name}')
     archive = ROOT / 'content.vpk'
     manifest = json.loads((ROOT / 'artifacts/build-manifest.json').read_text())
     entries, read = read_vpk(archive)
@@ -30,7 +35,9 @@ def prepare():
         if (path.is_absolute() or '..' in path.parts or ':' in name or '\\' in name
                 or path.suffix not in {'.vmt', '.vcs', '.cfg', '.vtf', '.txt'}):
             raise ValueError(f'Unexpected runtime path: {name}')
-        if path.suffix == '.vtf' and name != 'materials/xenesthesia/prism.vtf':
+        if path.suffix == '.vtf' and name not in {
+                'materials/xenesthesia/prism.vtf', 'materials/xenesthesia/weave.vtf',
+                'materials/xenesthesia/eddy_normal.vtf'}:
             raise ValueError(f'Unexpected texture: {name}')
         if path.suffix == '.txt' and name not in {
                 'xenesthesia/licenses/valve-sdk-license.txt',
@@ -53,24 +60,21 @@ def prepare():
         'VALIDATION.md': 'artifacts/VALIDATION.md',
         'COVERAGE.md': 'artifacts/release/COVERAGE.md',
         'workshop-description.txt': 'artifacts/workshop-description.txt',
-        'media/cover.png': 'artifacts/release/media/cover.png',
-        'media/cover-workshop.jpg': 'artifacts/release/media/cover-workshop.jpg',
-        'media/cover-workshop.png': 'artifacts/release/media/cover-workshop.png',
-        'media/cover-prompt.txt': 'artifacts/release/media/cover-prompt.txt',
-        'media/coast.jpg': 'artifacts/subtle-motion/coast-prismatic-1080.jpg',
-        'media/ravenholm.jpg': 'artifacts/subtle-motion/ravenholm-prismatic-1080.jpg',
-        'media/wall-motion.mp4': 'artifacts/subtle-motion/wall-motion.mp4',
+        'gameplay-media.json': 'artifacts/release/gameplay-media.json',
+        'CURRENT-VALIDATION.md': 'artifacts/campaign-coverage/VALIDATION.md',
     }
+    review_files.update({f'media/{name}': evidence['source']
+                         for name, evidence in media['images'].items()})
     for name, source in review_files.items():
         if not (ROOT / source).is_file():
             raise FileNotFoundError(source)
-        if (name in {'media/cover-workshop.jpg', 'media/cover-workshop.png', 'media/coast.jpg', 'media/ravenholm.jpg'}
+        if (name.startswith('media/')
                 and (ROOT / source).stat().st_size >= 1_000_000):
             raise ValueError(f'Preview image exceeds conservative 1 MB limit: {name}')
 
     now = datetime.now(timezone.utc)
     archive_hash = sha(archive.read_bytes())
-    destination = ROOT / 'dist' / f'xenesthesia-preview-{now:%Y%m%dT%H%M%S}-{archive_hash[:8]}'
+    destination = ROOT / 'dist' / f'xenesthesia-release-{now:%Y%m%dT%H%M%S}-{archive_hash[:8]}'
     destination.mkdir(parents=True, exist_ok=False)
     content_root = destination / 'workshop-content'
     for name, body in payloads.items():
@@ -97,7 +101,7 @@ def prepare():
             raise ValueError(f'Staged runtime verification failed: {name}')
 
     metadata = {
-        'status': 'local preview; requires owner playtest and explicit upload approval',
+        'status': 'release candidate; owner authorized Workshop publication on 2026-10-24',
         'prepared_utc': now.isoformat(),
         'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         'tracked_working_changes': subprocess.run(['git', 'diff', '--quiet', 'HEAD'], cwd=ROOT).returncode != 0,

@@ -1,35 +1,28 @@
-XENESTHESIA — MATERIAL COLOUR PREVIEW
-Original Half-Life 2, Windows 20th Anniversary edition
+XENESTHESIA
+Original Half-Life 2, Windows 20th Anniversary edition, DirectX 9
 
-Not published. Workshop upload requires the owner's explicit go.
+WORKSHOP INSTALL
+Subscribe, enable Xenesthesia in the game's Workshop menu, and restart HL2.
+Start/load the original campaign from the main menu. Disable conflicting material
+or shader addons, including City 17 ASCII. Use only one Xenesthesia copy.
 
-INSTALL
-1. Close HL2 and disable conflicting visual/material addons, including City 17 ASCII.
-2. Open Half-Life 2's installation folder from Steam > Manage > Browse local files.
-3. Copy xenesthesia.vpk into hl2/custom. Use only one Xenesthesia copy.
-4. Start original Half-Life 2 and start/load from the main menu. DirectX 9 is required.
+MANUAL INSTALL (alternative to Workshop)
+Close HL2. Copy xenesthesia.vpk into Half-Life 2/hl2/custom, then restart.
+Do not install both the manual VPK and Workshop version.
 
-The colour and gentle movement are mapped onto supported surfaces. This revision
-uses stock bloom and colour correction; the previous HDR postprocess override is gone.
-
-CONTROLS
-No keys change automatically. The developer preview has F6 pause and F8 console.
-The old F4 colour toggle is retired: material effects cannot be turned off by
-bypassing bloom. Optional exec xen_keys assigns F4 to console help, replacing its
-previous binding. exec xen_off explains removal; it does not disable the effect.
-
-REMOVE
-Close HL2, move/delete this one VPK, then restart. For the development preview,
-run tools/disable-playtest.ps1 while the game is closed. Restore preferred key
-and video settings separately. If installed through Workshop later, disable it
-there as well; a remaining local copy still applies.
+CONTROLS AND REMOVAL
+No keys change automatically. Disable the Workshop addon and restart to remove
+the effect. For a manual installation, close HL2 and remove xenesthesia.vpk.
+The developer preview's F5 live toggle requires its separate Windows companion;
+the Workshop addon does not contain or start that companion. The optional
+exec xen_keys developer configuration is not needed for normal Workshop use.
 
 LIMITS
-Compatible surfaces, props, hands/weapons, cutouts and NPC materials receive
-colour. NPCs and cutouts keep their original UVs. Authored animations are retained.
-Special shaders and most translucent/additive layers and some screens are excluded.
-Objects with shared materials can animate together. Classic zombies/headcrabs have an experimental geometry pulse. Alyx and selected human families also have a head/upper-body pulse. The pulse preserves native material lighting/transparency through skin and generic vertex paths; broader low-detail and NPC/cinematic testing remain pending. Episodes are unvalidated.
+Material coverage varies. Most transparent/additive layers, special shaders and
+some animated screens remain unchanged. Shared materials can animate together.
+Character pulses are experimental; complete cinematic, detail-level and campaign
+regression has not been performed. Episodes and other platforms are unvalidated.
+First-use shader/asset loading may cause occasional stutters.
 
-The VPK contains material definitions, twenty compiled vertex shaders, original procedural colour data and
-optional console help. It needs no injector or replacement game executable.
-Original code/data: MIT; Valve-derived definitions and imagery: see NOTICE.md.
+This native addon needs no injector or replacement game executable.
+Original code/data: MIT. Valve-derived content and game imagery: see NOTICE.md.

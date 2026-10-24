@@ -1,6 +1,6 @@
 # Xenesthesia
 
-**Local playtest. Nothing uploaded to Workshop.** Publication requires the owner's explicit approval after playing the preview.
+**Release approved on 24 October 2026.** Workshop upload and subscribed-install verification are in progress. The listing uses current in-game screenshots only.
 
 A native psychedelic material addon for the original Windows Half-Life 2 20th Anniversary edition. Gentle texture breathing and slowly unfolding prismatic colours live in surface coordinates, before camera projection. Walking or turning does not recenter the colour field on Gordon. The original textures, lighting, HUD and screen geometry remain readable.
 
@@ -41,7 +41,7 @@ python tools/audit-coverage.py
 
 `tools/human_pulse.py` coordinates human skin, hair, eyes, teeth and Kleiner’s glasses deformation. `tools/surface_shaders.py` preserves generic material shading and gives world colour a continuous coordinate field. Its native shader bytecode layouts are verified against the installed game. `tools/prism_texture.py` generates an original, mipmapped, 128-frame RGB colour field. `tools/lab_textures.py` adds the rug colour field and a 256-frame liquid normal map; `tools/lab_materials.py` limits special-material changes to explicit names. `tools/surface_motion.py` augments supported VMTs while retaining existing animation blocks and protecting cutout UVs. `tools/build.py` packs the runtime content and verifies every archived byte. Source hashes and output hashes are recorded in `artifacts`. The coverage audit now scans all 68 non-empty original-campaign BSPs, recording inherited material references, assigned effect types and remaining exclusions. The installed empty d2_coast_02 placeholder is reported separately. This is a file audit, not a full campaign playthrough.
 
-`tools/prepare-release.py` stages an offline review package. It contains no upload calls. Workshop publication, a clean subscribed-install check and final screenshots remain gated on approval of the revised appearance. Earlier staged packages and their screenshots are superseded by the material-colour revision.
+`tools/prepare-release.py` stages and verifies the release package. It contains no upload calls. Current screenshot provenance is recorded in `artifacts/release/gameplay-media.json`; only genuine captures matching the runtime hash are accepted. The earlier generated cover and old preview media are excluded. See `artifacts/release/PUBLISHING.md` for the authorized publication process and `artifacts/release/PUBLICATION.md` for its eventual receipts and install checks.
 
 The old custom `-game` harness is retired; all current tests use the actual anniversary runtime. The previous postprocess shader source is retained for history, but neither its compiled shader nor its bloom/engine_post replacements ship.
 

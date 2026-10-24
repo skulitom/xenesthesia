@@ -1,23 +1,29 @@
-Xenesthesia — Half-Life 2 material effects
+[h1]City 17 is starting to breathe.[/h1]
+Xenesthesia is a psychedelic visual addon for Half-Life 2. Familiar surfaces gently move, prismatic colours unfold across the world, and characters and supplies develop subtle pulses. The effects live on the materials, so they stay with the scenery as you look around.
 
-DRAFT — NOT UPLOADED. Requires the owner's explicit go before any Workshop item is created or updated.
+[h2]What's inside[/h2]
+[list]
+[*]Restrained, irregular texture movement on compatible walls, floors, stairs, grates and props.
+[*]Slowly evolving colour across connected world surfaces, with texture-local colour on supported props, hands and weapons.
+[*]Flowing carpets and swirling liquid in Kleiner's lab tanks.
+[*]Gentle character and enemy pulses, including a subtle Combine head pulse that follows ragdolls.
+[*]Breathing health kits, batteries and wall chargers, plus drifting ink echoes on supported signs.
+[*]Native materials and shaders: no injector or replacement game executable. HUD elements stay readable.
+[/list]
 
-City 17's surfaces quietly come alive. Brick, concrete, metal stairs and grates, props and supported weapons breathe with restrained, irregular texture movement. Prismatic colour shapes bend and flow over time. A continuous pattern crosses connected world surfaces; props and characters keep colours attached to their own textures as they move.
+[h2]Install[/h2]
+Subscribe, enable Xenesthesia in Half-Life 2's Workshop menu, then restart the game. Start or load the original Half-Life 2 campaign from the main menu. Disable conflicting material/shader addons, including City 17 ASCII, and remove any older manual Xenesthesia copy first.
 
-• Gentle surface movement rather than camera blur or screen wobble.
-• Material-local colour on compatible walls, props, screens, hands, weapons and NPC materials.
-• Flowing colour patterns inside supported rugs, and slow liquid eddies in Kleiner's generator tubes.
-• Keeps the HUD readable and world geometry stable.
-• Native game content; no injector or replacement game executable.
+Tested on the Windows 20th Anniversary version of the original Half-Life 2 using DirectX 9. Episodes, Linux and Steam Deck are not validated.
 
-For the original Windows Half-Life 2 20th Anniversary edition, using DirectX 9. Other episodes and platforms have not been validated.
+[h2]Switching it off[/h2]
+Disable the addon in the Workshop menu and restart. No keys are rebound automatically. The developer preview's F5 live toggle uses a separate local helper; it is not included or started by this Workshop addon.
 
-Coverage varies by material. Most transparent/additive surfaces, special shaders and some animated displays remain unchanged. Objects sharing materials can animate together. Classic zombies and classic headcrabs have an experimental shape pulse, with their original texture colours. An experimental head/upper-body pulse also covers Alyx and several human character families, preserving native skin shading. Alyx has been checked in the native game; broader character/cinematic compatibility still needs validation. Combine soldiers and metrocops have a subtle head pulse that follows ragdolls, while Barney keeps the coordinated humanoid pulse; additional zombies, headcrabs and antlions have a native-shaded body pulse. First-use stutters are still under investigation and block release readiness.
+[h2]Coverage and limitations[/h2]
+The release covers 2,632 material definitions, with an asset audit across 68 original-campaign maps. This is broad coverage, not a promise that every surface or every scene is affected. Most transparent/additive layers, special shaders and some animated screens stay unchanged. Shared materials can animate together, and some texture/lighting seams remain visible.
 
-Disable conflicting material addons, including City 17 ASCII, before use. Subscribe and enable through the game's Workshop menu, restart, and start/load from the main menu. These Workshop installation steps still require a clean-install test after publication approval.
+Character deformation is experimental. Alyx, Kleiner, selected enemy models and Combine ragdolls received close-up checks; every character, cinematic and detail setting has not been tested. Classic zombies/headcrabs use a different lighting path. First-use shader/asset loading may still cause occasional stutters; performance varies by system and scene.
 
-To remove all effects, disable the addon and restart. The optional local preview launcher supports F5 to switch visuals off/on. A standalone Workshop addon does not start that companion, so its optional distribution is still being prepared. No keys are bound automatically.
+All listing images are genuine captures of this release build. Still images show the colours and distortion; the texture flow and pulses animate in game.
 
-Original code and procedural colour data are MIT licensed. Valve-derived material definitions, compiled shaders and game imagery are excluded; see the included notices. Not affiliated with or endorsed by Valve.
-
-Media: replace the old postprocess screenshots with verified material-colour captures before publication. Illustrated cover is labelled as artwork.
+Original code and procedural texture data are MIT licensed. Valve-derived material definitions, compiled shaders and game imagery are excluded; notices are included in the addon. Free, independent addon; not affiliated with or endorsed by Valve.

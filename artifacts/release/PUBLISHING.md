@@ -1,46 +1,31 @@
-# Publication handoff — local only
+# Workshop publication
 
-The owner has explicitly prohibited creating or uploading a Workshop item until
-they give a go-ahead. Do not treat approving the visual balance, launching the
-preview or producing this folder as publication approval.
+Publication was explicitly authorized by the owner on 24 October 2026: use the
+latest in-game screenshots and do not use the generated cover.
 
-## Prepared fields
+- Game: Half-Life 2, app 220.
+- Title: Xenesthesia - Breathing Textures & Prismatic Colour.
+- Description: workshop-description.txt.
+- Native uploader input: staged workshop-content folder.
+- Thumbnail: media/lab.jpg, an unedited native screenshot of the final build.
+- Gallery: only the verified captures in gameplay-media.json.
 
-- Game: Half-Life 2, Steam app 220.
-- Proposed title: Xenesthesia — Breathing Textures & Prismatic Colour.
-- Description: `workshop-description.txt`.
-- Runtime folder: `workshop-content` in the staged release candidate.
-- Preview: `media/cover-workshop.png` (512×512); JPEG alternative also included.
-- Genuine gallery: `media/coast.jpg`, `media/ravenholm.jpg`.
-- Local manual-install package: `xenesthesia-manual-install.zip`.
+Keep documents, private settings, development helpers and manual-install ZIP out
+of the runtime folder. Never upload the earlier illustrated cover or prompt.
 
-Keep review documents, prompts, private settings and the manual-install ZIP out
-of the Workshop runtime folder. Check manifest hashes again if any file changes.
-Regenerate captures if the shader's visual appearance changes after this review.
+Create one private item for installation verification, retain its ID, subscribe
+and compare the downloaded archive's full contents against build-manifest.json.
+Temporarily remove the local development VPK and all active loose material
+overrides before testing the actual subscribed addon. Check native rendering and
+disable/restart. Then publish this same item publicly, add the verified gallery,
+and verify visibility and media on the resulting page. The owner's approval
+covers this sequence; do not request it again.
 
-## After explicit approval
+If Steam requires the contributor agreement, the owner must complete that step.
+If Steam's content review delays public visibility, retain the item and report
+the exact state rather than creating duplicates or claiming it is public.
 
-Use the game's native Workshop uploader under Extras > Workshop > My Uploads.
-Select the prepared runtime folder and separate preview image. Confirm the native
-uploader accepts the folder and image before submitting. Initially use private
-visibility for the owner to validate the uploaded installation; publication
-visibility follows the scope of their approval. Preserve the created item ID.
-
-Close HL2 and temporarily remove the local development VPK before testing the
-subscription. Verify the actual Workshop download matches the intended runtime,
-then load a normal HL2 save from the main menu. Recheck colour, material motion,
-hands/weapons, HUD, toggle and addon disable/restart. A locally installed VPK can
-otherwise mask a broken Workshop installation. Record results in VALIDATION.md.
-
-If Steam requests its contributor agreement, the owner must complete that step.
-Do not claim successful publication from a created ID or an upload button click;
-confirm the result, visibility, page contents and real subscribed installation.
-
-## Format references
-
-Valve's [Workshop implementation guide](https://partner.steamgames.com/doc/features/workshop/implementation)
-describes separate item creation and upload operations, the content directory,
-preview image and completion callbacks. Its [ISteamUGC reference](https://partner.steamgames.com/doc/api/ISteamUGC#AddItemPreviewFile)
-specifies an under-1-MB limit for additional image previews. The staged thumbnail
-exports and original game screenshots are all conservatively below 1,000,000 bytes.
-The full-resolution cover master is retained for review, not used as the thumbnail.
+Valve references: https://partner.steamgames.com/doc/features/workshop/implementation
+and https://partner.steamgames.com/doc/api/ISteamUGC . All uploaded preview images
+are below 1,000,000 bytes. Completion callbacks and the downloaded content are
+checked separately; a returned item ID alone is not successful publication.
