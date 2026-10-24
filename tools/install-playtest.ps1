@@ -38,4 +38,6 @@ bind F8 toggleconsole
 exec xen_keys
 '@
 [IO.File]::WriteAllText((Join-Path $cfg 'xen_preview.cfg'),$previewConfig,$encoding)
+& python -X utf8 (Join-Path $PSScriptRoot 'prepare-live-toggle.py')
+if ($LASTEXITCODE -ne 0) { throw 'Live toggle preparation failed.' }
 Write-Output 'Native HL2 preview installed; ASCII disabled, subscription retained. Original settings backed up.'

@@ -10,13 +10,16 @@ FOLDERS = {'alyx', 'barney', 'kleiner', 'eli', 'mossman', 'breen', 'humans',
 # their skinned normals instead, retaining native Phong, cutouts and lighting.
 CREATURE_FOLDERS = {'zombie_fast', 'zombie_poison', 'headcrab', 'headcrab_black',
                     'antlion', 'antlion_guard'}
+PICKUPS = {'materials/models/items/healthkit01.vmt',
+           'materials/models/items/battery01.vmt',
+           'materials/models/healthvial/healthvial.vmt'}
 SHADERS = ('skin_vs20.fxc', 'Eyes_vs20.fxc', 'teeth_vs20.fxc', 'teeth_bump_vs20.fxc',
            'teeth_flashlight_vs20.fxc', 'eyes_flashlight_vs20.fxc')
 
 
 def material(name, source, tokens):
     parts = name.split('/')
-    if len(parts) < 4 or parts[1] != 'models' or parts[2] not in FOLDERS | CREATURE_FOLDERS:
+    if len(parts) < 4 or parts[1] != 'models' or (parts[2] not in FOLDERS | CREATURE_FOLDERS and name not in PICKUPS):
         return None
     if any(word in parts[-1] for word in ('emptool', 'glint', 'pupil')):
         return None
@@ -30,17 +33,27 @@ def material(name, source, tokens):
         return None
     if '$additive' in vals and not lens:
         return None
-    marker = 1001 if parts[2] in CREATURE_FOLDERS else 1000
+    # Armoured enemies have no CPU-flexed face fragments. Select their head
+    # from rest-pose height, then expand along skinned normals so the field
+    # follows crouches and ragdolls instead of depending on world height.
+    armoured = parts[2] == 'combine_soldier' or name == 'materials/models/police/metrocop_sheet.vmt'
+    pickup = name in PICKUPS
+    marker = 1003 if pickup else 1002 if armoured else 1001 if parts[2] in CREATURE_FOLDERS else 1000
+    maximum = '.08' if armoured else '.16'
+    # Antlion materials are shared by static gib models. EntityRandom is not
+    # null-safe there. Origin is guarded by Valve's CEntityMaterialProxy; a
+    # deterministic phase retains smooth animation on these shared materials.
+    entity_phase = not pickup and parts[2] not in {'antlion', 'antlion_guard'}
     declarations = ['// Xenesthesia NPC pulse; all parts share the entity phase.',
                     '"$xen_hphase" "0"', '"$entityorigin" "[0 0 0]"']
-    proxies = ['"EntityRandom" { "scale" "7" "resultVar" "$xen_hphase" }',
-               '"EntityOrigin" { }']
+    proxies = (['"EntityRandom" { "scale" "7" "resultVar" "$xen_hphase" }'] if entity_phase else [])
+    proxies += ['"EntityOrigin" { }']
     if shader in {'vertexlitgeneric', 'unlitgeneric'}:
         # Preserve native alpha/lighting semantics. Both skin and generic
         # vertex paths understand the marker, including the glasses lenses.
         declarations += [f'"$xen_hshift" "[{marker} 0]"', '"$xen_hcenter" "[0 0]"',
                          f'"$basetexturetransform" "center 0 0 scale 1 1 rotate 0 translate {marker} 0"']
-        proxies += [f'"Sine" {{ "sinePeriod" "5.3" "sineMin" "{marker}.01" "sineMax" "{marker}.16" "timeOffset" "$xen_hphase" "resultVar" "$xen_hshift[0]" }}',
+        proxies += [f'"Sine" {{ "sinePeriod" "5.3" "sineMin" "{marker}.01" "sineMax" "{marker}{maximum}" "timeOffset" "$xen_hphase" "resultVar" "$xen_hshift[0]" }}',
                     '"LinearRamp" { "rate" "0" "initialValue" "$entityorigin[2]" "resultVar" "$xen_hshift[1]" }',
                     '"TextureTransform" { "centerVar" "$xen_hcenter" "scaleVar" "$entityorigin" "translateVar" "$xen_hshift" "resultVar" "$basetexturetransform" }']
     else:
@@ -76,16 +89,29 @@ def once(source, anchor, replacement):
     return source.replace(anchor, replacement, 1)
 
 
+def patch_local_pulse(source):
+    """Pickup scale precedes skinning; enemy head mask uses rest-pose height."""
+    anchor = '\tfloat4 vPosition = v.vPos;'
+    source = once(source, anchor, anchor + '''
+    if (cBaseTexCoordTransform[0].w >= 1003.0 && cBaseTexCoordTransform[0].w < 1004.0)
+        vPosition.xyz *= 1.0 + (cBaseTexCoordTransform[0].w - 1003.0);
+''')
+    return source
+
+
 def patch_shader(name, source):
     source = once(source, 'VS_OUTPUT main(', '#include "xen_human_pulse.h"\n\nVS_OUTPUT main(')
     anchor = '\t// Transform into projection space'
     if name == 'skin_vs20.fxc':
+        source = patch_local_pulse(source)
         extra = """
     float xenMarker = cBaseTexCoordTransform[0].w;
-    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1002.0;
+    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1004.0;
     float3 xenOrigin = float3(cBaseTexCoordTransform[0].x,
                              cBaseTexCoordTransform[1].y, cBaseTexCoordTransform[1].w);
-    if (xenHuman) XenNpcPulseWorld(worldPos, worldNormal, xenOrigin, xenMarker);
+    if (xenHuman && xenMarker < 1002.0) XenNpcPulseWorld(worldPos, worldNormal, xenOrigin, xenMarker);
+    if (xenMarker >= 1002.0 && xenMarker < 1003.0)
+        worldPos += worldNormal * (smoothstep(52.0, 61.0, v.vPos.z) * (xenMarker - 1002.0) * 6.0);
 """
         source = once(source, anchor, extra+anchor)
         for field, uv, transform in [('x', 'x', 'cBaseTexCoordTransform[0]'),

@@ -40,7 +40,7 @@ class PackageTests(unittest.TestCase):
                 self.assertNotIn('host_writeconfig', commands)
                 if name.endswith('xen_keys.cfg'):
                     self.assertEqual([x for x in lines if x.startswith('bind ')],
-                                     ['bind F4 "exec xen_help"'])
+                         ['bind F4 "exec xen_help"', 'bind F5 "exec xen_toggle; xen_toggle_begin"'])
                 else:
                     self.assertNotIn('bind', commands)
 

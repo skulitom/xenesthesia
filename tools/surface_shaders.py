@@ -11,6 +11,7 @@ import shutil
 import struct
 import subprocess
 import urllib.request
+from human_pulse import patch_local_pulse
 
 ROOT = Path(__file__).resolve().parents[1]
 SHADERS = {
@@ -32,15 +33,21 @@ def patch_shader(name, source):
     header = 'xen_human_pulse.h' if generic else 'xen_world_colour.h'
     source = replace_once(source, 'VS_OUTPUT main(', f'#include "{header}"\n\nVS_OUTPUT main(')
     if generic:
+        # The three pickup VMTs use the non-bumped generic family. Keep their
+        # extra pre-skin transform out of the tightly packed SM2 bump path.
+        if '_bump_' not in name:
+            source = patch_local_pulse(source)
         # The old SP file used the Xbox/legacy dual register annotation.
         # PC FXC uses vertex sampler s0, as the newer SDK skin shader does.
         source = replace_once(source, 'register( D3DVERTEXTEXTURESAMPLER0, s0 )', 'register( s0 )')
         source = replace_once(source, '\t// Transform into projection space', '''
     float xenMarker = cBaseTexCoordTransform[0].w;
-    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1002.0;
+    bool xenHuman = xenMarker >= 1000.0 && xenMarker < 1004.0;
     float3 xenOrigin = float3(cBaseTexCoordTransform[0].x,
                              cBaseTexCoordTransform[1].y, cBaseTexCoordTransform[1].w);
-    if (xenHuman) XenNpcPulseWorld(worldPos, worldNormal, xenOrigin, xenMarker);
+    if (xenHuman && xenMarker < 1002.0) XenNpcPulseWorld(worldPos, worldNormal, xenOrigin, xenMarker);
+    if (xenMarker >= 1002.0 && xenMarker < 1003.0)
+        worldPos += worldNormal * (smoothstep(52.0, 61.0, v.vPos.z) * (xenMarker - 1002.0) * 6.0);
 \t// Transform into projection space''')
         field = ('baseTexCoord2_tangentSpaceVertToEyeVectorXY' if '_bump_' in name else 'baseTexCoord')
         detail = 'detailTexCoord_atten3' if '_bump_' in name else 'detailTexCoord'

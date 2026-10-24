@@ -21,5 +21,8 @@ if ($Scene -ne 'menu') {
 # The user explicitly requests an interactive game window on their own desktop.
 # Start at the menu by default so opening the preview cannot immediately grab
 # the mouse for gameplay. Keep the title bar and normal window controls.
-Start-Process -FilePath $steam -ArgumentList ('-applaunch 220 -windowed -w 1280 -h 720 -novid -condebug +hl2_expansion hl2 +exec xen_preview {0}' -f $start)
-Write-Output 'Xenesthesia preview requested in a bordered window. F6 opens the pause menu. Surface effects stay active until the addon is disabled and the game restarted. F4 shows rollback guidance in the console.'
+# Use the installed executable with the existing signed-in Steam client. This
+# also leaves any unresolved Steam Cloud config choice untouched.
+$preview = Start-Process -FilePath (Join-Path $game 'hl2.exe') -WorkingDirectory $game -ArgumentList ('-steam -game hl2_complete -windowed -w 1280 -h 720 -novid -condebug +hl2_expansion hl2 +exec xen_preview {0}' -f $start) -PassThru
+& (Join-Path $PSScriptRoot 'start-live-toggle.ps1') -GameProcessId $preview.Id
+Write-Output 'Xenesthesia preview opened in a bordered window. F5 switches all mod visuals off/on with a brief material refresh. F6 pauses and releases the mouse.'

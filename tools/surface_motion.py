@@ -78,7 +78,7 @@ def animate(name, source):
     # are tested separately instead of sliding eyes/mouths across their faces.
     prop = model and (parts[2].startswith('props') or parts[2] == 'weapons'
                      or parts[2] in {'combine_room', 'combine_apc', 'items'})
-    motion = not overlay and not any(x in values for x in unsafe_motion) and (not model or prop)
+    motion = not overlay and name not in human_pulse.PICKUPS and not any(x in values for x in unsafe_motion) and (not model or prop)
     details = [values[i+1].replace('\\', '/') for i, v in enumerate(values[:-1]) if v == '$detail']
     # Standard micrograin layers can be replaced by our own colour+grain field.
     # Special detail blends (cracks, masks, authored animation) remain intact.

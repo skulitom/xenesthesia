@@ -254,3 +254,7 @@ requested the missing kaleidoscopic colour effect. This revision addresses both.
 - Reviewed complete removal instructions and clarified that the local disable
   helper removes the preview VPK but leaves video preferences and F4/F6/F8 bindings
   for the owner to restore. No settings were changed during this audit.
+
+## 24 October — inspection and live toggle
+
+See [inspection/VALIDATION.md](inspection/VALIDATION.md) and [summary.json](inspection/summary.json). F5 live switching, gentler pose-aware armoured heads, and three pickup types were tested in the native runtime. Main preview opened in session 1. No Workshop publication.

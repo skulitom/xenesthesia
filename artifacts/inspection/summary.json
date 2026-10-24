@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-24",
+  "runtime_sha256": "00960a9bdf77ce737460bca4b44157f700bed03fbf4160101c660ac4e1d19efe",
+  "counts": {
+    "materials": 2534,
+    "colour": 2496,
+    "uv_motion": 2062,
+    "humanoid": 119,
+    "creature": 15,
+    "armoured": 6,
+    "pickup": 3
+  },
+  "armoured_normal_expansion_units": [
+    0.06,
+    0.48
+  ],
+  "armoured_period_seconds": 5.3,
+  "pickup_scale_range": [
+    1.01,
+    1.16
+  ],
+  "tests_passed": 34,
+  "native_shader_layouts_verified": 20,
+  "off_materials_verified_against_stock": 2534,
+  "native_tests": [
+    "Actual item_healthkit, item_battery, item_healthvial close-ups",
+    "prop_ragdoll and actual npc_combine_s killed with SetHealth 0",
+    "F5 OFF/ON/OFF/ON/OFF, native colour and shape restoration",
+    "Companion exited with game; loose material override directory removed"
+  ],
+  "main_preview": {
+    "pid": 79664,
+    "companion_pid": 125228,
+    "session": 1
+  },
+  "limits": [
+    "F5 requires optional local Windows companion; not automatic in a standalone Workshop VPK.",
+    "Material refresh can briefly pause rendering.",
+    "No new frame-time benchmark; prior performance result and caveats still apply.",
+    "Diagnostic lab screenshots are not approved Workshop media.",
+    "No Workshop upload authorised or performed."
+  ]
+}
