@@ -2,6 +2,10 @@
 
 **Published on 24 October 2026:** [Xenesthesia on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3826155980). The public listing uses four genuine gameplay images. A clean downloaded installation passed native gameplay checks with the required early-load option below; subscribing alone is insufficient.
 
+[Source on GitHub](https://github.com/skulitom/xenesthesia) · [MIT license for original code](LICENSE) · [Third-party notices](NOTICE.md)
+
+![Xenesthesia running in Kleiner's lab — genuine gameplay screenshot](artifacts/release/gameplay/lab.jpg)
+
 A native psychedelic material addon for the original Windows Half-Life 2 20th Anniversary edition. Gentle texture breathing and slowly unfolding prismatic colours live in surface coordinates, before camera projection. Walking or turning does not recenter the colour field on Gordon. The original textures, lighting, HUD and screen geometry remain readable.
 
 The current material build covers 2,632 definitions. Compatible world surfaces, props, opaque NPC materials, cutouts, hands and weapons receive colour. The complete two-wave UV animation is retained on supported world/prop/weapon materials. Connected world materials now share the same motion clock; props and weapons retain their individual rhythms. NPC faces, weapon cutouts and materials with authored animation receive colour without added UV movement. Architectural metal grates, stairs, rails and trusses now receive a gentle UV breath, keeping their native alpha/transparency settings and moving the colour/holes together. Legacy lab panels, composite building walls, storefronts and brush-built train/vehicle surfaces are also included across maps. Standard grain detail layers are replaced by the original colour/grain field; special-purpose detail layers are preserved.
@@ -50,6 +54,8 @@ The addon never changes key bindings automatically. `exec xen_keys` opts into F4
 ## Build and validate
 
 Requires the locally installed original game and Python 3. The build verifies and caches pinned official SDK sources for NPC and world vertex shaders on first use (see research/*-sdk-files.json). The build reads material definitions from that installation; it does not extract or redistribute Valve texture images.
+
+The current Windows build scripts use the developer's Steam library path. Before building on another machine, set `GAME` in `tools/surface_motion.py` to your game's `hl2` folder and `packer` in `tools/build.py` to its `bin/vpk.exe`. The Python generators use the standard library. The optional F5 companion and its tests require the Windows .NET Framework C# compiler. Generated game materials and downloaded SDK/compiler files are intentionally excluded from Git; build locally before running the full package tests.
 
 ```
 powershell -File tools/bootstrap.ps1
