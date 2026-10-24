@@ -1,4 +1,10 @@
-# Current revision: shared world motion, enemy pulses, full animation retained
+# Current revision: chargers and drifting sign lettering
+
+Local preview; no Workshop activity. Runtime SHA-256: `10e1f3ecea1633ce189cbd2a967cf104fa9cfd83a1fc4ca66985e3d288f157d2`. 2,594 files, 18,172,283 bytes; 2,564 generated VMTs. Forty checks pass. Native tests covered both charger interactions, warning decals, an opaque sign board and F5. See [the current validation record](stations-signs/VALIDATION.md) for evidence, resolved prototype issues and remaining coverage.
+
+---
+
+# Previous revision: shared world motion, enemy pulses, full animation retained
 
 Local preview. No Workshop activity. Runtime SHA-256: `6d3db43d0ff80abb8664eec9df87dccae94399cff91e301c21d941471df74de7` (case-insensitive). 2,564 files, 17,730,563 bytes, 2,534 generated material definitions. Thirty unit/package checks pass; all 20 native vertex shader layouts match retail.
 

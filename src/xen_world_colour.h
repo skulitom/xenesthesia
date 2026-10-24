@@ -5,6 +5,12 @@ bool XenWorldColour(float4 baseRow, float4 detailRow)
     return abs(scale + 1337.0) < 0.1;
 }
 
+bool XenSignEcho(float4 baseRow, float4 detailRow)
+{
+    float scale = dot(detailRow.xy, baseRow.xy) / max(dot(baseRow.xy, baseRow.xy), 0.000001);
+    return abs(scale + 1338.0) < 0.1;
+}
+
 float2 XenWorldColourUV(float3 worldPos)
 {
     // A continuous oblique projection: same point -> same colour, independent

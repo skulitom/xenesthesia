@@ -12,6 +12,7 @@ import npc_pulse
 import human_pulse
 import surface_shaders
 import lab_materials
+import inspection_materials
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = Path(r'D:/Steam/steamapps/common/Half-Life 2/hl2')
@@ -177,7 +178,11 @@ def build_materials(content):
             continue
         raw = read(name)
         source = raw.decode('utf8', errors='strict').replace('\r\r\n', '\n')
-        out = lab_materials.tank_material(name, source, tokens)
+        out = inspection_materials.station_material(name, source, tokens)
+        if out is None:
+            out = inspection_materials.sign_material(name, source, tokens)
+        if out is None:
+            out = lab_materials.tank_material(name, source, tokens)
         if out is None:
             out = npc_pulse.material(name, source, tokens(source))
         if out is None:

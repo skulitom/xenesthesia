@@ -1,6 +1,6 @@
 # Material coverage — revised preview
 
-2,534 material definitions: 2,496 receive surface colour, 2,062 receive the full gentle UV animation, two classic zombie/headcrab materials use the original experimental geometry pulse, 119 humanoid definitions use coordinated head/upper-body expansion, six armoured enemy materials use a model-relative head pulse, three pickup materials use gentle scale breathing, and 15 additional creature definitions use normal-based expansion. Categories overlap.
+2,564 material definitions: 2,459 receive prismatic surface colour, 2,028 receive the full gentle general UV animation, 67 signs receive a dedicated ink echo, and three wall-charger parts receive coordinated breathing and illumination. Two classic zombie/headcrab materials use the original experimental geometry pulse, 119 humanoid definitions use coordinated head/upper-body expansion, six armoured enemy materials use a model-relative head pulse, three pickup materials use gentle scale breathing, and 15 additional creature definitions use normal-based expansion. Categories overlap. Signs and chargers now use their dedicated effects in place of their previous general animation.
 
 All ten installed hand material definitions are included. The RPG cutout receives colour without moving its alpha silhouette. Authored animation blocks are preserved. Most transparent/additive materials and unsupported shaders (including UnlitTwoTexture screens) are excluded.
 
@@ -21,7 +21,7 @@ These are file/reference counts, not a percentage of visible scenery or a full-c
 | d3_c17_01 | 79 | 56 |
 | d3_breen_01 | 13 | 359 |
 
-World colour uses shared coordinates and timing across 1,401 compatible definitions, reducing texture-border colour cuts. Movable models retain local colour mapping. Special materials and lighting changes can still create visible borders.
+World colour uses shared coordinates and timing across 1,367 compatible definitions, reducing texture-border colour cuts. Movable models retain local colour mapping. Special materials and lighting changes can still create visible borders. Sign effects preserve the original image/alpha and animate a separate copy of the lettering; they do not recognize or replace glyphs. The photographed warning decal, other warning variants, an opaque sign board and both charger entities were checked in the native test room. Model-sign variants still need broader visual regression.
 
 Targeted lab additions: six standalone rug/decal materials use border-faded animated colour while preserving their base UVs and transparency. Four runner pieces use the shared world colour field; six carpet floors use normal colour and gentle UV motion. The two lab generator tubes share one Refract material with an original 16-second animated normal field; their authored orange tint texture and native silhouette/blur behavior remain. These are selective exceptions, not general support for every decal or glass surface.
 

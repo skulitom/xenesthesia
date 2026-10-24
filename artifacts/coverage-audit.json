@@ -1,5 +1,5 @@
 {
-  "runtime_sha256": "00960a9bdf77ce737460bca4b44157f700bed03fbf4160101c660ac4e1d19efe",
+  "runtime_sha256": "10e1f3ecea1633ce189cbd2a967cf104fa9cfd83a1fc4ca66985e3d288f157d2",
   "scope": "Static material references only; excludes visibility, model usage and gameplay behaviour.",
   "viewmodels": {
     "v_357": {

@@ -1,0 +1,14 @@
+{
+  "runtime_sha256": "10e1f3ecea1633ce189cbd2a967cf104fa9cfd83a1fc4ca66985e3d288f157d2",
+  "runtime_bytes": 18172283,
+  "runtime_files": 2594,
+  "material_definitions": 2564,
+  "prismatic_colour": 2459,
+  "general_uv_motion": 2028,
+  "world_colour": 1367,
+  "sign_ink_echo": 67,
+  "charger_parts": 3,
+  "tests_passed": 40,
+  "native_shader_layouts_matched": 20,
+  "scope": "Native warning decals, opaque sign board, both charger interactions and F5. Model-sign variants and full campaign remain broader regression work. No new frame-time benchmark."
+}

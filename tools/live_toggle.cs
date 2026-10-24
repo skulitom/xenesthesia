@@ -72,7 +72,9 @@ internal sealed class LiveToggle : IDisposable
             string next = i == 39 ? "exec xen_wait_timeout" : "xw" + (i + 1);
             request.Append("alias xw" + i + " \"alias xen_wait_next " + (i == 39 ? "xen_timeout" : next) + "; wait 30; xen_read_reply; xen_wait_continue\"\n");
         }
-        request.Append("alias xen_timeout \"exec xen_wait_timeout\"\necho " + Request + "\n");
+        // Some native console diagnostics omit their trailing newline. Flush
+        // an empty line first so our exact request cannot join that output.
+        request.Append("alias xen_timeout \"exec xen_wait_timeout\"\necho\necho " + Request + "\n");
         // The key binding calls xen_toggle_begin AFTER exec returns. Valve's
         // exec evaluates nested files synchronously, so starting the wait chain
         // inside that file would recurse rather than yield to the next frame.

@@ -67,6 +67,14 @@ def patch_shader(name, source):
 #if {guard}
     if (XenWorldColour(cBaseTexCoordTransform[0], {transform}[0]))
         o.{field} = XenWorldColourUV(worldPos);
+    if (XenSignEcho(cBaseTexCoordTransform[0], {transform}[0]))
+    {{
+        // LightmappedGeneric has no independent detail transform. For opted-in
+        // signs the base matrix carries the echo transform; restore the base
+        // sample so alpha masks, borders and original lettering stay fixed.
+        o.{field} = o.baseTexCoord.xy;
+        o.baseTexCoord.xy = v.vBaseTexCoord.xy;
+    }}
 #endif
 \treturn o;''')
     return source

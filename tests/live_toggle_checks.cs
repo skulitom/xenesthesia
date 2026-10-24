@@ -16,6 +16,8 @@ internal class ToggleChecks
         using (var live = new LiveToggle(state, mount, cfg))
         {
             string first = live.Request;
+            Check(File.ReadAllText(Path.Combine(cfg, "xen_toggle.cfg")).Contains("\necho\necho " + first),
+                  "Request must begin on a fresh log line after unterminated game output");
             Check(!live.Handle("] echo " + first), "Console input echo must not count as a request");
             Check(live.Enabled, "Spurious toggle");
             Check(live.Handle(first), "Request ignored");
