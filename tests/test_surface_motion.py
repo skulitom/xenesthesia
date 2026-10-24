@@ -54,6 +54,30 @@ class SurfaceMotionTests(unittest.TestCase):
             if extra:
                 self.assertIn(extra, out)
 
+    def test_architectural_openwork_keeps_transparency_and_animates_as_one_sample(self):
+        for basename, flag in [('metalstair004a', '$translucent 1'),
+                               ('metalstair004b', '$translucent 1'),
+                               ('metalgrate002a', '$alphatest 1')]:
+            source = 'LightmappedGeneric { $basetexture metal/test $surfaceprop metalgrate '+flag+' }'
+            out = animate('materials/metal/'+basename+'.vmt', source)
+            self.assertIn(flag, out)
+            self.assertIn('"TextureTransform"', out)
+            self.assertIn('"animatedTextureFrameRate" "8.000"', out)
+            self.assertNotIn('$alpha"', out)
+        # A special existing animation must not be overwritten by this exception.
+        out = animate('materials/metal/metalgrate002a.vmt',
+                      'LightmappedGeneric { $basetexture a $alphatest 1 Proxies { Sine { resultVar $alpha } } }')
+        self.assertNotIn('TextureTransform', out)
+
+    def test_campaign_panel_families_receive_motion_without_touching_interface(self):
+        for folder in ('halflife', 'composite', 'storefront_template', 'vehicle'):
+            out = animate('materials/'+folder+'/panel.vmt',
+                          'LightmappedGeneric { $basetexture panel $selfillum 1 }')
+            self.assertIn('"TextureTransform"', out)
+            self.assertIn('$selfillum 1', out)
+        self.assertIsNone(animate('materials/vgui/panel.vmt',
+                                 'UnlitGeneric { $basetexture panel }'))
+
     def test_authored_detail_layer_is_not_replaced(self):
         source = 'LightmappedGeneric { $basetexture test $detail original/detail }'
         out = animate('materials/brick/test.vmt',source)
@@ -90,7 +114,7 @@ class SurfaceMotionTests(unittest.TestCase):
         out = animate('materials/brick/test.vmt', 'LightmappedGeneric { $basetexture test }')
         waves = re.findall(r'"Sine" \{ "sinePeriod" "([^"]+)" "sineMin" "([^"]+)" "sineMax" "([^"]+)"', out)
         self.assertEqual(len(waves), 10)
-        limits = [0.0012, 0.0012, 0.0035, 0.0035, 0.006]
+        limits = [0.0012, 0.0012, 0.006, 0.006, 0.006]
         for i, limit in enumerate(limits):
             a, b = waves[i*2:i*2+2]
             self.assertGreater(float(a[0]), 7.9)

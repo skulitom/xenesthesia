@@ -1,0 +1,52 @@
+{
+  "runtime_sha256": "0bb326b0b729c0b348af976e983ba5cc125c0a092fbf4e2df265d2795385beef",
+  "runtime_bytes": 18410670,
+  "material_definitions": 2632,
+  "new_definitions": 68,
+  "existing_cutouts_gaining_motion": 37,
+  "general_motion_definitions": 2128,
+  "flowing_colour_definitions": 2521,
+  "world_colour_definitions": 1435,
+  "campaign_maps_audited": 68,
+  "empty_map_placeholders": [
+    "d2_coast_02"
+  ],
+  "native_maps_checked": [
+    "xen_coverage_lab",
+    "d1_canals_01",
+    "d3_c17_13"
+  ],
+  "canals_camera": {
+    "position": [
+      -400,
+      -7360,
+      132
+    ],
+    "angles": [
+      30,
+      90,
+      0
+    ]
+  },
+  "canals_materials": [
+    "concrete/concretewall041a",
+    "metal/metalstair004a",
+    "metal/metalstair004b"
+  ],
+  "tests_passed": 42,
+  "stock_off_hashes_verified": 2632,
+  "screenshots": {
+    "xen_c17_storefront_a.jpg": "9fe4c8f34fbb83135edfdf2ebcf842e76d2b65d70480c24ab47d61b44c928e4c",
+    "xen_c17_storefront_b.jpg": "95d507987f4defce5b1d792e3903178c4697ad2ed300837b4172c0807fabb289",
+    "xen_canals_flashlight.jpg": "f73a692acff6ae80232b7ab8f9ec01bfe4f57f23ce0feadb8448ae25e4510eac",
+    "xen_canals_match_a.jpg": "a4146aa5f843cc17d2f13e72b596a9771ab5d17fa241a5fe957e5d865a8cff05",
+    "xen_canals_match_b.jpg": "339cdcdeccf1e88ef56a18605163320253045ec400ec9ae98e43f64045a1979a",
+    "xen_canals_stock_verified.jpg": "a0ecd0ae957d33acd6da0941c40597db51221baa785340b0ba9f175d17550cc9",
+    "xen_coverage_grates_a.jpg": "dc7391c02b710b36e1406d571311c05ee029985b40e9539327a5fcc8edc6ed51",
+    "xen_coverage_grates_b.jpg": "8d09e2d423d0ef8da8255d0f099d8a52d85c15b680aeb825ccadf47e457d157d",
+    "xen_coverage_grates_off.jpg": "7b75cff12dba05b1ba0589bdb6dc72160587917f8204085ae23619758138bb32",
+    "xen_coverage_lab_a.jpg": "85c8190bab70a645e6bb5e74e7dd0747f4ee09482330d5d3979565097672aea2",
+    "xen_coverage_lab_b.jpg": "7eb1fd41a58ecf1a200797e631aed45a7e10cd1b4a54ebac5065457f4db99e09"
+  },
+  "published": false
+}

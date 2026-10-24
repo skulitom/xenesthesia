@@ -1,6 +1,6 @@
 # Material coverage — revised preview
 
-2,564 material definitions: 2,459 receive prismatic surface colour, 2,028 receive the full gentle general UV animation, 67 signs receive a dedicated ink echo, and three wall-charger parts receive coordinated breathing and illumination. Two classic zombie/headcrab materials use the original experimental geometry pulse, 119 humanoid definitions use coordinated head/upper-body expansion, six armoured enemy materials use a model-relative head pulse, three pickup materials use gentle scale breathing, and 15 additional creature definitions use normal-based expansion. Categories overlap. Signs and chargers now use their dedicated effects in place of their previous general animation.
+2,632 material definitions: 2,521 receive prismatic surface colour, 2,128 receive the full gentle general UV animation, 67 signs receive a dedicated ink echo, and three wall-charger parts receive coordinated breathing and illumination. Two classic zombie/headcrab materials use the original experimental geometry pulse, 119 humanoid definitions use coordinated head/upper-body expansion, six armoured enemy materials use a model-relative head pulse, three pickup materials use gentle scale breathing, and 15 additional creature definitions use normal-based expansion. Categories overlap. Signs and chargers now use their dedicated effects in place of their previous general animation.
 
 All ten installed hand material definitions are included. The RPG cutout receives colour without moving its alpha silhouette. Authored animation blocks are preserved. Most transparent/additive materials and unsupported shaders (including UnlitTwoTexture screens) are excluded.
 
@@ -8,21 +8,25 @@ The human family counts are Alyx 8, Breen 5, Eli 5, citizens 83, Kleiner 8 and M
 
 These are file/reference counts, not a percentage of visible scenery or a full-campaign compatibility claim. Map-specific patches can override inherited parameters. Native checks cover station walls, coast, Ravenholm and a private test room containing character models, a physics crate and computer monitors.
 
+The full static inventory now covers 68 non-empty original-campaign maps in `artifacts/coverage-audit.json`; the installed zero-byte d2_coast_02 placeholder is listed separately. It records assigned effect types and uncovered materials per map. The table below remains a sample, not the audit scope.
+
 | Map | Direct material references | Patches referencing modified bases |
 |---|---:|---:|
-| d1_trainstation_01 | 90 | 107 |
+| d1_trainstation_01 | 124 | 245 |
 | d1_trainstation_05 | 109 | 99 |
-| d1_canals_01 | 108 | 155 |
-| d1_canals_06 | 63 | 97 |
-| d1_eli_01 | 91 | 53 |
+| d1_canals_01 | 111 | 155 |
+| d1_canals_06 | 64 | 97 |
+| d1_eli_01 | 93 | 53 |
 | d1_town_01 | 69 | 272 |
 | d2_coast_03 | 54 | 106 |
-| d2_prison_01 | 45 | 104 |
+| d2_prison_01 | 46 | 104 |
 | d3_c17_01 | 79 | 56 |
-| d3_breen_01 | 13 | 359 |
+| d3_breen_01 | 22 | 359 |
 
-World colour uses shared coordinates and timing across 1,367 compatible definitions, reducing texture-border colour cuts. Movable models retain local colour mapping. Special materials and lighting changes can still create visible borders. Sign effects preserve the original image/alpha and animate a separate copy of the lettering; they do not recognize or replace glyphs. The photographed warning decal, other warning variants, an opaque sign board and both charger entities were checked in the native test room. Model-sign variants still need broader visual regression.
+World colour uses shared coordinates and timing across 1,435 compatible definitions, reducing texture-border colour cuts. Movable models retain local colour mapping. Special materials and lighting changes can still create visible borders. Sign effects preserve the original image/alpha and animate a separate copy of the lettering; they do not recognize or replace glyphs. The photographed warning decal, other warning variants, an opaque sign board and both charger entities were checked in the native test room. Model-sign variants still need broader visual regression.
 
 Targeted lab additions: six standalone rug/decal materials use border-faded animated colour while preserving their base UVs and transparency. Four runner pieces use the shared world colour field; six carpet floors use normal colour and gentle UV motion. The two lab generator tubes share one Refract material with an original 16-second animated normal field; their authored orange tint texture and native silhouette/blur behavior remain. These are selective exceptions, not general support for every decal or glass surface.
 
 The full two-wave motion is preserved. World materials share phase/period to reduce opposing motion at joins; arbitrary authored UV orientation/scale, base colours, special shaders and lighting boundaries can still reveal seams. An additional 120 opaque world definitions under props/ now receive compatible surface effects.
+
+Campaign coverage additions: 68 additional definitions from legacy lab/industrial panels, composite walls, storefronts, brush vehicle surfaces and translucent architectural openwork. Another 37 previously colour-only metal cutouts now receive motion (net general-motion increase is 100 because five newly covered materials retain authored transforms or animation and receive colour only). Existing alpha blend/test modes remain intact; no global transparency exception was added. The bounded world drift increases from 0.0035 to 0.006 UV, while scale, rotation bounds, timing, harmonic count and all model/NPC pulse strengths stay as before.

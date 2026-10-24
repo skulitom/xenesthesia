@@ -19,7 +19,9 @@ GAME = Path(r'D:/Steam/steamapps/common/Half-Life 2/hl2')
 # Preserve tokens and duplicate keys; comments must not count as declarations.
 TOKEN = re.compile(r'//[^\r\n]*|/\*.*?\*/|"[^"\r\n]*"|[{}]|[^\s{}"]+', re.S)
 WORLD = {'brick', 'concrete', 'metal', 'plaster', 'wood', 'tile', 'nature',
-         'ground', 'stone', 'plasterwall', 'ceiling', 'floor', 'building_template', 'props'}
+         'ground', 'stone', 'plasterwall', 'ceiling', 'floor', 'building_template',
+         'props', 'halflife', 'composite', 'storefront_template', 'vehicle'}
+METAL_OPENWORK = ('metalgrate', 'metalstair', 'metalrail', 'metaltruss', 'metalbar')
 GRAIN_DETAILS = {'detail/plaster_detail_01', 'detail/noise_detail_01',
                  'detail/metal_detail_01', 'detail/rock_detail_01'}
 
@@ -45,8 +47,16 @@ def animate(name, source):
     allowed = {'vertexlitgeneric', 'unlitgeneric'} if model else {'lightmappedgeneric', 'worldvertextransition'}
     if shader not in allowed or '$basetexture' not in values:
         return None
-    # Alpha-tested surfaces can receive MOD2X colour without moving their mask.
+    # Architectural openwork has holes painted into the base alpha. Its small
+    # UV breath deliberately moves the perforation pattern as a whole, keeping
+    # colour and alpha aligned. Do not apply this exception to glass, foliage,
+    # decals, faces or weapon cutouts; preserve their existing exclusions.
+    openwork = (not model and parts[1] == 'metal'
+                and parts[2].startswith(METAL_OPENWORK)
+                and shader == 'lightmappedgeneric')
     excluded = {'$additive'} if overlay else {'$translucent', '$decal', '$additive'}
+    if openwork:
+        excluded = excluded - {'$translucent'}
     if any(x in values for x in excluded):
         return None
     depth = 0
@@ -75,6 +85,8 @@ def animate(name, source):
     unsafe_motion = {'proxies', '$alphatest', '$basetexturetransform',
                      '$basetexturetransform2', '$bumptransform', '$bumptransform2',
                      '$envmapmasktransform'}
+    if openwork:
+        unsafe_motion = unsafe_motion - {'$alphatest'}
     # NPC colour is supported; their facial UVs stay intact. Geometric pulses
     # are tested separately instead of sliding eyes/mouths across their faces.
     prop = model and (parts[2].startswith('props') or parts[2] == 'weapons'
@@ -96,7 +108,10 @@ def animate(name, source):
     # World UVs extend far beyond 0..1. Even modest scale/rotation can therefore
     # move whole facades by metres. Keep those terms tiny, not just the drift.
     scale = 0.006 if model else 0.0012
-    drift = 0.003 if model else 0.0035
+    # At 512 texels the old world drift was at most 1.8 texels and was almost
+    # invisible on close concrete. Increase only bounded translation (~3 texels),
+    # not world-origin-dependent scale/rotation or the two-wave animation rate.
+    drift = 0.003 if model else 0.006
     rotate = 0.12 if model else 0.006
     declarations = ['\n// Xenesthesia: surface-local animation, independent of the camera.']
     lines = []
@@ -120,7 +135,7 @@ def animate(name, source):
     if motion:
         declarations += [
              '"$xen_center" "[0.5 0.5]"', '"$xen_scale" "[1 1]"',
-             '"$xen_shift" "[0 0]"', '"$xen_rotate" "0"',
+             '"$xen_shift" "[0 0]"', '"$xen_rotate" "0.0"',
              f'"$xen_phase" "{phase:.4f}"',
              '"$xen_a" "0"', '"$xen_b" "0"']
     # Static props can bind a renderable with no C_BaseEntity. HL2's EntityRandom
