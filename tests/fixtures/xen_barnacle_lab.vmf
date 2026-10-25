@@ -1,0 +1,72 @@
+versioninfo { "editorversion" "400" "mapversion" "1" "formatversion" "100" }
+world { "id" "1" "classname" "worldspawn" "skyname" "sky_day01_01"
+solid { "id" "10"
+side { "id" "11" "plane" "(-400 -400 0) (-400 400 0) (400 400 0)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "12" "plane" "(-400 400 -32) (-400 -400 -32) (400 -400 -32)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "13" "plane" "(-400 -400 0) (-400 -400 -32) (-400 400 -32)" "material" "concrete/concretefloor001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "14" "plane" "(400 400 0) (400 400 -32) (400 -400 -32)" "material" "concrete/concretefloor001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "15" "plane" "(400 -400 0) (400 -400 -32) (-400 -400 -32)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "16" "plane" "(-400 400 0) (-400 400 -32) (400 400 -32)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+}
+solid { "id" "17"
+side { "id" "18" "plane" "(-400 -400 272) (-400 400 272) (400 400 272)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "19" "plane" "(-400 400 256) (-400 -400 256) (400 -400 256)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "20" "plane" "(-400 -400 272) (-400 -400 256) (-400 400 256)" "material" "concrete/concretefloor001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "21" "plane" "(400 400 272) (400 400 256) (400 -400 256)" "material" "concrete/concretefloor001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "22" "plane" "(400 -400 272) (400 -400 256) (-400 -400 256)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "23" "plane" "(-400 400 272) (-400 400 256) (400 400 256)" "material" "concrete/concretefloor001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+}
+solid { "id" "24"
+side { "id" "25" "plane" "(-400 -400 256) (-400 400 256) (-384 400 256)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "26" "plane" "(-400 400 0) (-400 -400 0) (-384 -400 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "27" "plane" "(-400 -400 256) (-400 -400 0) (-400 400 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "28" "plane" "(-384 400 256) (-384 400 0) (-384 -400 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "29" "plane" "(-384 -400 256) (-384 -400 0) (-400 -400 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "30" "plane" "(-400 400 256) (-400 400 0) (-384 400 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+}
+solid { "id" "31"
+side { "id" "32" "plane" "(384 -400 256) (384 400 256) (400 400 256)" "material" "concrete/concretewall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "33" "plane" "(384 400 0) (384 -400 0) (400 -400 0)" "material" "concrete/concretewall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "34" "plane" "(384 -400 256) (384 -400 0) (384 400 0)" "material" "concrete/concretewall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "35" "plane" "(400 400 256) (400 400 0) (400 -400 0)" "material" "concrete/concretewall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "36" "plane" "(400 -400 256) (400 -400 0) (384 -400 0)" "material" "concrete/concretewall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "37" "plane" "(384 400 256) (384 400 0) (400 400 0)" "material" "concrete/concretewall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+}
+solid { "id" "38"
+side { "id" "39" "plane" "(-384 -400 256) (-384 -384 256) (384 -384 256)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "40" "plane" "(-384 -384 0) (-384 -400 0) (384 -400 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "41" "plane" "(-384 -400 256) (-384 -400 0) (-384 -384 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "42" "plane" "(384 -384 256) (384 -384 0) (384 -400 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "43" "plane" "(384 -400 256) (384 -400 0) (-384 -400 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "44" "plane" "(-384 -384 256) (-384 -384 0) (384 -384 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+}
+solid { "id" "45"
+side { "id" "46" "plane" "(-384 384 256) (-384 400 256) (0 400 256)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "47" "plane" "(-384 400 0) (-384 384 0) (0 384 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "48" "plane" "(-384 384 256) (-384 384 0) (-384 400 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "49" "plane" "(0 400 256) (0 400 0) (0 384 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "50" "plane" "(0 384 256) (0 384 0) (-384 384 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "51" "plane" "(-384 400 256) (-384 400 0) (0 400 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 0] 0.25" "vaxis" "[0 0 -1 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+}
+solid { "id" "145"
+side { "id" "146" "plane" "(0 384 256) (0 400 256) (384 400 256)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 137] 0.5" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "147" "plane" "(0 400 0) (0 384 0) (384 384 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 137] 0.5" "vaxis" "[0 -1 0 0] 0.25" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "148" "plane" "(0 384 256) (0 384 0) (0 400 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 83] 0.5" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "149" "plane" "(384 400 256) (384 400 0) (384 384 0)" "material" "brick/brickwall001a" "uaxis" "[0 1 0 0] 0.25" "vaxis" "[0 0 -1 83] 0.5" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "150" "plane" "(384 384 256) (384 384 0) (0 384 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 137] 0.5" "vaxis" "[0 0 -1 83] 0.5" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+side { "id" "151" "plane" "(0 400 256) (0 400 0) (384 400 0)" "material" "brick/brickwall001a" "uaxis" "[1 0 0 137] 0.5" "vaxis" "[0 0 -1 83] 0.5" "rotation" "0" "lightmapscale" "16" "smoothing_groups" "0" }
+}
+}
+
+entity { "id" "700" "classname" "info_player_start" "origin" "0 -280 16" "angles" "-17 90 0" }
+entity { "id" "701" "classname" "light" "origin" "0 -150 220" "_light" "255 240 220 700" }
+entity { "id" "702" "classname" "npc_barnacle" "origin" "0 0 252" "angles" "0 0 0" "targetname" "xen_barnacle" "spawnflags" "4" "RestDist" "16"
+ connections { "OnGrab" "xen_test_cmd,Command,echo XEN_BARNACLE_GRAB,0,-1" "OnRelease" "xen_test_cmd,Command,echo XEN_BARNACLE_RELEASE,0,-1" }
+}
+entity { "id" "703" "classname" "npc_headcrab" "origin" "0 0 4" "angles" "0 270 0" "targetname" "xen_prey" "spawnflags" "260"
+ connections { "OnDeath" "xen_test_cmd,Command,echo XEN_PREY_DIED,0,-1" }
+}
+entity { "id" "704" "classname" "point_servercommand" "targetname" "xen_test_cmd" }
+entity { "id" "705" "classname" "logic_auto"
+ connections { "OnMapSpawn" "xen_test_cmd,Command,echo XEN_BARNACLE_TEST_START,0,-1" "OnMapSpawn" "xen_test_cmd,Command,echo XEN_BARNACLE_TEST_30_SECONDS,30,-1" }
+}
