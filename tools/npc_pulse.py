@@ -38,10 +38,12 @@ def material(name, source, token_list):
     extra = '''
 // Xenesthesia experimental body pulse: original game textures, no face UV drift.
 "$warpparam" "2.1"
+// Shared by live NPCs, ragdolls and temporary renderables. EntityRandom can
+// dereference a missing C_BaseEntity after BindArgToEntity; this clock must
+// also work when there is no owning entity.
 "$xen_pulsephase" "0"
 "Proxies"
 {
-    "EntityRandom" { "scale" "5" "resultVar" "$xen_pulsephase" }
     "Sine" { "sinePeriod" "4.7" "sineMin" "2.04" "sineMax" "2.75" "timeOffset" "$xen_pulsephase" "resultVar" "$warpparam" }
 }
 '''
